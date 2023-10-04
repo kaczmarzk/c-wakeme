@@ -254,7 +254,7 @@ packages:
   fpdart:
     dependency: "direct main"
     description:
-      name: functional
+      name: fpdart
       sha256: "7413acc5a6569a3fe8277928fc7487f3198530f0c4e635d0baef199ea36e8ee9"
       url: "https://pub.dev"
     source: hosted

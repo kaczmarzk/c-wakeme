@@ -17,6 +17,9 @@ dependencies:
   loggy: 2.0.3
   fpdart: 1.1.0
 
+  # ui
+  cupertino_icons: 1.0.6
+
   # class management
   freezed_annotation: 2.4.1
   json_annotation: 4.8.1

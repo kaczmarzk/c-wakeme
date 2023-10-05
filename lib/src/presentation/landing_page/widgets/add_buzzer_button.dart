@@ -12,7 +12,6 @@ class AddBuzzerButton extends StatelessWidget {
     return FloatingActionButton(
       onPressed: context.read<LandingCubit>().onAddBuzzer,
       backgroundColor: ThemeColors.componentPrimary,
-
       child: const Icon(
         CupertinoIcons.add,
         color: ThemeColors.textPrimary,

@@ -5,5 +5,10 @@ enum Weekday {
   thursday,
   friday,
   saturday,
-  sunday,
+  sunday;
+
+  static Weekday get now {
+    final weekday = DateTime.now().weekday;
+    return values[weekday - 1];
+  }
 }

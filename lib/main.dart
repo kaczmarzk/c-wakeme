@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:wakeme/src/core/injection/injection.dart';
 import 'package:wakeme/src/core/routing/app_router.dart';
 import 'package:wakeme/src/core/service/db/hive/hive_client.dart';

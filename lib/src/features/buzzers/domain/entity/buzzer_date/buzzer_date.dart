@@ -20,6 +20,16 @@ class BuzzerDate with _$BuzzerDate {
         minute: dto.minute,
       );
 
+  factory BuzzerDate.now() {
+    final time = DateTime.now();
+
+    return BuzzerDate(
+      weekday: Weekday.now,
+      hour: time.hour,
+      minute: time.minute,
+    );
+  }
+
   BuzzerDateDto toDto() => BuzzerDateDto(
         weekday: weekday,
         hour: hour,

@@ -48,7 +48,7 @@ class BuzzersRepository with UiLoggy implements IBuzzersRepository {
   @override
   List<Buzzer> getAll() {
     final dtos = source.getAll();
-    return dtos.map((dto) => Buzzer.fromDto(dto)).toList();
+    return dtos.map(Buzzer.fromDto).toList();
   }
 
   @override

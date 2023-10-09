@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wakeme/src/presentation/common/theme/theme_colors.dart';
-import 'package:wakeme/src/presentation/common/theme/theme_styles.dart';
+import 'package:wakeme/src/core/presentation/theme/theme_colors.dart';
+import 'package:wakeme/src/core/presentation/theme/theme_styles.dart';
 
 class CommonSliverAppBar extends StatelessWidget {
   const CommonSliverAppBar({

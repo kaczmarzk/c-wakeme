@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wakeme/src/presentation/common/theme/theme_colors.dart';
+import 'package:wakeme/src/core/presentation/theme/theme_colors.dart';
 
 class CommonScreen extends StatelessWidget {
   const CommonScreen({

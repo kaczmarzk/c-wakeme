@@ -16,6 +16,7 @@ dependencies:
   uuid: 3.0.7
   loggy: 2.0.3
   fpdart: 1.1.0
+  easy_debounce: 2.0.3
 
   # ui
   cupertino_icons: 1.0.6

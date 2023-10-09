@@ -9,7 +9,7 @@ abstract final class Logger {
       );
 
   static void configuration(Object? e, StackTrace? st) {
-    logError('failure to configurate application to work', e, st);
+    logError('failure to configure application to work', e, st);
     throw const FatalFailure();
   }
 }
@@ -21,27 +21,13 @@ class _LogPrinter extends LoggyPrinter {
   void onLog(LogRecord record) {
     switch (record.level) {
       case LogLevel.error:
-        return _coloredPrint(208, null, '‼️ $record - ${record.error}');
+        return print('🆘 $record - ${record.error}');
       case LogLevel.warning:
-        return _coloredPrint(226, null, '⚠️ $record');
+        return print('☢️ $record');
       case LogLevel.debug:
-        return _coloredPrint(69, null, '🚀 $record');
+        return print('${record.loggerName.substring(11)} - ${record.message}');
       default:
         return print(record);
     }
-  }
-
-  void _coloredPrint(int? textAsciiColor, int? backgroundAsciiColor, String text) {
-    String output;
-    if (textAsciiColor != null) {
-      output = '\x1B[38;5;${textAsciiColor}m$text';
-    }
-
-    if (backgroundAsciiColor != null) {
-      output = '\x1B[48;5;${backgroundAsciiColor}m$text';
-    }
-
-    output = '$text\x1B[0m';
-    print(output);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-extension BuildContextExt on BuildContext {
+extension BuildContextExtension on BuildContext {
   MediaQueryData get mq => MediaQuery.of(this);
 }

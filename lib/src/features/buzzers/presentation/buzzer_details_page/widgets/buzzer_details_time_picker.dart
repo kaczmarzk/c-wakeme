@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wakeme/src/core/utils/extension/build_context_ext.dart';
 import 'package:wakeme/src/features/buzzers/domain/entity/buzzer_date/buzzer_date.dart';
-import 'package:wakeme/src/presentation/common/theme/theme_colors.dart';
-import 'package:wakeme/src/presentation/common/theme/theme_styles.dart';
+import 'package:wakeme/src/features/buzzers/presentation/buzzer_details_page/widgets/buzzer_details_cupertino_time_picker.dart';
+import 'package:wakeme/src/core/presentation/theme/theme_colors.dart';
 
 class BuzzerDetailsTimePicker extends StatelessWidget {
   const BuzzerDetailsTimePicker({
@@ -16,7 +15,7 @@ class BuzzerDetailsTimePicker extends StatelessWidget {
   final Function(BuzzerDate date) onDateChanged;
 
   static const height = 250.0;
-  static const backgroundRadius = Radius.circular(100);
+  static const backgroundRadius = Radius.circular(50);
   static final containerRadius = BorderRadius.circular(14.0);
   static const containerHeight = height * 0.8;
 
@@ -38,23 +37,13 @@ class BuzzerDetailsTimePicker extends StatelessWidget {
               Container(
                 height: containerHeight,
                 padding: EdgeInsets.symmetric(horizontal: horizontalPadding).copyWith(
-                  top: 10.0,
+                  top: 20.0,
                 ),
                 decoration: const BoxDecoration(
                   color: ThemeColors.primary,
                   borderRadius: BorderRadius.only(
                     bottomLeft: backgroundRadius,
                     bottomRight: backgroundRadius,
-                  ),
-                ),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    '22:00',
-                    style: ThemeStyles.albertSansBold.copyWith(
-                      fontSize: 23.0,
-                      color: ThemeColors.white,
-                    ),
                   ),
                 ),
               ),
@@ -68,13 +57,11 @@ class BuzzerDetailsTimePicker extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: ThemeColors.white,
                     borderRadius: containerRadius,
-                    border: Border.all(color: ThemeColors.secondary),
+                    border: Border.all(color: ThemeColors.secondary, width: 2),
                   ),
-                  child: CupertinoDatePicker(
-                    initialDateTime: DateTime.now(),
-                    onDateTimeChanged: _onDateTimeChanged,
-                    mode: CupertinoDatePickerMode.time,
-                    use24hFormat: true,
+                  child: BuzzerDetailsCupertinoTimePicker(
+                    initial: initial,
+                    onDateChanged: onDateChanged,
                   ),
                 ),
               ),
@@ -83,10 +70,5 @@ class BuzzerDetailsTimePicker extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  void _onDateTimeChanged(DateTime time) {
-    final entity = BuzzerDate(weekday: initial.weekday, hour: time.hour, minute: time.minute);
-    onDateChanged(entity);
   }
 }

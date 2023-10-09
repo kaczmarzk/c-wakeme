@@ -11,11 +11,12 @@ class BuzzerDateDto {
     required this.minute,
   });
 
+  factory BuzzerDateDto.fromJson(Map<String, dynamic> json) => _$BuzzerDateDtoFromJson(json);
+
   final Weekday weekday;
   final int hour;
   final int minute;
 
-  factory BuzzerDateDto.fromJson(Map<String, dynamic> json) => _$BuzzerDateDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$BuzzerDateDtoToJson(this);
 }

@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wakeme/src/core/injection/injection.dart';
 import 'package:wakeme/src/features/buzzers/presentation/buzzer_details_page/cubit/buzzer_details_screen_cubit.dart';
 import 'package:wakeme/src/features/buzzers/presentation/buzzer_details_page/widgets/buzzer_details_time_picker.dart';
-import 'package:wakeme/src/presentation/common/theme/theme_colors.dart';
-import 'package:wakeme/src/presentation/common/widgets/common_screen.dart';
+import 'package:wakeme/src/core/presentation/widgets/common_screen.dart';
 
 @RoutePage()
 class BuzzerDetailsScreen extends StatelessWidget {

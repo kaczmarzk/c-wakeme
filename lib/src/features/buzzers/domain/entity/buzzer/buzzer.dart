@@ -7,14 +7,14 @@ part 'buzzer.freezed.dart';
 
 @freezed
 class Buzzer with _$Buzzer {
-  const Buzzer._();
-
   const factory Buzzer({
     required String uid,
     required String label,
     required BuzzerDate date,
     required DateTime createdAt,
   }) = _Buzzer;
+
+  const Buzzer._();
 
   factory Buzzer.create({required String label, required BuzzerDate date}) => Buzzer(
         uid: const Uuid().v1(),

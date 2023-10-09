@@ -6,13 +6,13 @@ part 'buzzer_date.freezed.dart';
 
 @freezed
 class BuzzerDate with _$BuzzerDate {
-  const BuzzerDate._();
-
   const factory BuzzerDate({
     required Weekday weekday,
     required int hour,
     required int minute,
   }) = _BuzzerDate;
+
+  const BuzzerDate._();
 
   factory BuzzerDate.fromDto(BuzzerDateDto dto) => BuzzerDate(
         weekday: dto.weekday,

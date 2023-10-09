@@ -12,12 +12,12 @@ class BuzzerDto {
     required this.createdAt,
   });
 
+  factory BuzzerDto.fromJson(Map<String, dynamic> json) => _$BuzzerDtoFromJson(json);
+
   final String uid;
   final String label;
   final BuzzerDateDto date;
   final DateTime createdAt;
-
-  factory BuzzerDto.fromJson(Map<String, dynamic> json) => _$BuzzerDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$BuzzerDtoToJson(this);
 }

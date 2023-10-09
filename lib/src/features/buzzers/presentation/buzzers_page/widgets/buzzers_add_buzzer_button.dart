@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wakeme/src/features/buzzers/presentation/buzzers_page/cubit/buzzers_screen_cubit.dart';
-import 'package:wakeme/src/presentation/common/theme/theme_colors.dart';
+import 'package:wakeme/src/core/presentation/theme/theme_colors.dart';
 
 class BuzzersAddBuzzerButton extends StatelessWidget {
   const BuzzersAddBuzzerButton({super.key});

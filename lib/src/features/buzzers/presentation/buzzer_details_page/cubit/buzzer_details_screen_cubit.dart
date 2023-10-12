@@ -24,6 +24,10 @@ class BuzzerDetailsScreenCubit extends Cubit<BuzzerDetailsScreenState> with UiLo
     );
   }
 
+  void handleSave() {
+
+  }
+
   @override
   Future<void> close() {
     debouncer.cancel();

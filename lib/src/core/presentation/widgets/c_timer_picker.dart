@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:wakeme/src/core/presentation/theme/c_theme_colors.dart';
+import 'package:wakeme/src/core/presentation/theme/c_theme_styles.dart';
 import 'package:wakeme/src/features/buzzers/domain/entity/buzzer_date/buzzer_date.dart';
-import 'package:wakeme/src/core/presentation/theme/theme_colors.dart';
-import 'package:wakeme/src/core/presentation/theme/theme_styles.dart';
 
-class BuzzerDetailsCupertinoTimePicker extends StatelessWidget {
-  const BuzzerDetailsCupertinoTimePicker({
+class CTimePicker extends StatelessWidget {
+  const CTimePicker({
     required this.initial,
     required this.onDateChanged,
     super.key,
@@ -20,8 +20,8 @@ class BuzzerDetailsCupertinoTimePicker extends StatelessWidget {
       child: CupertinoTheme(
         data: CupertinoThemeData(
           textTheme: CupertinoTextThemeData(
-            dateTimePickerTextStyle: ThemeStyles.albertSansRegular.copyWith(
-              color: ThemeColors.black,
+            dateTimePickerTextStyle: CThemeStyles.gilroyMedium_20.copyWith(
+              color: CThemeColors.softPeach,
               fontSize: 26.0,
             ),
           ),

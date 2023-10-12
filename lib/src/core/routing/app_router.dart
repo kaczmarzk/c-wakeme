@@ -6,7 +6,7 @@ import 'package:wakeme/src/core/routing/app_router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: BuzzersRoute.page),
-        AutoRoute(page: BuzzerDetailsRoute.page, initial: true),
+        AutoRoute(page: BuzzersRoute.page, initial: true),
+        AutoRoute(page: BuzzerDetailsRoute.page),
       ];
 }

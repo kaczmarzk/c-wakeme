@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wakeme/src/core/utils/extension/build_context_ext.dart';
 import 'package:wakeme/src/features/buzzers/domain/entity/buzzer_date/buzzer_date.dart';
-import 'package:wakeme/src/features/buzzers/presentation/buzzer_details_page/widgets/buzzer_details_cupertino_time_picker.dart';
-import 'package:wakeme/src/core/presentation/theme/theme_colors.dart';
+import 'package:wakeme/src/core/presentation/widgets/c_timer_picker.dart';
 
 class BuzzerDetailsTimePicker extends StatelessWidget {
   const BuzzerDetailsTimePicker({
@@ -28,7 +27,7 @@ class BuzzerDetailsTimePicker extends StatelessWidget {
       children: [
         Container(
           height: context.mq.padding.top,
-          color: ThemeColors.primary,
+          // color: ThemeColors.primary,
         ),
         SizedBox(
           height: height,
@@ -40,7 +39,7 @@ class BuzzerDetailsTimePicker extends StatelessWidget {
                   top: 20.0,
                 ),
                 decoration: const BoxDecoration(
-                  color: ThemeColors.primary,
+                  // color: ThemeColors.primary,
                   borderRadius: BorderRadius.only(
                     bottomLeft: backgroundRadius,
                     bottomRight: backgroundRadius,
@@ -55,11 +54,11 @@ class BuzzerDetailsTimePicker extends StatelessWidget {
                     bottom: height * 0.05,
                   ),
                   decoration: BoxDecoration(
-                    color: ThemeColors.white,
+                    // color: ThemeColors.white,
                     borderRadius: containerRadius,
-                    border: Border.all(color: ThemeColors.secondary, width: 2),
+                    // border: Border.all(color: ThemeColors.secondary, width: 2),
                   ),
-                  child: BuzzerDetailsCupertinoTimePicker(
+                  child: CTimePicker(
                     initial: initial,
                     onDateChanged: onDateChanged,
                   ),

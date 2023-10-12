@@ -2,8 +2,8 @@ name: wakeme
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.3 <4.0.0'
-  flutter: '3.1.3'
+  sdk: '>=3.1.1 <4.0.0'
+  flutter: '3.13.3'
 
 dependencies:
   flutter:
@@ -20,6 +20,11 @@ dependencies:
 
   # ui
   cupertino_icons: 1.0.6
+  enough_platform_widgets: 0.7.3
+
+  # l10n
+  slang: 3.24.0
+  slang_flutter: 3.24.0
 
   # class management
   freezed_annotation: 2.4.1
@@ -45,18 +50,16 @@ dev_dependencies:
   auto_route_generator: 7.3.1
   freezed: 2.4.1
   json_serializable: 6.7.1
+  slang_build_runner: 3.24.0
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/images/
-    -
   fonts:
-    - family: AlbertSans
+    - family: Gilroy
       fonts:
-        - asset: assets/fonts/albert-sans-bold.ttf
-          weight: 700
-        - asset: assets/fonts/albert-sans-regular.ttf
+        - asset: assets/presentation/fonts/gilroy-semi-bold.ttf
+          weight: 600
+        - asset: assets/presentation/fonts/gilroy-medium.ttf
           weight: 500
-        - asset: assets/fonts/albert-sans-light.ttf
+        - asset: assets/presentation/fonts/gilroy-regular.ttf
           weight: 400

@@ -185,6 +185,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+  csv:
+    dependency: transitive
+    description:
+      name: csv
+      sha256: "016b31a51a913744a0a1655c74ff13c9379e1200e246a03d96c81c5d9ed297b5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -193,6 +201,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  cupertino_progress_bar:
+    dependency: transitive
+    description:
+      name: cupertino_progress_bar
+      sha256: "4962a7c6db9b94d1c19462ad6036fdf20db43defa4114c908a3c4cbef1b3a2e0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
+  cupertino_stepper:
+    dependency: transitive
+    description:
+      name: cupertino_stepper
+      sha256: "124690b8b23db7b43fc6d547688e42a9f3d73c8f46d0b210568e98a04b5645b2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
   dart_style:
     dependency: transitive
     description:
@@ -209,6 +233,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  enough_platform_widgets:
+    dependency: "direct main"
+    description:
+      name: enough_platform_widgets
+      sha256: "2e0cfb068f0b5ce38139f88238a515e1f318d7b2624ac6b55bf5b4ef8199e013"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.3"
   fake_async:
     dependency: transitive
     description:
@@ -262,6 +294,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  flutter_platform_widgets:
+    dependency: transitive
+    description:
+      name: flutter_platform_widgets
+      sha256: "107d5bc9a167b4e268cba44075ee399b6b2c63d44ede28f7e8c983d7fa4b59be"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.5"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -379,6 +419,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+  json2yaml:
+    dependency: transitive
+    description:
+      name: json2yaml
+      sha256: da94630fbc56079426fdd167ae58373286f603371075b69bf46d848d63ba3e51
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   json_annotation:
     dependency: "direct main"
     description:
@@ -616,6 +664,30 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  slang:
+    dependency: "direct main"
+    description:
+      name: slang
+      sha256: ce1270c6dada4163b42811682d49ecc12efa076efbdde066c05e7fd010c4eb23
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.24.0"
+  slang_build_runner:
+    dependency: "direct dev"
+    description:
+      name: slang_build_runner
+      sha256: "3257b62a66faa85b38a0590e0d59e874fc120d19b83a14643e51e14a57d0e184"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.24.0"
+  slang_flutter:
+    dependency: "direct main"
+    description:
+      name: slang_flutter
+      sha256: cbd4dedb7543c5e791100ef565c30e42b609c918260bfb2f5114f420ccee1d56
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.24.0"
   source_gen:
     dependency: transitive
     description:
@@ -777,5 +849,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.1.3 <4.0.0"
-  flutter: ">=3.13.0"
+  dart: ">=3.1.1 <4.0.0"
+  flutter: ">=3.13.3"

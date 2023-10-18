@@ -16,5 +16,6 @@ class DashboardScreenState with _$DashboardScreenState {
 enum DashboardScreenNavigationState {
   details,
   settings,
+  quickAlarm,
   none,
 }

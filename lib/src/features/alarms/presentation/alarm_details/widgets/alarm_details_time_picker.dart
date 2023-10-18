@@ -50,11 +50,7 @@ class AlarmDetailsTimePicker extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: horizontalPadding).copyWith(
                     bottom: height * 0.05,
                   ),
-                  decoration: BoxDecoration(
-                    // color: ThemeColors.white,
-                    borderRadius: containerRadius,
-                    // border: Border.all(color: ThemeColors.secondary, width: 2),
-                  ),
+                  decoration: BoxDecoration(borderRadius: containerRadius),
                   child: CTimePicker(
                     initial: initial,
                     onDateChanged: onDateChanged,

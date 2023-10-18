@@ -4,9 +4,11 @@ part of 'buzzer_details_screen_cubit.dart';
 class AlarmDetailsScreenState with _$AlarmDetailsScreenState {
   const factory AlarmDetailsScreenState({
     required BuzzerDate date,
+    required Set<Weekday> weekdays,
   }) = _AlarmDetailsScreenState;
 
   factory AlarmDetailsScreenState.initial([Buzzer? entity]) => AlarmDetailsScreenState(
-    date: entity?.date ?? BuzzerDate.now(),
-  );
+        date: entity?.date ?? BuzzerDate.now(),
+        weekdays: {Weekday.next},
+      );
 }

@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AlarmDetailsScreenState {
   BuzzerDate get date => throw _privateConstructorUsedError;
+  Set<Weekday> get weekdays => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AlarmDetailsScreenStateCopyWith<AlarmDetailsScreenState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $AlarmDetailsScreenStateCopyWith<$Res> {
           $Res Function(AlarmDetailsScreenState) then) =
       _$AlarmDetailsScreenStateCopyWithImpl<$Res, AlarmDetailsScreenState>;
   @useResult
-  $Res call({BuzzerDate date});
+  $Res call({BuzzerDate date, Set<Weekday> weekdays});
 
   $BuzzerDateCopyWith<$Res> get date;
 }
@@ -49,12 +50,17 @@ class _$AlarmDetailsScreenStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? date = null,
+    Object? weekdays = null,
   }) {
     return _then(_value.copyWith(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as BuzzerDate,
+      weekdays: null == weekdays
+          ? _value.weekdays
+          : weekdays // ignore: cast_nullable_to_non_nullable
+              as Set<Weekday>,
     ) as $Val);
   }
 
@@ -75,7 +81,7 @@ abstract class _$$_AlarmDetailsScreenStateCopyWith<$Res>
       __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BuzzerDate date});
+  $Res call({BuzzerDate date, Set<Weekday> weekdays});
 
   @override
   $BuzzerDateCopyWith<$Res> get date;
@@ -94,12 +100,17 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? date = null,
+    Object? weekdays = null,
   }) {
     return _then(_$_AlarmDetailsScreenState(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as BuzzerDate,
+      weekdays: null == weekdays
+          ? _value._weekdays
+          : weekdays // ignore: cast_nullable_to_non_nullable
+              as Set<Weekday>,
     ));
   }
 }
@@ -107,14 +118,23 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
-  const _$_AlarmDetailsScreenState({required this.date});
+  const _$_AlarmDetailsScreenState(
+      {required this.date, required final Set<Weekday> weekdays})
+      : _weekdays = weekdays;
 
   @override
   final BuzzerDate date;
+  final Set<Weekday> _weekdays;
+  @override
+  Set<Weekday> get weekdays {
+    if (_weekdays is EqualUnmodifiableSetView) return _weekdays;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_weekdays);
+  }
 
   @override
   String toString() {
-    return 'AlarmDetailsScreenState(date: $date)';
+    return 'AlarmDetailsScreenState(date: $date, weekdays: $weekdays)';
   }
 
   @override
@@ -122,11 +142,13 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AlarmDetailsScreenState &&
-            (identical(other.date, date) || other.date == date));
+            (identical(other.date, date) || other.date == date) &&
+            const DeepCollectionEquality().equals(other._weekdays, _weekdays));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, date);
+  int get hashCode => Object.hash(
+      runtimeType, date, const DeepCollectionEquality().hash(_weekdays));
 
   @JsonKey(ignore: true)
   @override
@@ -138,11 +160,14 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
 }
 
 abstract class _AlarmDetailsScreenState implements AlarmDetailsScreenState {
-  const factory _AlarmDetailsScreenState({required final BuzzerDate date}) =
-      _$_AlarmDetailsScreenState;
+  const factory _AlarmDetailsScreenState(
+      {required final BuzzerDate date,
+      required final Set<Weekday> weekdays}) = _$_AlarmDetailsScreenState;
 
   @override
   BuzzerDate get date;
+  @override
+  Set<Weekday> get weekdays;
   @override
   @JsonKey(ignore: true)
   _$$_AlarmDetailsScreenStateCopyWith<_$_AlarmDetailsScreenState>

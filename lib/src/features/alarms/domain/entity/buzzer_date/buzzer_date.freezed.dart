@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BuzzerDate {
-  Weekday get weekday => throw _privateConstructorUsedError;
+  Set<Weekday> get repeat => throw _privateConstructorUsedError;
   int get hour => throw _privateConstructorUsedError;
   int get minute => throw _privateConstructorUsedError;
 
@@ -31,7 +31,7 @@ abstract class $BuzzerDateCopyWith<$Res> {
           BuzzerDate value, $Res Function(BuzzerDate) then) =
       _$BuzzerDateCopyWithImpl<$Res, BuzzerDate>;
   @useResult
-  $Res call({Weekday weekday, int hour, int minute});
+  $Res call({Set<Weekday> repeat, int hour, int minute});
 }
 
 /// @nodoc
@@ -47,15 +47,15 @@ class _$BuzzerDateCopyWithImpl<$Res, $Val extends BuzzerDate>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? weekday = null,
+    Object? repeat = null,
     Object? hour = null,
     Object? minute = null,
   }) {
     return _then(_value.copyWith(
-      weekday: null == weekday
-          ? _value.weekday
-          : weekday // ignore: cast_nullable_to_non_nullable
-              as Weekday,
+      repeat: null == repeat
+          ? _value.repeat
+          : repeat // ignore: cast_nullable_to_non_nullable
+              as Set<Weekday>,
       hour: null == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
@@ -76,7 +76,7 @@ abstract class _$$_BuzzerDateCopyWith<$Res>
       __$$_BuzzerDateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Weekday weekday, int hour, int minute});
+  $Res call({Set<Weekday> repeat, int hour, int minute});
 }
 
 /// @nodoc
@@ -90,15 +90,15 @@ class __$$_BuzzerDateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? weekday = null,
+    Object? repeat = null,
     Object? hour = null,
     Object? minute = null,
   }) {
     return _then(_$_BuzzerDate(
-      weekday: null == weekday
-          ? _value.weekday
-          : weekday // ignore: cast_nullable_to_non_nullable
-              as Weekday,
+      repeat: null == repeat
+          ? _value._repeat
+          : repeat // ignore: cast_nullable_to_non_nullable
+              as Set<Weekday>,
       hour: null == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
@@ -115,11 +115,20 @@ class __$$_BuzzerDateCopyWithImpl<$Res>
 
 class _$_BuzzerDate extends _BuzzerDate {
   const _$_BuzzerDate(
-      {required this.weekday, required this.hour, required this.minute})
-      : super._();
+      {required final Set<Weekday> repeat,
+      required this.hour,
+      required this.minute})
+      : _repeat = repeat,
+        super._();
 
+  final Set<Weekday> _repeat;
   @override
-  final Weekday weekday;
+  Set<Weekday> get repeat {
+    if (_repeat is EqualUnmodifiableSetView) return _repeat;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_repeat);
+  }
+
   @override
   final int hour;
   @override
@@ -127,7 +136,7 @@ class _$_BuzzerDate extends _BuzzerDate {
 
   @override
   String toString() {
-    return 'BuzzerDate(weekday: $weekday, hour: $hour, minute: $minute)';
+    return 'BuzzerDate(repeat: $repeat, hour: $hour, minute: $minute)';
   }
 
   @override
@@ -135,13 +144,14 @@ class _$_BuzzerDate extends _BuzzerDate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BuzzerDate &&
-            (identical(other.weekday, weekday) || other.weekday == weekday) &&
+            const DeepCollectionEquality().equals(other._repeat, _repeat) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.minute, minute) || other.minute == minute));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, weekday, hour, minute);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_repeat), hour, minute);
 
   @JsonKey(ignore: true)
   @override
@@ -152,13 +162,13 @@ class _$_BuzzerDate extends _BuzzerDate {
 
 abstract class _BuzzerDate extends BuzzerDate {
   const factory _BuzzerDate(
-      {required final Weekday weekday,
+      {required final Set<Weekday> repeat,
       required final int hour,
       required final int minute}) = _$_BuzzerDate;
   const _BuzzerDate._() : super._();
 
   @override
-  Weekday get weekday;
+  Set<Weekday> get repeat;
   @override
   int get hour;
   @override

@@ -20,8 +20,8 @@ class CTimePicker extends StatelessWidget {
       child: CupertinoTheme(
         data: CupertinoThemeData(
           textTheme: CupertinoTextThemeData(
-            dateTimePickerTextStyle: CThemeStyles.gilroyMedium_24.copyWith(
-              color: CThemeColors.softPeach,
+            dateTimePickerTextStyle: CThemeStyles.albertRegular_26.copyWith(
+              color: CThemeColors.grayCloud,
             ),
           ),
         ),
@@ -36,7 +36,7 @@ class CTimePicker extends StatelessWidget {
   }
 
   void _onDateTimeChanged(DateTime time) {
-    final entity = BuzzerDate(weekday: initial.weekday, hour: time.hour, minute: time.minute);
+    final entity = initial.copyWith(hour: time.hour, minute: time.minute);
     onDateChanged(entity);
   }
 }

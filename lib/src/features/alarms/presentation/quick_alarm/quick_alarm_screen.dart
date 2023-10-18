@@ -13,8 +13,8 @@ import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date
 import 'package:wakeme/src/features/alarms/presentation/quick_alarm/cubit/quick_alarm_screen_cubit.dart';
 
 @RoutePage()
-class AlarmDetailsScreen extends StatelessWidget {
-  const AlarmDetailsScreen({super.key});
+class QuickAlarmScreen extends StatelessWidget {
+  const QuickAlarmScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,7 @@ class _Body extends StatelessWidget {
               onDateChanged: (_) {},
             ),
           ),
+          const SizedBox(height: 20.0),
           const SizedBox(height: 20.0),
           CContentBox(
             child: Column(

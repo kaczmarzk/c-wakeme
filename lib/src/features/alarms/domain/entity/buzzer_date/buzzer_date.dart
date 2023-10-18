@@ -7,7 +7,7 @@ part 'buzzer_date.freezed.dart';
 @freezed
 class BuzzerDate with _$BuzzerDate {
   const factory BuzzerDate({
-    required Weekday weekday,
+    required Set<Weekday> repeat,
     required int hour,
     required int minute,
   }) = _BuzzerDate;
@@ -15,7 +15,7 @@ class BuzzerDate with _$BuzzerDate {
   const BuzzerDate._();
 
   factory BuzzerDate.fromDto(BuzzerDateDto dto) => BuzzerDate(
-        weekday: dto.weekday,
+        repeat: dto.repeat,
         hour: dto.hour,
         minute: dto.minute,
       );
@@ -24,14 +24,14 @@ class BuzzerDate with _$BuzzerDate {
     final time = DateTime.now();
 
     return BuzzerDate(
-      weekday: Weekday.now,
+      repeat: {},
       hour: time.hour,
       minute: time.minute,
     );
   }
 
   BuzzerDateDto toDto() => BuzzerDateDto(
-        weekday: weekday,
+        repeat: repeat,
         hour: hour,
         minute: minute,
       );

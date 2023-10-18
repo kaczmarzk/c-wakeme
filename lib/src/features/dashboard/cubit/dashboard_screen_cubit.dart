@@ -26,4 +26,9 @@ class DashboardScreenCubit extends CCubit<DashboardScreenState> {
     final details = state.copyWith(navigation: DashboardScreenNavigationState.settings);
     cachedEmit(details);
   }
+
+  void onQuickAlarmPressed() {
+    final details = state.copyWith(navigation: DashboardScreenNavigationState.quickAlarm);
+    cachedEmit(details);
+  }
 }

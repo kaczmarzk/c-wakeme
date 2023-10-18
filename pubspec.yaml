@@ -17,12 +17,13 @@ dependencies:
   loggy: 2.0.3
   fpdart: 1.1.0
   easy_debounce: 2.0.3
-  intl: 0.18.1
 
   # ui
   cupertino_icons: 1.0.6
   enough_platform_widgets: 0.7.3
   draggable_bottom_sheet: 1.0.2
+  flutter_hooks: 0.20.3
+  intl: 0.18.1
 
   # l10n
   slang: 3.24.0
@@ -63,5 +64,7 @@ flutter:
           weight: 600
         - asset: assets/presentation/fonts/gilroy-medium.ttf
           weight: 500
-        - asset: assets/presentation/fonts/gilroy-regular.ttf
+    - family: AlbertSans
+      fonts:
+        - asset: assets/presentation/fonts/albert-sans-regular.ttf
           weight: 400

@@ -37,6 +37,7 @@ class _Body extends StatelessWidget {
 
   void _handleNavigationState(BuildContext context, DashboardScreenNavigationState state) => switch (state) {
         DashboardScreenNavigationState.details => context.router.push(const AlarmDetailsRoute()),
+        DashboardScreenNavigationState.quickAlarm => context.router.push(const QuickAlarmRoute()),
         DashboardScreenNavigationState.settings => null,
         DashboardScreenNavigationState.none => null,
       };
@@ -163,7 +164,7 @@ class _Body extends StatelessWidget {
                     CSquareButton.invert(
                       icon: CupertinoIcons.bolt,
                       size: CThemeSize.small,
-                      onPressed: () {},
+                      onPressed: context.read<DashboardScreenCubit>().onQuickAlarmPressed,
                     ),
                     const SizedBox(width: 20.0),
                     Expanded(

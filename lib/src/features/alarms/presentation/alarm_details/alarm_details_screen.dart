@@ -9,7 +9,7 @@ import 'package:wakeme/src/core/presentation/widgets/c_app_bar.dart';
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_box.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_timer_picker.dart';
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_option_box.dart';
-import 'package:wakeme/src/features/alarms/presentation/buzzer_details_page/cubit/buzzer_details_screen_cubit.dart';
+import 'package:wakeme/src/features/alarms/presentation/alarm_details/cubit/buzzer_details_screen_cubit.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_scaffold.dart';
 
 @RoutePage()

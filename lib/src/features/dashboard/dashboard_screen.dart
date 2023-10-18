@@ -115,14 +115,14 @@ class _Body extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Next alarm',
+                              'Timer',
                               style: CThemeStyles.gilroyMedium_20.copyWith(
                                 color: CThemeColors.platinum,
                               ),
                             ),
                             const SizedBox(height: 2.0),
                             Text(
-                              'No scheduled alarm',
+                              'No scheduled timer',
                               style: CThemeStyles.gilroyMedium_16.copyWith(
                                 color: CThemeColors.softPeach,
                                 fontSize: 15.0,
@@ -155,13 +155,13 @@ class _Body extends StatelessWidget {
                     ),
                     const SizedBox(width: 20.0),
                     CSquareButton.invert(
-                      icon: CupertinoIcons.bolt,
+                      icon: CupertinoIcons.timer,
                       size: CThemeSize.small,
                       onPressed: () {},
                     ),
                     const SizedBox(width: 20.0),
                     CSquareButton.invert(
-                      icon: CupertinoIcons.timer,
+                      icon: CupertinoIcons.bolt,
                       size: CThemeSize.small,
                       onPressed: () {},
                     ),

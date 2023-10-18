@@ -40,6 +40,29 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> with UiLog
     debouncer.cancel();
     return super.close();
   }
+
+  Future<void> _listenDeviceDateChanges() async {
+    isolate = await IsolateController.spawn<DateTime, DateTime>(
+          (payload, send) async {
+        DateTime current = payload.copyWith(microsecond: 0, millisecond: 0, second: 0);
+
+        while (true) {
+          await Future.delayed(const Duration(seconds: 1), () {
+            final now = DateTime.now().copyWith(microsecond: 0, millisecond: 0, second: 0);
+            if (now.isAfter(current)) {
+              send(now);
+              current = now;
+            }
+          });
+        }
+      },
+      DateTime.now(),
+    )
+      ..stream.listen((event) {
+        print('date changed: ${event.hour}:${event.minute}');
+      });
+  }
+
 }
 
 extension AlarmDetailsScreenCubitExt on AlarmDetailsScreenCubit {

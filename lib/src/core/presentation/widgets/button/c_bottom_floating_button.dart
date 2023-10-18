@@ -1,44 +1,104 @@
+import 'package:enough_platform_widgets/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wakeme/src/core/presentation/c_core/c_component.dart';
 import 'package:wakeme/src/core/presentation/theme/c_theme_colors.dart';
-import 'package:wakeme/src/core/presentation/theme/c_theme_dimens.dart';
 import 'package:wakeme/src/core/presentation/theme/c_theme_styles.dart';
-import 'package:wakeme/src/core/utils/extension/build_context_ext.dart';
 
-class CBottomFloatingButton extends StatelessWidget {
+class CBottomFloatingButton extends CComponent {
   const CBottomFloatingButton({
     required this.label,
     required this.onPressed,
+    this.action,
+    super.style,
+    super.size,
     super.key,
   });
 
+  factory CBottomFloatingButton.invert({
+    required String label,
+    required VoidCallback onPressed,
+    CBottomFloatingButtonAction? action,
+  }) =>
+      CBottomFloatingButton(
+        label: label,
+        onPressed: onPressed,
+        action: action,
+        style: CThemeStyle.invert,
+      );
+
   final String label;
   final VoidCallback onPressed;
+  final CBottomFloatingButtonAction? action;
 
-  static const _height = 60.0;
-  static const _horizontalMargin = 20.0;
+  @override
+  double get cRadius => 16.0;
+
+  @override
+  double get cDimension => 50.0;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: _height,
-      margin: const EdgeInsets.symmetric(horizontal: _horizontalMargin),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: CThemeDimens.buttonRadius,
-        color: context.theme.adaptiveColor(
-          dark: CThemeColors.softPeach,
-          light: CThemeColors.balticSea,
-        ),
-      ),
-      child: Text(
-        label,
-        style: CThemeStyles.gilroyMedium_20.copyWith(
-          color: context.theme.adaptiveColor(
-            dark: CThemeColors.cinder,
-            light: CThemeColors.carbonGray,
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            height: cDimension,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(cRadius),
+              color: cColors.background,
+            ),
+            child: CupertinoInkWell(
+              onTap: onPressed,
+              pressColor: cColors.pressColor,
+              child: Center(
+                child: Text(
+                  label,
+                  style: CThemeStyles.gilroyMedium_20.copyWith(
+                    color: cColors.foregroundPrimary,
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
-      ),
+        if (action != null)
+          Row(
+            children: [
+              const SizedBox(width: 10.0),
+              SizedBox.square(
+                dimension: cDimension,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(cRadius),
+                    color: cColors.background,
+                  ),
+                  child: CupertinoInkWell(
+                    onTap: onPressed,
+                    pressColor: CThemeColors.cinder.withOpacity(0.33),
+                    excludeFromSemantics: true,
+                    child: Center(
+                      child: Icon(
+                        action!.icon,
+                        color: cColors.foregroundPrimary,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+      ],
     );
   }
+}
+
+class CBottomFloatingButtonAction {
+  CBottomFloatingButtonAction({
+    required this.icon,
+    required this.onPressed,
+  });
+
+  final IconData icon;
+  final VoidCallback onPressed;
 }

@@ -7,13 +7,19 @@ class CScaffold extends StatelessWidget {
   const CScaffold({
     required this.body,
     this.floating,
+    this.top = true,
+    this.bottom = true,
+    this.horizontal = true,
     super.key,
-    this.lazy = false,
   });
 
   final Widget body;
   final Widget? floating;
-  final bool lazy;
+
+  /// screen paddings
+  final bool top;
+  final bool bottom;
+  final bool horizontal;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -23,8 +29,10 @@ class CScaffold extends StatelessWidget {
         ),
         floatingActionButton: floating,
         body: SafeArea(
+          bottom: bottom,
+          top: top,
           child: Padding(
-            padding: CThemeDimens.screenPadding,
+            padding: horizontal ? const EdgeInsets.symmetric(horizontal: CThemeDimens.paddingCScaffold) : EdgeInsets.zero,
             child: body,
           ),
         ),

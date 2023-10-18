@@ -27,7 +27,7 @@ class CContentBox extends StatelessWidget {
       padding: padding,
       alignment: alignment,
       decoration: BoxDecoration(
-        borderRadius: CThemeDimens.contentBoxRadius,
+        borderRadius: BorderRadius.circular(CThemeDimens.radiusCContentBox),
         color: context.theme.adaptiveColor(
           dark: CThemeColors.darkJungle,
           light: CThemeColors.platinum,

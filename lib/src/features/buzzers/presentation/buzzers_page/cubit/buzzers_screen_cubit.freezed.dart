@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$BuzzersScreenState {
   List<Buzzer> get buzzers => throw _privateConstructorUsedError;
+  BuzzersScreenNavigationState get navigation =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BuzzersScreenStateCopyWith<BuzzersScreenState> get copyWith =>
@@ -29,7 +31,7 @@ abstract class $BuzzersScreenStateCopyWith<$Res> {
           BuzzersScreenState value, $Res Function(BuzzersScreenState) then) =
       _$BuzzersScreenStateCopyWithImpl<$Res, BuzzersScreenState>;
   @useResult
-  $Res call({List<Buzzer> buzzers});
+  $Res call({List<Buzzer> buzzers, BuzzersScreenNavigationState navigation});
 }
 
 /// @nodoc
@@ -46,12 +48,17 @@ class _$BuzzersScreenStateCopyWithImpl<$Res, $Val extends BuzzersScreenState>
   @override
   $Res call({
     Object? buzzers = null,
+    Object? navigation = null,
   }) {
     return _then(_value.copyWith(
       buzzers: null == buzzers
           ? _value.buzzers
           : buzzers // ignore: cast_nullable_to_non_nullable
               as List<Buzzer>,
+      navigation: null == navigation
+          ? _value.navigation
+          : navigation // ignore: cast_nullable_to_non_nullable
+              as BuzzersScreenNavigationState,
     ) as $Val);
   }
 }
@@ -64,7 +71,7 @@ abstract class _$$_BuzzersScreenStateCopyWith<$Res>
       __$$_BuzzersScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Buzzer> buzzers});
+  $Res call({List<Buzzer> buzzers, BuzzersScreenNavigationState navigation});
 }
 
 /// @nodoc
@@ -79,12 +86,17 @@ class __$$_BuzzersScreenStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? buzzers = null,
+    Object? navigation = null,
   }) {
     return _then(_$_BuzzersScreenState(
       buzzers: null == buzzers
           ? _value._buzzers
           : buzzers // ignore: cast_nullable_to_non_nullable
               as List<Buzzer>,
+      navigation: null == navigation
+          ? _value.navigation
+          : navigation // ignore: cast_nullable_to_non_nullable
+              as BuzzersScreenNavigationState,
     ));
   }
 }
@@ -92,7 +104,8 @@ class __$$_BuzzersScreenStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BuzzersScreenState implements _BuzzersScreenState {
-  const _$_BuzzersScreenState({required final List<Buzzer> buzzers})
+  const _$_BuzzersScreenState(
+      {required final List<Buzzer> buzzers, required this.navigation})
       : _buzzers = buzzers;
 
   final List<Buzzer> _buzzers;
@@ -104,8 +117,11 @@ class _$_BuzzersScreenState implements _BuzzersScreenState {
   }
 
   @override
+  final BuzzersScreenNavigationState navigation;
+
+  @override
   String toString() {
-    return 'BuzzersScreenState(buzzers: $buzzers)';
+    return 'BuzzersScreenState(buzzers: $buzzers, navigation: $navigation)';
   }
 
   @override
@@ -113,12 +129,14 @@ class _$_BuzzersScreenState implements _BuzzersScreenState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BuzzersScreenState &&
-            const DeepCollectionEquality().equals(other._buzzers, _buzzers));
+            const DeepCollectionEquality().equals(other._buzzers, _buzzers) &&
+            (identical(other.navigation, navigation) ||
+                other.navigation == navigation));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_buzzers));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_buzzers), navigation);
 
   @JsonKey(ignore: true)
   @override
@@ -129,11 +147,15 @@ class _$_BuzzersScreenState implements _BuzzersScreenState {
 }
 
 abstract class _BuzzersScreenState implements BuzzersScreenState {
-  const factory _BuzzersScreenState({required final List<Buzzer> buzzers}) =
+  const factory _BuzzersScreenState(
+          {required final List<Buzzer> buzzers,
+          required final BuzzersScreenNavigationState navigation}) =
       _$_BuzzersScreenState;
 
   @override
   List<Buzzer> get buzzers;
+  @override
+  BuzzersScreenNavigationState get navigation;
   @override
   @JsonKey(ignore: true)
   _$$_BuzzersScreenStateCopyWith<_$_BuzzersScreenState> get copyWith =>

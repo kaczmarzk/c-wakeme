@@ -20,9 +20,8 @@ class CTimePicker extends StatelessWidget {
       child: CupertinoTheme(
         data: CupertinoThemeData(
           textTheme: CupertinoTextThemeData(
-            dateTimePickerTextStyle: CThemeStyles.gilroyMedium_20.copyWith(
+            dateTimePickerTextStyle: CThemeStyles.gilroyMedium_24.copyWith(
               color: CThemeColors.softPeach,
-              fontSize: 26.0,
             ),
           ),
         ),

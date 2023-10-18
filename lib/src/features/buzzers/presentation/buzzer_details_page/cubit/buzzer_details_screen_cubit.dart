@@ -25,7 +25,7 @@ class BuzzerDetailsScreenCubit extends Cubit<BuzzerDetailsScreenState> with UiLo
   }
 
   void handleSave() {
-
+    loggy.debug('handle save');
   }
 
   @override

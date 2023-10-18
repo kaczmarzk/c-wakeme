@@ -24,7 +24,7 @@ class CContentOptionBox extends StatelessWidget {
       onTap: onPressed,
       pressColor: CThemeColors.cinder,
       child: Container(
-        height: 80.0,
+        height: 70.0,
         padding: padding,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,23 +35,23 @@ class CContentOptionBox extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: CThemeStyles.gilroyMedium_26.copyWith(
+                  style: CThemeStyles.gilroyMedium_20.copyWith(
                     color: CThemeColors.platinum,
-                    fontSize: 20.0,
+                    fontSize: 18,
                   ),
                 ),
                 Text(
                   subtitle ?? '',
-                  style: CThemeStyles.gilroyMedium_20.copyWith(
+                  style: CThemeStyles.gilroyMedium_16.copyWith(
                     color: CThemeColors.softPeach,
-                    fontSize: 16.0,
+                    fontSize: 14,
                   ),
                 ),
               ],
             ),
             const Icon(
               CupertinoIcons.chevron_right,
-              size: 25.0,
+              size: CThemeDimens.sizeSIcon,
               color: CThemeColors.platinum,
             ),
           ],

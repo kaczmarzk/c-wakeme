@@ -11,8 +11,7 @@
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:wakeme/src/features/buzzers/presentation/buzzer_details_page/buzzer_details_screen.dart'
     as _i1;
-import 'package:wakeme/src/features/buzzers/presentation/buzzers_page/buzzers_screen.dart'
-    as _i2;
+import 'package:wakeme/src/features/dashboard/dashboard_screen.dart' as _i2;
 
 abstract class $AppRouter extends _i3.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -25,10 +24,10 @@ abstract class $AppRouter extends _i3.RootStackRouter {
         child: const _i1.BuzzerDetailsScreen(),
       );
     },
-    BuzzersRoute.name: (routeData) {
+    DashboardRoute.name: (routeData) {
       return _i3.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.BuzzersScreen(),
+        child: const _i2.DashboardScreen(),
       );
     },
   };
@@ -49,15 +48,15 @@ class BuzzerDetailsRoute extends _i3.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.BuzzersScreen]
-class BuzzersRoute extends _i3.PageRouteInfo<void> {
-  const BuzzersRoute({List<_i3.PageRouteInfo>? children})
+/// [_i2.DashboardScreen]
+class DashboardRoute extends _i3.PageRouteInfo<void> {
+  const DashboardRoute({List<_i3.PageRouteInfo>? children})
       : super(
-          BuzzersRoute.name,
+          DashboardRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'BuzzersRoute';
+  static const String name = 'DashboardRoute';
 
   static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
 }

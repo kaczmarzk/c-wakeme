@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wakeme/src/core/presentation/theme/c_theme_colors.dart';
+import 'package:wakeme/src/core/presentation/c_core/c_component.dart';
 import 'package:wakeme/src/core/presentation/theme/c_theme_dimens.dart';
-import 'package:wakeme/src/core/utils/extension/build_context_ext.dart';
 
-class CContentBox extends StatelessWidget {
+class CContentBox extends CComponent {
   const CContentBox({
     required this.child,
     this.alignment = Alignment.center,
@@ -20,6 +19,9 @@ class CContentBox extends StatelessWidget {
   final EdgeInsets padding;
 
   @override
+  double get cRadius => CThemeDimens.radiusCContentBox;
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
@@ -27,11 +29,8 @@ class CContentBox extends StatelessWidget {
       padding: padding,
       alignment: alignment,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(CThemeDimens.radiusCContentBox),
-        color: context.theme.adaptiveColor(
-          dark: CThemeColors.darkJungle,
-          light: CThemeColors.platinum,
-        ),
+        borderRadius: BorderRadius.circular(cRadius),
+        color: cColors.background,
       ),
       child: child,
     );

@@ -22,7 +22,7 @@ import 'package:wakeme/src/features/buzzers/domain/repository/buzzers_repository
     as _i8;
 import 'package:wakeme/src/features/buzzers/presentation/buzzer_details_page/cubit/buzzer_details_screen_cubit.dart'
     as _i6;
-import 'package:wakeme/src/features/buzzers/presentation/buzzers_page/cubit/buzzers_screen_cubit.dart'
+import 'package:wakeme/src/features/dashboard/cubit/dashboard_screen_cubit.dart'
     as _i9;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -47,8 +47,8 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i7.BuzzersLocalSource(gh<_i5.HiveClient>()));
     gh.factory<_i8.BuzzersRepository>(
         () => _i8.BuzzersRepository(gh<_i7.BuzzersLocalSource>()));
-    gh.factory<_i9.BuzzersScreenCubit>(
-        () => _i9.BuzzersScreenCubit(gh<_i8.BuzzersRepository>()));
+    gh.factory<_i9.DashboardScreenCubit>(
+        () => _i9.DashboardScreenCubit(gh<_i8.BuzzersRepository>()));
     return this;
   }
 }

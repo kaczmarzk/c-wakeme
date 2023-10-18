@@ -4,13 +4,12 @@ import 'package:wakeme/src/core/presentation/c_core/c_cubit.dart';
 import 'package:wakeme/src/features/buzzers/domain/entity/buzzer/buzzer.dart';
 import 'package:wakeme/src/features/buzzers/domain/repository/buzzers_repository.dart';
 
-part 'buzzers_screen_state.dart';
-
-part 'buzzers_screen_cubit.freezed.dart';
+part 'dashboard_screen_state.dart';
+part 'dashboard_screen_cubit.freezed.dart';
 
 @injectable
-class BuzzersScreenCubit extends CCubit<BuzzersScreenState> {
-  BuzzersScreenCubit(this._repository) : super(BuzzersScreenState.initial());
+class DashboardScreenCubit extends CCubit<DashboardScreenState> {
+  DashboardScreenCubit(this._repository) : super(DashboardScreenState.initial());
   final BuzzersRepository _repository;
 
   void fetchBuzzers() {
@@ -18,13 +17,13 @@ class BuzzersScreenCubit extends CCubit<BuzzersScreenState> {
     emit(state.copyWith(buzzers: buzzers));
   }
 
-  void onAddClicked() {
-    final details = state.copyWith(navigation: BuzzersScreenNavigationState.details);
+  void onAddPressed() {
+    final details = state.copyWith(navigation: DashboardScreenNavigationState.details);
     cachedEmit(details);
   }
 
-  void onBellClicked(){
-    final details = state.copyWith(navigation: BuzzersScreenNavigationState.settings);
+  void onSettingsPressed(){
+    final details = state.copyWith(navigation: DashboardScreenNavigationState.settings);
     cachedEmit(details);
   }
 }

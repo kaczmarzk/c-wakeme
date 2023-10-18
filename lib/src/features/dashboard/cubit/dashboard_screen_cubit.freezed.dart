@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'buzzers_screen_cubit.dart';
+part of 'dashboard_screen_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,29 +15,30 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$BuzzersScreenState {
+mixin _$DashboardScreenState {
   List<Buzzer> get buzzers => throw _privateConstructorUsedError;
-  BuzzersScreenNavigationState get navigation =>
+  DashboardScreenNavigationState get navigation =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $BuzzersScreenStateCopyWith<BuzzersScreenState> get copyWith =>
+  $DashboardScreenStateCopyWith<DashboardScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BuzzersScreenStateCopyWith<$Res> {
-  factory $BuzzersScreenStateCopyWith(
-          BuzzersScreenState value, $Res Function(BuzzersScreenState) then) =
-      _$BuzzersScreenStateCopyWithImpl<$Res, BuzzersScreenState>;
+abstract class $DashboardScreenStateCopyWith<$Res> {
+  factory $DashboardScreenStateCopyWith(DashboardScreenState value,
+          $Res Function(DashboardScreenState) then) =
+      _$DashboardScreenStateCopyWithImpl<$Res, DashboardScreenState>;
   @useResult
-  $Res call({List<Buzzer> buzzers, BuzzersScreenNavigationState navigation});
+  $Res call({List<Buzzer> buzzers, DashboardScreenNavigationState navigation});
 }
 
 /// @nodoc
-class _$BuzzersScreenStateCopyWithImpl<$Res, $Val extends BuzzersScreenState>
-    implements $BuzzersScreenStateCopyWith<$Res> {
-  _$BuzzersScreenStateCopyWithImpl(this._value, this._then);
+class _$DashboardScreenStateCopyWithImpl<$Res,
+        $Val extends DashboardScreenState>
+    implements $DashboardScreenStateCopyWith<$Res> {
+  _$DashboardScreenStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -58,28 +59,28 @@ class _$BuzzersScreenStateCopyWithImpl<$Res, $Val extends BuzzersScreenState>
       navigation: null == navigation
           ? _value.navigation
           : navigation // ignore: cast_nullable_to_non_nullable
-              as BuzzersScreenNavigationState,
+              as DashboardScreenNavigationState,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_BuzzersScreenStateCopyWith<$Res>
-    implements $BuzzersScreenStateCopyWith<$Res> {
-  factory _$$_BuzzersScreenStateCopyWith(_$_BuzzersScreenState value,
-          $Res Function(_$_BuzzersScreenState) then) =
-      __$$_BuzzersScreenStateCopyWithImpl<$Res>;
+abstract class _$$_DashboardScreenStateCopyWith<$Res>
+    implements $DashboardScreenStateCopyWith<$Res> {
+  factory _$$_DashboardScreenStateCopyWith(_$_DashboardScreenState value,
+          $Res Function(_$_DashboardScreenState) then) =
+      __$$_DashboardScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Buzzer> buzzers, BuzzersScreenNavigationState navigation});
+  $Res call({List<Buzzer> buzzers, DashboardScreenNavigationState navigation});
 }
 
 /// @nodoc
-class __$$_BuzzersScreenStateCopyWithImpl<$Res>
-    extends _$BuzzersScreenStateCopyWithImpl<$Res, _$_BuzzersScreenState>
-    implements _$$_BuzzersScreenStateCopyWith<$Res> {
-  __$$_BuzzersScreenStateCopyWithImpl(
-      _$_BuzzersScreenState _value, $Res Function(_$_BuzzersScreenState) _then)
+class __$$_DashboardScreenStateCopyWithImpl<$Res>
+    extends _$DashboardScreenStateCopyWithImpl<$Res, _$_DashboardScreenState>
+    implements _$$_DashboardScreenStateCopyWith<$Res> {
+  __$$_DashboardScreenStateCopyWithImpl(_$_DashboardScreenState _value,
+      $Res Function(_$_DashboardScreenState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +89,7 @@ class __$$_BuzzersScreenStateCopyWithImpl<$Res>
     Object? buzzers = null,
     Object? navigation = null,
   }) {
-    return _then(_$_BuzzersScreenState(
+    return _then(_$_DashboardScreenState(
       buzzers: null == buzzers
           ? _value._buzzers
           : buzzers // ignore: cast_nullable_to_non_nullable
@@ -96,15 +97,15 @@ class __$$_BuzzersScreenStateCopyWithImpl<$Res>
       navigation: null == navigation
           ? _value.navigation
           : navigation // ignore: cast_nullable_to_non_nullable
-              as BuzzersScreenNavigationState,
+              as DashboardScreenNavigationState,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_BuzzersScreenState implements _BuzzersScreenState {
-  const _$_BuzzersScreenState(
+class _$_DashboardScreenState implements _DashboardScreenState {
+  const _$_DashboardScreenState(
       {required final List<Buzzer> buzzers, required this.navigation})
       : _buzzers = buzzers;
 
@@ -117,18 +118,18 @@ class _$_BuzzersScreenState implements _BuzzersScreenState {
   }
 
   @override
-  final BuzzersScreenNavigationState navigation;
+  final DashboardScreenNavigationState navigation;
 
   @override
   String toString() {
-    return 'BuzzersScreenState(buzzers: $buzzers, navigation: $navigation)';
+    return 'DashboardScreenState(buzzers: $buzzers, navigation: $navigation)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BuzzersScreenState &&
+            other is _$_DashboardScreenState &&
             const DeepCollectionEquality().equals(other._buzzers, _buzzers) &&
             (identical(other.navigation, navigation) ||
                 other.navigation == navigation));
@@ -141,23 +142,23 @@ class _$_BuzzersScreenState implements _BuzzersScreenState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BuzzersScreenStateCopyWith<_$_BuzzersScreenState> get copyWith =>
-      __$$_BuzzersScreenStateCopyWithImpl<_$_BuzzersScreenState>(
+  _$$_DashboardScreenStateCopyWith<_$_DashboardScreenState> get copyWith =>
+      __$$_DashboardScreenStateCopyWithImpl<_$_DashboardScreenState>(
           this, _$identity);
 }
 
-abstract class _BuzzersScreenState implements BuzzersScreenState {
-  const factory _BuzzersScreenState(
+abstract class _DashboardScreenState implements DashboardScreenState {
+  const factory _DashboardScreenState(
           {required final List<Buzzer> buzzers,
-          required final BuzzersScreenNavigationState navigation}) =
-      _$_BuzzersScreenState;
+          required final DashboardScreenNavigationState navigation}) =
+      _$_DashboardScreenState;
 
   @override
   List<Buzzer> get buzzers;
   @override
-  BuzzersScreenNavigationState get navigation;
+  DashboardScreenNavigationState get navigation;
   @override
   @JsonKey(ignore: true)
-  _$$_BuzzersScreenStateCopyWith<_$_BuzzersScreenState> get copyWith =>
+  _$$_DashboardScreenStateCopyWith<_$_DashboardScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }

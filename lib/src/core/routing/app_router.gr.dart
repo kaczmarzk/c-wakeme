@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i3;
-import 'package:wakeme/src/features/buzzers/presentation/buzzer_details_page/buzzer_details_screen.dart'
+import 'package:wakeme/src/features/alarms/presentation/buzzer_details_page/alarm_details_screen.dart'
     as _i1;
 import 'package:wakeme/src/features/dashboard/dashboard_screen.dart' as _i2;
 
@@ -18,10 +18,10 @@ abstract class $AppRouter extends _i3.RootStackRouter {
 
   @override
   final Map<String, _i3.PageFactory> pagesMap = {
-    BuzzerDetailsRoute.name: (routeData) {
+    AlarmDetailsRoute.name: (routeData) {
       return _i3.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.BuzzerDetailsScreen(),
+        child: const _i1.AlarmDetailsScreen(),
       );
     },
     DashboardRoute.name: (routeData) {
@@ -34,15 +34,15 @@ abstract class $AppRouter extends _i3.RootStackRouter {
 }
 
 /// generated route for
-/// [_i1.BuzzerDetailsScreen]
-class BuzzerDetailsRoute extends _i3.PageRouteInfo<void> {
-  const BuzzerDetailsRoute({List<_i3.PageRouteInfo>? children})
+/// [_i1.AlarmDetailsScreen]
+class AlarmDetailsRoute extends _i3.PageRouteInfo<void> {
+  const AlarmDetailsRoute({List<_i3.PageRouteInfo>? children})
       : super(
-          BuzzerDetailsRoute.name,
+          AlarmDetailsRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'BuzzerDetailsRoute';
+  static const String name = 'AlarmDetailsRoute';
 
   static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
 }

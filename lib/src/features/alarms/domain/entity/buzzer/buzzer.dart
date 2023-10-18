@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wakeme/src/features/buzzers/data/dto/buzzer/buzzer_dto.dart';
-import 'package:wakeme/src/features/buzzers/domain/entity/buzzer_date/buzzer_date.dart';
+import 'package:wakeme/src/features/alarms/data/dto/buzzer/buzzer_dto.dart';
+import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date.dart';
 import 'package:uuid/uuid.dart';
 
 part 'buzzer.freezed.dart';

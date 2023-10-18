@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:wakeme/src/core/presentation/theme/c_theme_colors.dart';
 import 'package:wakeme/src/core/presentation/theme/c_theme_styles.dart';
-import 'package:wakeme/src/features/buzzers/domain/entity/buzzer_date/buzzer_date.dart';
+import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date.dart';
 
 class CTimePicker extends StatelessWidget {
   const CTimePicker({

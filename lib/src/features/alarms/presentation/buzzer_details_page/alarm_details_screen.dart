@@ -9,17 +9,17 @@ import 'package:wakeme/src/core/presentation/widgets/c_app_bar.dart';
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_box.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_timer_picker.dart';
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_option_box.dart';
-import 'package:wakeme/src/features/buzzers/presentation/buzzer_details_page/cubit/buzzer_details_screen_cubit.dart';
+import 'package:wakeme/src/features/alarms/presentation/buzzer_details_page/cubit/buzzer_details_screen_cubit.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_scaffold.dart';
 
 @RoutePage()
-class BuzzerDetailsScreen extends StatelessWidget {
-  const BuzzerDetailsScreen({super.key});
+class AlarmDetailsScreen extends StatelessWidget {
+  const AlarmDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => inject<BuzzerDetailsScreenCubit>(),
+      create: (_) => inject<AlarmDetailsScreenCubit>(),
       child: const CScaffold(
         body: _Body(),
       ),
@@ -31,7 +31,7 @@ class _Body extends StatelessWidget {
   const _Body();
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<BuzzerDetailsScreenCubit, BuzzerDetailsScreenState>(
+  Widget build(BuildContext context) => BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
         builder: (_, state) => Column(
           children: [
             const CAppBar(label: 'Edit Alarm'),
@@ -40,7 +40,7 @@ class _Body extends StatelessWidget {
               height: 140.0,
               child: CTimePicker(
                 initial: state.date,
-                onDateChanged: context.read<BuzzerDetailsScreenCubit>().handleDateChanged,
+                onDateChanged: context.read<AlarmDetailsScreenCubit>().handleDateChanged,
               ),
             ),
             const SizedBox(height: 20.0),
@@ -69,7 +69,7 @@ class _Body extends StatelessWidget {
             const Spacer(),
             CBottomFloatingButton.invert(
               label: l18n.save,
-              onPressed: context.read<BuzzerDetailsScreenCubit>().handleSave,
+              onPressed: context.read<AlarmDetailsScreenCubit>().handleSave,
               action: CBottomFloatingButtonAction(
                 icon: CupertinoIcons.clear,
                 onPressed: () => print('action pressed'),

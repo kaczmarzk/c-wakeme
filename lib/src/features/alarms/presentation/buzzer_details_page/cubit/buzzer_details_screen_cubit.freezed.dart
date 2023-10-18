@@ -15,19 +15,19 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$BuzzerDetailsScreenState {
+mixin _$AlarmDetailsScreenState {
   BuzzerDate get date => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $BuzzerDetailsScreenStateCopyWith<BuzzerDetailsScreenState> get copyWith =>
+  $AlarmDetailsScreenStateCopyWith<AlarmDetailsScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BuzzerDetailsScreenStateCopyWith<$Res> {
-  factory $BuzzerDetailsScreenStateCopyWith(BuzzerDetailsScreenState value,
-          $Res Function(BuzzerDetailsScreenState) then) =
-      _$BuzzerDetailsScreenStateCopyWithImpl<$Res, BuzzerDetailsScreenState>;
+abstract class $AlarmDetailsScreenStateCopyWith<$Res> {
+  factory $AlarmDetailsScreenStateCopyWith(AlarmDetailsScreenState value,
+          $Res Function(AlarmDetailsScreenState) then) =
+      _$AlarmDetailsScreenStateCopyWithImpl<$Res, AlarmDetailsScreenState>;
   @useResult
   $Res call({BuzzerDate date});
 
@@ -35,10 +35,10 @@ abstract class $BuzzerDetailsScreenStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BuzzerDetailsScreenStateCopyWithImpl<$Res,
-        $Val extends BuzzerDetailsScreenState>
-    implements $BuzzerDetailsScreenStateCopyWith<$Res> {
-  _$BuzzerDetailsScreenStateCopyWithImpl(this._value, this._then);
+class _$AlarmDetailsScreenStateCopyWithImpl<$Res,
+        $Val extends AlarmDetailsScreenState>
+    implements $AlarmDetailsScreenStateCopyWith<$Res> {
+  _$AlarmDetailsScreenStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -68,12 +68,11 @@ class _$BuzzerDetailsScreenStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_BuzzerDetailsScreenStateCopyWith<$Res>
-    implements $BuzzerDetailsScreenStateCopyWith<$Res> {
-  factory _$$_BuzzerDetailsScreenStateCopyWith(
-          _$_BuzzerDetailsScreenState value,
-          $Res Function(_$_BuzzerDetailsScreenState) then) =
-      __$$_BuzzerDetailsScreenStateCopyWithImpl<$Res>;
+abstract class _$$_AlarmDetailsScreenStateCopyWith<$Res>
+    implements $AlarmDetailsScreenStateCopyWith<$Res> {
+  factory _$$_AlarmDetailsScreenStateCopyWith(_$_AlarmDetailsScreenState value,
+          $Res Function(_$_AlarmDetailsScreenState) then) =
+      __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({BuzzerDate date});
@@ -83,12 +82,12 @@ abstract class _$$_BuzzerDetailsScreenStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BuzzerDetailsScreenStateCopyWithImpl<$Res>
-    extends _$BuzzerDetailsScreenStateCopyWithImpl<$Res,
-        _$_BuzzerDetailsScreenState>
-    implements _$$_BuzzerDetailsScreenStateCopyWith<$Res> {
-  __$$_BuzzerDetailsScreenStateCopyWithImpl(_$_BuzzerDetailsScreenState _value,
-      $Res Function(_$_BuzzerDetailsScreenState) _then)
+class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
+    extends _$AlarmDetailsScreenStateCopyWithImpl<$Res,
+        _$_AlarmDetailsScreenState>
+    implements _$$_AlarmDetailsScreenStateCopyWith<$Res> {
+  __$$_AlarmDetailsScreenStateCopyWithImpl(_$_AlarmDetailsScreenState _value,
+      $Res Function(_$_AlarmDetailsScreenState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,7 +95,7 @@ class __$$_BuzzerDetailsScreenStateCopyWithImpl<$Res>
   $Res call({
     Object? date = null,
   }) {
-    return _then(_$_BuzzerDetailsScreenState(
+    return _then(_$_AlarmDetailsScreenState(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -107,22 +106,22 @@ class __$$_BuzzerDetailsScreenStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BuzzerDetailsScreenState implements _BuzzerDetailsScreenState {
-  const _$_BuzzerDetailsScreenState({required this.date});
+class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
+  const _$_AlarmDetailsScreenState({required this.date});
 
   @override
   final BuzzerDate date;
 
   @override
   String toString() {
-    return 'BuzzerDetailsScreenState(date: $date)';
+    return 'AlarmDetailsScreenState(date: $date)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BuzzerDetailsScreenState &&
+            other is _$_AlarmDetailsScreenState &&
             (identical(other.date, date) || other.date == date));
   }
 
@@ -132,19 +131,20 @@ class _$_BuzzerDetailsScreenState implements _BuzzerDetailsScreenState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BuzzerDetailsScreenStateCopyWith<_$_BuzzerDetailsScreenState>
-      get copyWith => __$$_BuzzerDetailsScreenStateCopyWithImpl<
-          _$_BuzzerDetailsScreenState>(this, _$identity);
+  _$$_AlarmDetailsScreenStateCopyWith<_$_AlarmDetailsScreenState>
+      get copyWith =>
+          __$$_AlarmDetailsScreenStateCopyWithImpl<_$_AlarmDetailsScreenState>(
+              this, _$identity);
 }
 
-abstract class _BuzzerDetailsScreenState implements BuzzerDetailsScreenState {
-  const factory _BuzzerDetailsScreenState({required final BuzzerDate date}) =
-      _$_BuzzerDetailsScreenState;
+abstract class _AlarmDetailsScreenState implements AlarmDetailsScreenState {
+  const factory _AlarmDetailsScreenState({required final BuzzerDate date}) =
+      _$_AlarmDetailsScreenState;
 
   @override
   BuzzerDate get date;
   @override
   @JsonKey(ignore: true)
-  _$$_BuzzerDetailsScreenStateCopyWith<_$_BuzzerDetailsScreenState>
+  _$$_AlarmDetailsScreenStateCopyWith<_$_AlarmDetailsScreenState>
       get copyWith => throw _privateConstructorUsedError;
 }

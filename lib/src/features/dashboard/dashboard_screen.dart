@@ -36,7 +36,7 @@ class _Body extends StatelessWidget {
   const _Body();
 
   void _handleNavigationState(BuildContext context, DashboardScreenNavigationState state) => switch (state) {
-        DashboardScreenNavigationState.details => context.router.push(const BuzzerDetailsRoute()),
+        DashboardScreenNavigationState.details => context.router.push(const AlarmDetailsRoute()),
         DashboardScreenNavigationState.settings => null,
         DashboardScreenNavigationState.none => null,
       };
@@ -182,30 +182,41 @@ class _Body extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                   horizontal: CThemeDimens.paddingCScaffold,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Upcoming alarms',
-                      style: CThemeStyles.gilroyMedium_20.copyWith(
-                        color: CThemeColors.platinum,
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    BlocBuilder<DashboardScreenCubit, DashboardScreenState>(
-                      builder: (_, state) => ListView.separated(
-                        shrinkWrap: true,
-                        itemCount: state.buzzers.length,
-                        physics: const NeverScrollableScrollPhysics(),
-                        separatorBuilder: (_, __) => const SizedBox(height: 10.0),
-                        itemBuilder: (_, index) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20.0),
-                          child: Text(state.buzzers[index].label),
+                child: BlocBuilder<DashboardScreenCubit, DashboardScreenState>(
+                  builder: (_, state) {
+                    if (state.buzzers.isEmpty) {
+                      return Text(
+                        'No alarms',
+                        style: CThemeStyles.gilroyMedium_20.copyWith(
+                          color: CThemeColors.platinum,
                         ),
-                      ),
-                    ),
-                  ],
+                      );
+                    }
+
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Upcoming alarms',
+                          style: CThemeStyles.gilroyMedium_20.copyWith(
+                            color: CThemeColors.platinum,
+                          ),
+                        ),
+                        const SizedBox(height: 20.0),
+                        ListView.separated(
+                          shrinkWrap: true,
+                          itemCount: state.buzzers.length,
+                          physics: const NeverScrollableScrollPhysics(),
+                          separatorBuilder: (_, __) => const SizedBox(height: 10.0),
+                          itemBuilder: (_, index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20.0),
+                            child: Text(state.buzzers[index].label),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],

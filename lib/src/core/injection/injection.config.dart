@@ -16,11 +16,11 @@ import 'package:wakeme/src/core/injection/modules/router_module.dart' as _i11;
 import 'package:wakeme/src/core/routing/app_router.dart' as _i3;
 import 'package:wakeme/src/core/service/db/hive/hive_client.dart' as _i5;
 import 'package:wakeme/src/core/service/debounce/easy_debouncer.dart' as _i4;
-import 'package:wakeme/src/features/buzzers/data/source/local/buzzers_local_source.dart'
+import 'package:wakeme/src/features/alarms/data/source/local/buzzers_local_source.dart'
     as _i7;
-import 'package:wakeme/src/features/buzzers/domain/repository/buzzers_repository.dart'
+import 'package:wakeme/src/features/alarms/domain/repository/buzzers_repository.dart'
     as _i8;
-import 'package:wakeme/src/features/buzzers/presentation/buzzer_details_page/cubit/buzzer_details_screen_cubit.dart'
+import 'package:wakeme/src/features/alarms/presentation/buzzer_details_page/cubit/buzzer_details_screen_cubit.dart'
     as _i6;
 import 'package:wakeme/src/features/dashboard/cubit/dashboard_screen_cubit.dart'
     as _i9;
@@ -41,8 +41,8 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i3.AppRouter>(routerModule.router);
     gh.factory<_i4.EasyDebouncer>(() => debounceModule.easy);
     gh.lazySingleton<_i5.HiveClient>(() => _i5.HiveClient());
-    gh.factory<_i6.BuzzerDetailsScreenCubit>(
-        () => _i6.BuzzerDetailsScreenCubit(gh<_i4.EasyDebouncer>()));
+    gh.factory<_i6.AlarmDetailsScreenCubit>(
+        () => _i6.AlarmDetailsScreenCubit(gh<_i4.EasyDebouncer>()));
     gh.factory<_i7.BuzzersLocalSource>(
         () => _i7.BuzzersLocalSource(gh<_i5.HiveClient>()));
     gh.factory<_i8.BuzzersRepository>(

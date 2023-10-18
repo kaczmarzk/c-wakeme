@@ -6,7 +6,7 @@ import 'package:wakeme/src/core/service/db/hive/hive_client.dart';
 import 'package:wakeme/src/core/service/db/hive/hive_factory.dart';
 import 'package:wakeme/src/core/utils/functional/failure/failure.dart';
 import 'package:wakeme/src/core/utils/functional/success/success.dart';
-import 'package:wakeme/src/features/buzzers/data/dto/buzzer/buzzer_dto.dart';
+import 'package:wakeme/src/features/alarms/data/dto/buzzer/buzzer_dto.dart';
 
 abstract interface class IBuzzersLocalSource {
   Either<Failure, Success> add(BuzzerDto dto);

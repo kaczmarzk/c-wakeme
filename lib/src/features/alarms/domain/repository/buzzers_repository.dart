@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
 import 'package:loggy/loggy.dart';
 import 'package:wakeme/src/core/utils/functional/failure/failure.dart';
-import 'package:wakeme/src/features/buzzers/data/source/local/buzzers_local_source.dart';
-import 'package:wakeme/src/features/buzzers/domain/entity/buzzer/buzzer.dart';
-import 'package:wakeme/src/features/buzzers/domain/entity/buzzer_date/buzzer_date.dart';
+import 'package:wakeme/src/features/alarms/data/source/local/buzzers_local_source.dart';
+import 'package:wakeme/src/features/alarms/domain/entity/buzzer/buzzer.dart';
+import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class IBuzzersRepository {

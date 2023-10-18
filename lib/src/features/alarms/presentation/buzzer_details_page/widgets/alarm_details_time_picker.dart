@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wakeme/src/core/utils/extension/build_context_ext.dart';
-import 'package:wakeme/src/features/buzzers/domain/entity/buzzer_date/buzzer_date.dart';
+import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_timer_picker.dart';
 
-class BuzzerDetailsTimePicker extends StatelessWidget {
-  const BuzzerDetailsTimePicker({
+class AlarmDetailsTimePicker extends StatelessWidget {
+  const AlarmDetailsTimePicker({
     required this.initial,
     required this.onDateChanged,
     super.key,
@@ -25,10 +25,7 @@ class BuzzerDetailsTimePicker extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          height: context.mq.padding.top,
-          // color: ThemeColors.primary,
-        ),
+        Container(height: context.mq.padding.top),
         SizedBox(
           height: height,
           child: Stack(

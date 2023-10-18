@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wakeme/src/core/utils/enum/weekday.dart';
-import 'package:wakeme/src/features/buzzers/data/dto/buzzer_date/buzzer_date_dto.dart';
+import 'package:wakeme/src/features/alarms/data/dto/buzzer_date/buzzer_date_dto.dart';
 
 part 'buzzer_date.freezed.dart';
 

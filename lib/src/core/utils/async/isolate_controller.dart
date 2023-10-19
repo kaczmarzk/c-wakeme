@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:isolate';
 
-typedef IsolateHandler<Payload, Out> = FutureOr<void> Function(
-  Payload payload,
+typedef IsolateHandler<Out> = FutureOr<void> Function(
   void Function(Out out) send,
 );
 
@@ -12,7 +11,7 @@ class IsolateController<Out> {
     required this.close,
   });
 
-  static Future<void> _$entryPoint<Payload, Out>(_IsolateArgument<Payload, Out> argument) async {
+  static Future<void> _$entryPoint<Out>(_IsolateArgument<Out> argument) async {
     try {
       await argument();
     } finally {
@@ -21,22 +20,20 @@ class IsolateController<Out> {
     }
   }
 
-  static Future<IsolateController<Out>> spawn<Payload, Out>(
-    IsolateHandler<Payload, Out> handler,
-    Payload payload,
+  static Future<IsolateController<Out>> spawn<Out>(
+    IsolateHandler<Out> handler,
   ) async {
     // Create a [ReceivePort] to receive messages from the isolate.
     // You can create more than one [ReceivePort] to receive messages from the
     // isolate. E.g. separate ports for output, errors, and control messages.
     final receivePort = ReceivePort();
-    final argument = _IsolateArgument<Payload, Out>(
+    final argument = _IsolateArgument<Out>(
       handler: handler,
-      payload: payload,
       // Send the [SendPort] of the [ReceivePort] to the isolate.
       sendPort: receivePort.sendPort,
     );
-    final isolate = await Isolate.spawn<_IsolateArgument<Payload, Out>>(
-      _$entryPoint<Payload, Out>,
+    final isolate = await Isolate.spawn<_IsolateArgument<Out>>(
+      _$entryPoint<Out>,
       argument,
       errorsAreFatal: true,
       debugName: 'MyIsolate',
@@ -84,19 +81,16 @@ class IsolateController<Out> {
   final void Function() close;
 }
 
-class _IsolateArgument<Payload, Out> {
+class _IsolateArgument<Out> {
   _IsolateArgument({
     required this.handler,
-    required this.payload,
     required this.sendPort,
   });
 
-  final IsolateHandler<Payload, Out> handler;
-
-  final Payload payload;
+  final IsolateHandler<Out> handler;
 
   /// For sending messages from the spawned isolate to the main isolate.
   final SendPort sendPort;
 
-  FutureOr<void> call() => handler(payload, sendPort.send);
+  FutureOr<void> call() => handler(sendPort.send);
 }

@@ -21,48 +21,58 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> with UiLog
 
   IsolateController? isolate;
 
-  void handleDateChanged(BuzzerDate date) {
-    debouncer.debounce(
-      execute: () {
-        final weekdays = _handleWeekdayChanged(date);
-        emit(state.copyWith(date: date, weekdays: weekdays));
-        loggy.debug('onDateChanged: $weekdays - ${date.hour}:${date.minute}');
-      },
-    );
-  }
+  void handleDateChanged(BuzzerDate date) => debouncer.debounce(
+        execute: () {
+          final weekdays = _handleWeekdayChanged(date);
+          emit(state.copyWith(date: date, weekdays: weekdays));
+          loggy.debug('onDateChanged: $weekdays - ${date.hour}:${date.minute}');
+        },
+      );
 
+  //TODO: to implement
   void handleSave() {
     loggy.debug('handle save');
   }
 
+  //TODO: to implement
+  void handleRepeatChanged(Set<Weekday> repeat) {
+    if (state.date.repeat.isEmpty && repeat.isNotEmpty) {
+      listenForDateChanged();
+    }
+
+    if (state.date.repeat.isNotEmpty) {
+      isolate?.close();
+    }
+  }
+
+  Future<void> listenForDateChanged() async {
+    isolate = await IsolateController.spawn<DateTime>(
+      (send) async {
+        var current = DateTime.now();
+
+        while (true) {
+          await Future.delayed(
+            const Duration(seconds: 1),
+            () {
+              final now = DateTime.now().copyWith(microsecond: 0, millisecond: 0, second: 0);
+              if (now.isAfter(current)) {
+                send(now);
+                current = now;
+              }
+            },
+          );
+        }
+      },
+    )
+      ..stream.listen(_handleTimeChanged);
+  }
+
   @override
   Future<void> close() {
+    isolate?.close();
     debouncer.cancel();
     return super.close();
   }
-
-  Future<void> _listenDeviceDateChanges() async {
-    isolate = await IsolateController.spawn<DateTime, DateTime>(
-          (payload, send) async {
-        DateTime current = payload.copyWith(microsecond: 0, millisecond: 0, second: 0);
-
-        while (true) {
-          await Future.delayed(const Duration(seconds: 1), () {
-            final now = DateTime.now().copyWith(microsecond: 0, millisecond: 0, second: 0);
-            if (now.isAfter(current)) {
-              send(now);
-              current = now;
-            }
-          });
-        }
-      },
-      DateTime.now(),
-    )
-      ..stream.listen((event) {
-        print('date changed: ${event.hour}:${event.minute}');
-      });
-  }
-
 }
 
 extension AlarmDetailsScreenCubitExt on AlarmDetailsScreenCubit {
@@ -78,5 +88,18 @@ extension AlarmDetailsScreenCubitExt on AlarmDetailsScreenCubit {
     final isBefore = date.isBefore(now);
     if (isBefore || isNow) return {Weekday.next};
     return {Weekday.now};
+  }
+
+  void _handleTimeChanged(DateTime now) {
+    if (state.date.repeat.isNotEmpty) return;
+
+    final date = now.copyWith(hour: state.date.hour, minute: state.date.minute);
+    final isNow = date.hour == now.hour && date.minute == now.minute;
+    final isBefore = date.isBefore(now);
+
+    Set<Weekday> weekdays;
+    if (isBefore || isNow) weekdays = {Weekday.next};
+    weekdays = {Weekday.now};
+    emit(state.copyWith(weekdays: weekdays));
   }
 }

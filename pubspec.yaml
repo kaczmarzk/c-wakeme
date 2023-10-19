@@ -17,6 +17,7 @@ dependencies:
   loggy: 2.0.3
   fpdart: 1.1.0
   easy_debounce: 2.0.3
+  time_listener: 0.0.2
 
   # ui
   cupertino_icons: 1.0.6
@@ -40,9 +41,6 @@ dependencies:
   # injection
   get_it: 7.2.0
   injectable: 2.1.1
-
-  time_listener:
-    path: "../time_listener"
 
 dev_dependencies:
   flutter_test:

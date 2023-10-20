@@ -1,10 +1,7 @@
-import 'dart:isolate';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:loggy/loggy.dart';
+import 'package:time_listener/time_listener.dart';
 import 'package:wakeme/src/core/service/debounce/easy_debouncer.dart';
-import 'package:wakeme/src/core/utils/async/isolate_controller.dart';
 import 'package:wakeme/src/core/utils/enum/weekday.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer/buzzer.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date.dart';
@@ -15,17 +12,15 @@ part 'buzzer_details_screen_state.dart';
 part 'buzzer_details_screen_cubit.freezed.dart';
 
 @injectable
-class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> with UiLoggy {
-  AlarmDetailsScreenCubit(this.debouncer) : super(AlarmDetailsScreenState.initial());
+class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
+  AlarmDetailsScreenCubit(this.debouncer, this.dTime) : super(AlarmDetailsScreenState.initial());
   final EasyDebouncer debouncer;
-
-  IsolateController? isolate;
+  final TimeListener dTime;
 
   void handleDateChanged(BuzzerDate date) => debouncer.debounce(
         execute: () {
-          final weekdays = _handleWeekdayChanged(date);
+          final weekdays = _handleWeekdayChanged(entity: date);
           emit(state.copyWith(date: date, weekdays: weekdays));
-          loggy.debug('onDateChanged: $weekdays - ${date.hour}:${date.minute}');
         },
       );
 
@@ -35,53 +30,31 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> with UiLog
   }
 
   //TODO: to implement
-  void handleRepeatChanged(Set<Weekday> repeat) {
-    if (state.date.repeat.isEmpty && repeat.isNotEmpty) {
-      listenForDateChanged();
-    }
+  void handleRepeatChanged(Set<Weekday> repeat) {}
 
-    if (state.date.repeat.isNotEmpty) {
-      isolate?.close();
-    }
-  }
-
-  Future<void> listenForDateChanged() async {
-    isolate = await IsolateController.spawn<DateTime>(
-      (send) async {
-        var current = DateTime.now();
-
-        while (true) {
-          await Future.delayed(
-            const Duration(seconds: 1),
-            () {
-              final now = DateTime.now().copyWith(microsecond: 0, millisecond: 0, second: 0);
-              if (now.isAfter(current)) {
-                send(now);
-                current = now;
-              }
-            },
-          );
-        }
-      },
-    )
-      ..stream.listen(_handleTimeChanged);
+  @override
+  void init() {
+    _handleTimeChanged();
   }
 
   @override
   Future<void> close() {
-    isolate?.close();
+    loggy.debug('$runtimeType - close');
+    dTime.cancel();
     debouncer.cancel();
     return super.close();
   }
 }
 
-extension AlarmDetailsScreenCubitExt on AlarmDetailsScreenCubit {
-  /// change alarm weekday on date change when if not repeated
-  Set<Weekday> _handleWeekdayChanged([BuzzerDate? entity]) {
-    if (entity == null || state.date.repeat.isNotEmpty) return state.date.repeat;
+extension AlarmDetailsScreenCubitWeekdaysExt on AlarmDetailsScreenCubit {
+  /// change alarm weekday on time change by user or device
+  /// if not alarm repeat not set
+  Set<Weekday> _handleWeekdayChanged({DateTime? dt, BuzzerDate? entity}) {
+    if (state.date.repeat.isNotEmpty) return state.date.repeat;
+    if (dt == null && entity == null) return state.weekdays;
 
     final now = DateTime.now();
-    final date = now.copyWith(hour: entity.hour, minute: entity.minute);
+    final date = now.copyWith(hour: entity?.hour ?? dt!.hour, minute: entity?.minute ?? dt!.minute);
 
     /// if user set current hour and minute, set alarm to next day
     final isNow = date.hour == now.hour && date.minute == now.minute;
@@ -90,16 +63,12 @@ extension AlarmDetailsScreenCubitExt on AlarmDetailsScreenCubit {
     return {Weekday.now};
   }
 
-  void _handleTimeChanged(DateTime now) {
-    if (state.date.repeat.isNotEmpty) return;
-
-    final date = now.copyWith(hour: state.date.hour, minute: state.date.minute);
-    final isNow = date.hour == now.hour && date.minute == now.minute;
-    final isBefore = date.isBefore(now);
-
-    Set<Weekday> weekdays;
-    if (isBefore || isNow) weekdays = {Weekday.next};
-    weekdays = {Weekday.now};
-    emit(state.copyWith(weekdays: weekdays));
+  void _handleTimeChanged() {
+    dTime.listen(
+      (dt) {
+        final weekdays = _handleWeekdayChanged(dt: dt);
+        emit(state.copyWith(weekdays: weekdays));
+      },
+    );
   }
 }

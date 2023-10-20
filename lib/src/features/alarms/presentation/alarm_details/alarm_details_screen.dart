@@ -1,11 +1,13 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wakeme/i18n/translations.g.dart';
 import 'package:wakeme/src/core/injection/injection.dart';
 import 'package:wakeme/src/core/presentation/widgets/button/c_bottom_floating_button.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_app_bar.dart';
+import 'package:wakeme/src/core/presentation/widgets/c_dialog.dart';
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_box.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_timer_picker.dart';
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_option_box.dart';
@@ -20,7 +22,7 @@ class AlarmDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => inject<AlarmDetailsScreenCubit>(),
+      create: (_) => inject<AlarmDetailsScreenCubit>()..init(),
       child: const CScaffold(
         body: _Body(),
       ),
@@ -56,17 +58,21 @@ class _Body extends StatelessWidget {
                 CContentOptionBox(
                   title: 'Label',
                   subtitle: 'Śliczna nazwa budzika',
-                  onPressed: () => print('pressed'),
+                  onPressed: () => CDialog.show(
+                    context,
+                    label: 'Set label',
+                    child: Container(color: Colors.red, width: 100, height: 100,),
+                  ),
                 ),
                 CContentOptionBox(
                   title: 'Repeat',
                   subtitle: 'Never',
-                  onPressed: () => print('pressed'),
+                  onPressed: () {},
                 ),
                 CContentOptionBox(
                   title: 'Sound',
                   subtitle: 'Orkney',
-                  onPressed: () => print('pressed'),
+                  onPressed: () {},
                 ),
               ],
             ),
@@ -77,7 +83,7 @@ class _Body extends StatelessWidget {
             onPressed: context.read<AlarmDetailsScreenCubit>().handleSave,
             action: CBottomFloatingButtonAction(
               icon: CupertinoIcons.clear,
-              onPressed: () => print('action pressed'),
+              onPressed: () {},
             ),
           ),
           const SizedBox(height: 20.0),

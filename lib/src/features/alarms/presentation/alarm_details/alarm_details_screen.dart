@@ -1,7 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wakeme/i18n/translations.g.dart';
 import 'package:wakeme/src/core/injection/injection.dart';
@@ -13,6 +12,7 @@ import 'package:wakeme/src/core/presentation/widgets/c_timer_picker.dart';
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_option_box.dart';
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/cubit/buzzer_details_screen_cubit.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_scaffold.dart';
+import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/alarm_details_label_popup.dart';
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/alarm_details_weekday_picker.dart';
 
 @RoutePage()
@@ -61,7 +61,7 @@ class _Body extends StatelessWidget {
                   onPressed: () => CDialog.show(
                     context,
                     label: 'Set label',
-                    child: Container(color: Colors.red, width: 100, height: 100,),
+                    child: const AlarmDetailsLabelPopup(),
                   ),
                 ),
                 CContentOptionBox(

@@ -44,8 +44,9 @@ class CDialog<T> extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          Container(
             height: CThemeDimens.sizeCAppBar,
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,55 +80,3 @@ class CDialog<T> extends StatelessWidget {
     );
   }
 }
-
-// void _showDialog(BuildContext context) {
-//   showCupertinoDialog(
-//     context: context,
-//     builder: (_) =>
-//         AlertDialog(
-//           backgroundColor: CThemeColors.cinder,
-//           contentPadding: EdgeInsets.zero,
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(CThemeDimens.radiusCContentBox),
-//           ),
-//           content: Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               SizedBox(
-//                 height: CThemeDimens.sizeCAppBar,
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   crossAxisAlignment: CrossAxisAlignment.center,
-//                   children: [
-//                     Container(
-//                       width: 100.0,
-//                       alignment: Alignment.centerLeft,
-//                       child: leading ??
-//                           CIconButton(
-//                             icon: CupertinoIcons.arrow_left,
-//                             onPressed: context.router.pop,
-//                             size: CThemeSize.large,
-//                           ),
-//                     ),
-//                     Text(
-//                       label,
-//                       style: CThemeStyles.gilroyMedium_20.copyWith(
-//                         color: CThemeColors.grayCloud,
-//                       ),
-//                     ),
-//                     const SizedBox(width: 100),
-//                   ],
-//                 ),
-//               ),
-//               SizedBox.square(
-//                 dimension: 200,
-//                 child: Container(
-//                   color: CThemeColors.cinder,
-//                   child: Placeholder(color: CThemeColors.cinder),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//   );
-// }

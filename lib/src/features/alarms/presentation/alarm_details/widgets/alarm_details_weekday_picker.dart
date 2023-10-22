@@ -14,18 +14,22 @@ class AlarmDetailsWeekdaysWidget extends StatelessWidget {
     return CContentBox(
       height: 60.0,
       child: LayoutBuilder(
-        builder: (_, constraints) => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: Weekday.values
-              .map(
-                (day) => _SingleDayWidget(
-                  day: day,
-                  value: values.contains(day),
-                  dimension: constraints.maxWidth / 9,
-                ),
-              )
-              .toList(),
-        ),
+        builder: (_, constraints) {
+          /// out sunday as first
+          final value = [Weekday.sunday, ...Weekday.weekdays, Weekday.saturday];
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: value
+                .map(
+                  (day) => _SingleDayWidget(
+                    day: day,
+                    value: values.contains(day),
+                    dimension: constraints.maxWidth / 9,
+                  ),
+                )
+                .toList(),
+          );
+        },
       ),
     );
   }

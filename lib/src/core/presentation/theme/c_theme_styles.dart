@@ -20,5 +20,6 @@ abstract final class CThemeStyles {
 
   static TextStyle get gilroyMedium_24 => _gilroyMedium.copyWith(fontSize: 24.0);
 
+  static TextStyle get albertRegular_16 => _albertRegular.copyWith(fontSize: 16.0);
   static TextStyle get albertRegular_26 => _albertRegular.copyWith(fontSize: 26.0);
 }

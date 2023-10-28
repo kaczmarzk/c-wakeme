@@ -23,11 +23,11 @@ Map<String, dynamic> _$BuzzerDateDtoToJson(BuzzerDateDto instance) =>
     };
 
 const _$WeekdayEnumMap = {
-  Weekday.sunday: 'sunday',
   Weekday.monday: 'monday',
   Weekday.tuesday: 'tuesday',
   Weekday.wednesday: 'wednesday',
   Weekday.thursday: 'thursday',
   Weekday.friday: 'friday',
   Weekday.saturday: 'saturday',
+  Weekday.sunday: 'sunday',
 };

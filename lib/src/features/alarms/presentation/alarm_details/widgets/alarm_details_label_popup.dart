@@ -1,15 +1,50 @@
-import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:wakeme/src/core/presentation/c_core/c_component.dart';
+import 'package:wakeme/src/core/presentation/widgets/button/c_bottom_floating_button.dart';
+import 'package:wakeme/src/core/presentation/widgets/c_text_field.dart';
 
-class AlarmDetailsLabelPopup extends StatelessWidget {
-  const AlarmDetailsLabelPopup({super.key});
+class AlarmDetailsLabelPopup extends StatefulWidget {
+  const AlarmDetailsLabelPopup({required this.initialValue, super.key});
+
+  final String initialValue;
+
+  @override
+  State<AlarmDetailsLabelPopup> createState() => _AlarmDetailsLabelPopupState();
+}
+
+class _AlarmDetailsLabelPopupState extends State<AlarmDetailsLabelPopup> {
+  String _value = 'initial value';
+
+  void onChanged(String? value) {
+    if (value != null && value != 'dupa') _value = value;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      color: Colors.blue,
-      width: 100,
-      height: 100,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 100,
+          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: CTextField(
+            value: _value,
+            onChanged: onChanged,
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0).copyWith(bottom: 10.0),
+          child: CBottomFloatingButton(
+            label: 'Save',
+            onPressed: () => context.router.pop(_value),
+            size: CThemeSize.small,
+          ),
+        ),
+      ],
     );
   }
 }

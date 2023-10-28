@@ -32,10 +32,16 @@ class CBottomFloatingButton extends CComponent {
   final CBottomFloatingButtonAction? action;
 
   @override
-  double get cRadius => 16.0;
+  double get cRadius => switch (size) {
+        CThemeSize.large => 16.0,
+        CThemeSize.small => 10.0,
+      };
 
   @override
-  double get cDimension => 50.0;
+  double get cDimension => switch (size) {
+        CThemeSize.large => 50.0,
+        CThemeSize.small => 42.0,
+      };
 
   @override
   Widget build(BuildContext context) {

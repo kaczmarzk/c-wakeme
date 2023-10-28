@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AlarmDetailsScreenState {
   BuzzerDate get date => throw _privateConstructorUsedError;
   Set<Weekday> get weekdays => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AlarmDetailsScreenStateCopyWith<AlarmDetailsScreenState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $AlarmDetailsScreenStateCopyWith<$Res> {
           $Res Function(AlarmDetailsScreenState) then) =
       _$AlarmDetailsScreenStateCopyWithImpl<$Res, AlarmDetailsScreenState>;
   @useResult
-  $Res call({BuzzerDate date, Set<Weekday> weekdays});
+  $Res call({BuzzerDate date, Set<Weekday> weekdays, String? name});
 
   $BuzzerDateCopyWith<$Res> get date;
 }
@@ -51,6 +52,7 @@ class _$AlarmDetailsScreenStateCopyWithImpl<$Res,
   $Res call({
     Object? date = null,
     Object? weekdays = null,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
       date: null == date
@@ -61,6 +63,10 @@ class _$AlarmDetailsScreenStateCopyWithImpl<$Res,
           ? _value.weekdays
           : weekdays // ignore: cast_nullable_to_non_nullable
               as Set<Weekday>,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -81,7 +87,7 @@ abstract class _$$_AlarmDetailsScreenStateCopyWith<$Res>
       __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BuzzerDate date, Set<Weekday> weekdays});
+  $Res call({BuzzerDate date, Set<Weekday> weekdays, String? name});
 
   @override
   $BuzzerDateCopyWith<$Res> get date;
@@ -101,6 +107,7 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
   $Res call({
     Object? date = null,
     Object? weekdays = null,
+    Object? name = freezed,
   }) {
     return _then(_$_AlarmDetailsScreenState(
       date: null == date
@@ -111,6 +118,10 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
           ? _value._weekdays
           : weekdays // ignore: cast_nullable_to_non_nullable
               as Set<Weekday>,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -119,7 +130,7 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
 
 class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
   const _$_AlarmDetailsScreenState(
-      {required this.date, required final Set<Weekday> weekdays})
+      {required this.date, required final Set<Weekday> weekdays, this.name})
       : _weekdays = weekdays;
 
   @override
@@ -133,8 +144,11 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
   }
 
   @override
+  final String? name;
+
+  @override
   String toString() {
-    return 'AlarmDetailsScreenState(date: $date, weekdays: $weekdays)';
+    return 'AlarmDetailsScreenState(date: $date, weekdays: $weekdays, name: $name)';
   }
 
   @override
@@ -143,12 +157,13 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
         (other.runtimeType == runtimeType &&
             other is _$_AlarmDetailsScreenState &&
             (identical(other.date, date) || other.date == date) &&
-            const DeepCollectionEquality().equals(other._weekdays, _weekdays));
+            const DeepCollectionEquality().equals(other._weekdays, _weekdays) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, date, const DeepCollectionEquality().hash(_weekdays));
+      runtimeType, date, const DeepCollectionEquality().hash(_weekdays), name);
 
   @JsonKey(ignore: true)
   @override
@@ -162,12 +177,15 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
 abstract class _AlarmDetailsScreenState implements AlarmDetailsScreenState {
   const factory _AlarmDetailsScreenState(
       {required final BuzzerDate date,
-      required final Set<Weekday> weekdays}) = _$_AlarmDetailsScreenState;
+      required final Set<Weekday> weekdays,
+      final String? name}) = _$_AlarmDetailsScreenState;
 
   @override
   BuzzerDate get date;
   @override
   Set<Weekday> get weekdays;
+  @override
+  String? get name;
   @override
   @JsonKey(ignore: true)
   _$$_AlarmDetailsScreenStateCopyWith<_$_AlarmDetailsScreenState>

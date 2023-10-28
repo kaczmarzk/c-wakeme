@@ -32,6 +32,11 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
   //TODO: to implement
   void handleRepeatChanged(Set<Weekday> repeat) {}
 
+  void handleLabelChanged(String? name) {
+    if (name == null) return;
+    emit(state.copyWith(name: name));
+  }
+
   @override
   void init() {
     _handleTimeChanged();

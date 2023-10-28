@@ -55,13 +55,24 @@ class _Body extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CContentOptionBox(
-                  title: 'Label',
-                  subtitle: 'Śliczna nazwa budzika',
-                  onPressed: () => CDialog.show(
-                    context,
-                    label: 'Set label',
-                    child: const AlarmDetailsLabelPopup(),
+                BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
+                  buildWhen: (prev, curr) => prev.name != curr.name,
+                  builder: (_, state) => CContentOptionBox(
+                    title: 'Label',
+                    subtitle: state.name,
+                    onPressed: () async {
+                      final result = await CDialog.show<String?>(
+                        context,
+                        label: 'Set label',
+                        child: AlarmDetailsLabelPopup(
+                          initialValue: 'testtest',
+                        ),
+                      );
+
+                      if (result != null) {
+                        context.read<AlarmDetailsScreenCubit>().handleLabelChanged(result);
+                      }
+                    },
                   ),
                 ),
                 CContentOptionBox(

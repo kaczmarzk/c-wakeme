@@ -3,8 +3,8 @@ import 'package:wakeme/src/core/presentation/c_core/c_component.dart';
 import 'package:wakeme/src/core/presentation/theme/c_theme_colors.dart';
 import 'package:wakeme/src/core/presentation/theme/c_theme_styles.dart';
 
-class CTextField extends CStatefulComponent {
-  const CTextField({
+class CTextInput extends CStatefulComponent {
+  const CTextInput({
     required this.value,
     required this.onChanged,
     this.maxLength = 30,
@@ -24,10 +24,10 @@ class CTextField extends CStatefulComponent {
   final bool autofocus;
 
   @override
-  State<CTextField> createState() => _CTextFieldState();
+  State<CTextInput> createState() => _CTextFieldState();
 }
 
-class _CTextFieldState extends State<CTextField> {
+class _CTextFieldState extends State<CTextInput> {
   late TextEditingController _controller;
 
   @override
@@ -37,7 +37,7 @@ class _CTextFieldState extends State<CTextField> {
   }
 
   @override
-  void didUpdateWidget(covariant CTextField oldWidget) {
+  void didUpdateWidget(covariant CTextInput oldWidget) {
     if (_controller.value.text != widget.value) {
       _controller.text = widget.value ?? '';
     }

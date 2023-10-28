@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wakeme/src/core/presentation/c_core/c_component.dart';
 import 'package:wakeme/src/core/presentation/widgets/button/c_bottom_floating_button.dart';
-import 'package:wakeme/src/core/presentation/widgets/c_text_field.dart';
+import 'package:wakeme/src/core/presentation/widgets/text_field/c_text_input.dart';
 
 class AlarmDetailsLabelPopup extends StatefulWidget {
   const AlarmDetailsLabelPopup({required this.initialValue, super.key});
@@ -30,7 +30,7 @@ class _AlarmDetailsLabelPopupState extends State<AlarmDetailsLabelPopup> {
           height: 100,
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: CTextField(
+          child: CTextInput(
             value: _value,
             onChanged: onChanged,
           ),

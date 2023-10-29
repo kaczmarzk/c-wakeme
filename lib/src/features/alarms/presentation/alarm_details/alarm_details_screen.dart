@@ -60,19 +60,7 @@ class _Body extends StatelessWidget {
                   builder: (_, state) => CContentOptionBox(
                     title: 'Label',
                     subtitle: state.name,
-                    onPressed: () async {
-                      final result = await CDialog.show<String?>(
-                        context,
-                        label: 'Set label',
-                        child: AlarmDetailsLabelPopup(
-                          initialValue: 'testtest',
-                        ),
-                      );
-
-                      if (result != null) {
-                        context.read<AlarmDetailsScreenCubit>().handleLabelChanged(result);
-                      }
-                    },
+                    onPressed: () => _showChangeLabelDialog(context, state.name),
                   ),
                 ),
                 CContentOptionBox(
@@ -100,4 +88,16 @@ class _Body extends StatelessWidget {
           const SizedBox(height: 20.0),
         ],
       );
+
+  Future<void> _showChangeLabelDialog(BuildContext context, String? initialValue) async {
+    final result = await CDialog.show<String?>(
+      context,
+      label: 'Set label',
+      child: AlarmDetailsLabelPopup(initialValue: initialValue),
+    );
+
+    if (result != null) {
+      context.read<AlarmDetailsScreenCubit>().handleLabelChanged(result);
+    }
+  }
 }

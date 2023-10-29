@@ -51,12 +51,12 @@ class _Body extends StatelessWidget {
                 CContentOptionBox(
                   title: 'Label',
                   subtitle: 'Śliczna nazwa budzika',
-                  onPressed: () => print('pressed'),
+                  onPressed: () {},
                 ),
                 CContentOptionBox(
                   title: 'Sound',
                   subtitle: 'Orkney',
-                  onPressed: () => print('pressed'),
+                  onPressed: () {},
                 ),
               ],
             ),
@@ -67,7 +67,7 @@ class _Body extends StatelessWidget {
             onPressed: () {},
             action: CBottomFloatingButtonAction(
               icon: CupertinoIcons.clear,
-              onPressed: () => print('action pressed'),
+              onPressed: () {},
             ),
           ),
           const SizedBox(height: 20.0),

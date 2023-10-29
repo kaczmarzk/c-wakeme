@@ -40,13 +40,14 @@ class CContentOptionBox extends StatelessWidget {
                     fontSize: 18,
                   ),
                 ),
-                Text(
-                  subtitle ?? '',
-                  style: CThemeStyles.gilroyMedium_16.copyWith(
-                    color: CThemeColors.softPeach,
-                    fontSize: 14,
+                if (subtitle != null)
+                  Text(
+                    subtitle!,
+                    style: CThemeStyles.gilroyMedium_16.copyWith(
+                      color: CThemeColors.softPeach,
+                      fontSize: 14,
+                    ),
                   ),
-                ),
               ],
             ),
             const Icon(

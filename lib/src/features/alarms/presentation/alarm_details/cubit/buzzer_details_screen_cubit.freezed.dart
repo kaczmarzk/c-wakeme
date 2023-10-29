@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AlarmDetailsScreenState {
   BuzzerDate get date => throw _privateConstructorUsedError;
   Set<Weekday> get weekdays => throw _privateConstructorUsedError;
+  AlarmDetailsScreenNavigationState get navigation =>
+      throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +33,11 @@ abstract class $AlarmDetailsScreenStateCopyWith<$Res> {
           $Res Function(AlarmDetailsScreenState) then) =
       _$AlarmDetailsScreenStateCopyWithImpl<$Res, AlarmDetailsScreenState>;
   @useResult
-  $Res call({BuzzerDate date, Set<Weekday> weekdays, String? name});
+  $Res call(
+      {BuzzerDate date,
+      Set<Weekday> weekdays,
+      AlarmDetailsScreenNavigationState navigation,
+      String? name});
 
   $BuzzerDateCopyWith<$Res> get date;
 }
@@ -52,6 +58,7 @@ class _$AlarmDetailsScreenStateCopyWithImpl<$Res,
   $Res call({
     Object? date = null,
     Object? weekdays = null,
+    Object? navigation = null,
     Object? name = freezed,
   }) {
     return _then(_value.copyWith(
@@ -63,6 +70,10 @@ class _$AlarmDetailsScreenStateCopyWithImpl<$Res,
           ? _value.weekdays
           : weekdays // ignore: cast_nullable_to_non_nullable
               as Set<Weekday>,
+      navigation: null == navigation
+          ? _value.navigation
+          : navigation // ignore: cast_nullable_to_non_nullable
+              as AlarmDetailsScreenNavigationState,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -87,7 +98,11 @@ abstract class _$$_AlarmDetailsScreenStateCopyWith<$Res>
       __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BuzzerDate date, Set<Weekday> weekdays, String? name});
+  $Res call(
+      {BuzzerDate date,
+      Set<Weekday> weekdays,
+      AlarmDetailsScreenNavigationState navigation,
+      String? name});
 
   @override
   $BuzzerDateCopyWith<$Res> get date;
@@ -107,6 +122,7 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
   $Res call({
     Object? date = null,
     Object? weekdays = null,
+    Object? navigation = null,
     Object? name = freezed,
   }) {
     return _then(_$_AlarmDetailsScreenState(
@@ -118,6 +134,10 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
           ? _value._weekdays
           : weekdays // ignore: cast_nullable_to_non_nullable
               as Set<Weekday>,
+      navigation: null == navigation
+          ? _value.navigation
+          : navigation // ignore: cast_nullable_to_non_nullable
+              as AlarmDetailsScreenNavigationState,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -130,7 +150,10 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
 
 class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
   const _$_AlarmDetailsScreenState(
-      {required this.date, required final Set<Weekday> weekdays, this.name})
+      {required this.date,
+      required final Set<Weekday> weekdays,
+      required this.navigation,
+      required this.name})
       : _weekdays = weekdays;
 
   @override
@@ -144,11 +167,13 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
   }
 
   @override
+  final AlarmDetailsScreenNavigationState navigation;
+  @override
   final String? name;
 
   @override
   String toString() {
-    return 'AlarmDetailsScreenState(date: $date, weekdays: $weekdays, name: $name)';
+    return 'AlarmDetailsScreenState(date: $date, weekdays: $weekdays, navigation: $navigation, name: $name)';
   }
 
   @override
@@ -158,12 +183,14 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
             other is _$_AlarmDetailsScreenState &&
             (identical(other.date, date) || other.date == date) &&
             const DeepCollectionEquality().equals(other._weekdays, _weekdays) &&
+            (identical(other.navigation, navigation) ||
+                other.navigation == navigation) &&
             (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, date, const DeepCollectionEquality().hash(_weekdays), name);
+  int get hashCode => Object.hash(runtimeType, date,
+      const DeepCollectionEquality().hash(_weekdays), navigation, name);
 
   @JsonKey(ignore: true)
   @override
@@ -178,12 +205,15 @@ abstract class _AlarmDetailsScreenState implements AlarmDetailsScreenState {
   const factory _AlarmDetailsScreenState(
       {required final BuzzerDate date,
       required final Set<Weekday> weekdays,
-      final String? name}) = _$_AlarmDetailsScreenState;
+      required final AlarmDetailsScreenNavigationState navigation,
+      required final String? name}) = _$_AlarmDetailsScreenState;
 
   @override
   BuzzerDate get date;
   @override
   Set<Weekday> get weekdays;
+  @override
+  AlarmDetailsScreenNavigationState get navigation;
   @override
   String? get name;
   @override

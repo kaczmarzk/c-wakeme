@@ -40,7 +40,7 @@ class CContentOptionBox extends StatelessWidget {
                     fontSize: 18,
                   ),
                 ),
-                if (subtitle != null)
+                if ((subtitle ?? '').isNotEmpty)
                   Text(
                     subtitle!,
                     style: CThemeStyles.gilroyMedium_16.copyWith(

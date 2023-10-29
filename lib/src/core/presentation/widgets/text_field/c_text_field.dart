@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:wakeme/src/core/presentation/widgets/text_field/c_text_input.dart';
 import 'package:wakeme/src/core/utils/validator/c_input_validator.dart';
 
+typedef CTextFieldNotifier = ValueNotifier<String?>;
+
 /// [CTextField] is a more expanded [CTextInput]
 /// which contain fe validation, value notifier support
 class CTextField extends StatefulWidget {
@@ -19,8 +21,8 @@ class CTextField extends StatefulWidget {
 
   final String? value;
   final List<CInputValidator> validators;
-  final ValueNotifier<String> notifier;
-  final void Function(String)? onSubmitted;
+  final CTextFieldNotifier notifier;
+  final VoidCallback? onSubmitted;
   final int maxLength;
   final int maxLines;
   final FocusNode? focusNode;
@@ -32,9 +34,15 @@ class CTextField extends StatefulWidget {
 
 class _CTextFieldState extends State<CTextField> {
   void _onChanged(String? value) {
+    /// ignore validators for empty string or null
+    if ((value ?? '').isEmpty) {
+      widget.notifier.value = value;
+      return setState(() {});
+    }
+
     final index = widget.validators.indexWhere((val) => val.validate(value).isSome());
-    if (value != null && index == -1) widget.notifier.value = value;
-    setState(() {});
+    if (index == -1) widget.notifier.value = value;
+    return setState(() {});
   }
 
   @override
@@ -43,7 +51,7 @@ class _CTextFieldState extends State<CTextField> {
         builder: (_, value, __) => CTextInput(
           value: widget.notifier.value,
           onChanged: _onChanged,
-          onSubmitted: widget.onSubmitted,
+          onSubmitted: (_) => widget.onSubmitted?.call(),
           maxLength: widget.maxLength,
           maxLines: widget.maxLines,
           focusNode: widget.focusNode,

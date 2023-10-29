@@ -33,71 +33,73 @@ class AlarmDetailsScreen extends StatelessWidget {
 class _Body extends StatelessWidget {
   const _Body();
 
+  void _handleNavigationState(BuildContext context, AlarmDetailsScreenState state) => switch (state.navigation) {
+        AlarmDetailsScreenNavigationState.editLabel => _showChangeLabelDialog(context, state.name),
+        AlarmDetailsScreenNavigationState.none => null,
+      };
+
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          const CAppBar(label: 'Edit Alarm'),
-          const SizedBox(height: 10.0),
-          CContentBox(
-            height: 140.0,
-            child: CTimePicker(
-              initial: context.read<AlarmDetailsScreenCubit>().state.date,
-              onDateChanged: context.read<AlarmDetailsScreenCubit>().handleDateChanged,
+  Widget build(BuildContext context) => BlocListener<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
+        listener: (_, state) => _handleNavigationState(context, state),
+        child: Column(
+          children: [
+            const CAppBar(label: 'Edit Alarm'),
+            const SizedBox(height: 10.0),
+            CContentBox(
+              height: 140.0,
+              child: CTimePicker(
+                initial: context.read<AlarmDetailsScreenCubit>().state.date,
+                onDateChanged: context.read<AlarmDetailsScreenCubit>().handleDateChanged,
+              ),
             ),
-          ),
-          const SizedBox(height: 20.0),
-          BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
-            buildWhen: (prev, curr) => prev.weekdays != curr.weekdays,
-            builder: (_, state) => AlarmDetailsWeekdaysWidget(values: state.weekdays),
-          ),
-          const SizedBox(height: 20.0),
-          CContentBox(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
-                  buildWhen: (prev, curr) => prev.name != curr.name,
-                  builder: (_, state) => CContentOptionBox(
-                    title: 'Label',
-                    subtitle: state.name,
-                    onPressed: () => _showChangeLabelDialog(context, state.name),
+            const SizedBox(height: 20.0),
+            BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
+              buildWhen: (prev, curr) => prev.weekdays != curr.weekdays,
+              builder: (_, state) => AlarmDetailsWeekdaysWidget(values: state.weekdays),
+            ),
+            const SizedBox(height: 20.0),
+            CContentBox(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
+                    buildWhen: (prev, curr) => prev.name != curr.name,
+                    builder: (_, state) => CContentOptionBox(
+                      title: 'Label',
+                      subtitle: state.name,
+                      onPressed: context.read<AlarmDetailsScreenCubit>().onEditLabelPressed,
+                    ),
                   ),
-                ),
-                CContentOptionBox(
-                  title: 'Repeat',
-                  subtitle: 'Never',
-                  onPressed: () {},
-                ),
-                CContentOptionBox(
-                  title: 'Sound',
-                  subtitle: 'Orkney',
-                  onPressed: () {},
-                ),
-              ],
+                  CContentOptionBox(
+                    title: 'Repeat',
+                    subtitle: 'Never',
+                    onPressed: () {},
+                  ),
+                  CContentOptionBox(
+                    title: 'Sound',
+                    subtitle: 'Orkney',
+                    onPressed: () {},
+                  ),
+                ],
+              ),
             ),
-          ),
-          const Spacer(),
-          CBottomFloatingButton.invert(
-            label: l18n.save,
-            onPressed: context.read<AlarmDetailsScreenCubit>().handleSave,
-            action: CBottomFloatingButtonAction(
-              icon: CupertinoIcons.clear,
-              onPressed: () {},
+            const Spacer(),
+            CBottomFloatingButton.invert(
+              label: l18n.save,
+              onPressed: context.read<AlarmDetailsScreenCubit>().handleSave,
+              action: CBottomFloatingButtonAction(
+                icon: CupertinoIcons.clear,
+                onPressed: () {},
+              ),
             ),
-          ),
-          const SizedBox(height: 20.0),
-        ],
+            const SizedBox(height: 20.0),
+          ],
+        ),
       );
 
-  Future<void> _showChangeLabelDialog(BuildContext context, String? initialValue) async {
-    final result = await CDialog.show<String?>(
-      context,
-      label: 'Set label',
-      child: AlarmDetailsLabelPopup(initialValue: initialValue),
-    );
-
-    if (result != null) {
-      context.read<AlarmDetailsScreenCubit>().handleLabelChanged(result);
-    }
-  }
+  Future<void> _showChangeLabelDialog(BuildContext context, String? initialValue) => CDialog.show<String?>(
+        context,
+        label: 'Set label',
+        child: AlarmDetailsLabelPopup(initialValue: initialValue),
+      ).then(context.read<AlarmDetailsScreenCubit>().handleLabelChanged);
 }

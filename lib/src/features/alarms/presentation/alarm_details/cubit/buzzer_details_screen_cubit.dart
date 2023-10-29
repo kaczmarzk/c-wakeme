@@ -1,3 +1,4 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:time_listener/time_listener.dart';
@@ -33,8 +34,11 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
   void handleRepeatChanged(Set<Weekday> repeat) {}
 
   void handleLabelChanged(String? name) {
-    if (name == null) return;
     emit(state.copyWith(name: name));
+  }
+
+  void onEditLabelPressed() {
+    cachedEmit(state.copyWith(navigation: AlarmDetailsScreenNavigationState.editLabel));
   }
 
   @override
@@ -44,14 +48,13 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
 
   @override
   Future<void> close() {
-    loggy.debug('$runtimeType - close');
     dTime.cancel();
     debouncer.cancel();
     return super.close();
   }
 }
 
-extension AlarmDetailsScreenCubitWeekdaysExt on AlarmDetailsScreenCubit {
+extension _WeekdayExt on AlarmDetailsScreenCubit {
   /// change alarm weekday on time change by user or device
   /// if not alarm repeat not set
   Set<Weekday> _handleWeekdayChanged({DateTime? dt, BuzzerDate? entity}) {

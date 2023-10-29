@@ -15,11 +15,11 @@ class AlarmDetailsLabelPopup extends StatefulWidget {
 }
 
 class _AlarmDetailsLabelPopupState extends State<AlarmDetailsLabelPopup> {
-  late ValueNotifier<String> _notifier;
+  late CTextFieldNotifier _notifier;
 
   @override
   void initState() {
-    _notifier = ValueNotifier<String>(widget.initialValue ?? '');
+    _notifier = CTextFieldNotifier(widget.initialValue);
     super.initState();
   }
 
@@ -47,7 +47,7 @@ class _AlarmDetailsLabelPopupState extends State<AlarmDetailsLabelPopup> {
             value: widget.initialValue,
             notifier: _notifier,
             validators: [LabelValidator()],
-            onSubmitted: (_) => _onSubmitted(context),
+            onSubmitted: () => _onSubmitted(context),
           ),
         ),
         const SizedBox(height: 10.0),

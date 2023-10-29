@@ -1,3 +1,4 @@
 enum InputValidationError {
   unknown,
+  invalid,
 }

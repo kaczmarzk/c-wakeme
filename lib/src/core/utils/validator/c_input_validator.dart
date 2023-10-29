@@ -5,10 +5,12 @@ abstract class CInputValidator<T> {
   Option<InputValidationError> validate(T input);
 }
 
-class CStringValidator extends CInputValidator<String?> {
+class CStringValidator extends CInputValidator<String> {
+  static final onlyChars = RegExp('[a-zA-Z]');
+
   @override
-  Option<InputValidationError> validate(String? input) {
-    if (input == null) return some(InputValidationError.unknown);
+  Option<InputValidationError> validate(String input) {
+    if (input.isNotEmpty && !onlyChars.hasMatch(input)) return some(InputValidationError.invalid);
     return none();
   }
 }

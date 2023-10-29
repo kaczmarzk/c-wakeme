@@ -16,4 +16,5 @@ jobs:
 
       - run: flutter analyze
       - run: flutter test
+      - run: dart run slang analyze
 

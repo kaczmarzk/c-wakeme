@@ -1,5 +1,7 @@
 # Development temp
-ios/
+ios/**
+assets/translations/_missing_translations.json
+assets/translations/_unused_translations.json
 
 # Miscellaneous
 *.class

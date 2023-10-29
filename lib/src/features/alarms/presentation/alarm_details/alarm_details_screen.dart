@@ -10,9 +10,11 @@ import 'package:wakeme/src/core/presentation/widgets/c_dialog.dart';
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_box.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_timer_picker.dart';
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_option_box.dart';
+import 'package:wakeme/src/core/utils/enum/weekday.dart';
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/cubit/buzzer_details_screen_cubit.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_scaffold.dart';
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/alarm_details_label_popup.dart';
+import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/alarm_details_repeat_popup.dart';
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/alarm_details_weekday_picker.dart';
 
 @RoutePage()
@@ -34,7 +36,8 @@ class _Body extends StatelessWidget {
   const _Body();
 
   void _handleNavigationState(BuildContext context, AlarmDetailsScreenState state) => switch (state.navigation) {
-        AlarmDetailsScreenNavigationState.editLabel => _showChangeLabelDialog(context, state.name),
+        AlarmDetailsScreenNavigationState.label => _showChangeLabelDialog(context, state),
+        AlarmDetailsScreenNavigationState.repeat => _showChangeRepeatDialog(context, state),
         AlarmDetailsScreenNavigationState.none => null,
       };
 
@@ -66,14 +69,14 @@ class _Body extends StatelessWidget {
                     buildWhen: (prev, curr) => prev.name != curr.name,
                     builder: (_, state) => CContentOptionBox(
                       title: 'Label',
-                      subtitle: state.name,
-                      onPressed: context.read<AlarmDetailsScreenCubit>().onEditLabelPressed,
+                      subtitle: state.name ?? 'No Label',
+                      onPressed: context.read<AlarmDetailsScreenCubit>().onLabelPressed,
                     ),
                   ),
                   CContentOptionBox(
                     title: 'Repeat',
                     subtitle: 'Never',
-                    onPressed: () {},
+                    onPressed: context.read<AlarmDetailsScreenCubit>().onRepeatPressed,
                   ),
                   CContentOptionBox(
                     title: 'Sound',
@@ -97,9 +100,23 @@ class _Body extends StatelessWidget {
         ),
       );
 
-  Future<void> _showChangeLabelDialog(BuildContext context, String? initialValue) => CDialog.show<String?>(
+  Future<void> _showChangeLabelDialog(
+    BuildContext context,
+    AlarmDetailsScreenState state,
+  ) =>
+      CDialog.show<String?>(
         context,
-        label: 'Set label',
-        child: AlarmDetailsLabelPopup(initialValue: initialValue),
+        label: 'Label',
+        child: AlarmDetailsLabelPopup(initialValue: state.name),
       ).then(context.read<AlarmDetailsScreenCubit>().handleLabelChanged);
+
+  Future<void> _showChangeRepeatDialog(
+    BuildContext context,
+    AlarmDetailsScreenState state,
+  ) =>
+      CDialog.show<Set<Weekday>?>(
+        context,
+        label: 'Repeat',
+        child: AlarmDetailsRepeatPopup(initialValue: state.date.repeat),
+      ).then(context.read<AlarmDetailsScreenCubit>().handleRepeatChanged);
 }

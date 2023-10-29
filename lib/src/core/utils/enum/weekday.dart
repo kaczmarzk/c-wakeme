@@ -20,5 +20,5 @@ enum Weekday {
 
   static List<Weekday> get weekdays => Weekday.values.sublist(0, Weekday.values.length - 2);
 
-  static List<Weekday> get weekend => [Weekday.saturday, Weekday.sunday];
+  static List<Weekday> get weekends => [Weekday.saturday, Weekday.sunday];
 }

@@ -30,14 +30,18 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
   }
 
   //TODO: to implement
-  void handleRepeatChanged(Set<Weekday> repeat) {}
+  void handleRepeatChanged(Set<Weekday>? repeat) {}
 
   void handleLabelChanged(String? name) {
     emit(state.copyWith(name: name));
   }
 
-  void onEditLabelPressed() {
-    cachedEmit(state.copyWith(navigation: AlarmDetailsScreenNavigationState.editLabel));
+  void onLabelPressed() {
+    cachedEmit(state.copyWith(navigation: AlarmDetailsScreenNavigationState.label));
+  }
+
+  void onRepeatPressed() {
+    cachedEmit(state.copyWith(navigation: AlarmDetailsScreenNavigationState.repeat));
   }
 
   @override

@@ -30,7 +30,7 @@ class _AlarmDetailsLabelPopupState extends State<AlarmDetailsLabelPopup> {
   }
 
   void _onSubmitted(BuildContext context) {
-    final value = _notifier.value;
+    final value = _notifier.value?.trimRight();
     context.router.pop(value);
   }
 

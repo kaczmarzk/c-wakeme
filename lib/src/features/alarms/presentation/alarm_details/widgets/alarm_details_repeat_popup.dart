@@ -23,7 +23,7 @@ class AlarmDetailsRepeatPopup extends HookWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
           child: Row(
             children: [
               Expanded(
@@ -48,7 +48,7 @@ class AlarmDetailsRepeatPopup extends HookWidget {
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(
             horizontal: 16.0,
-            vertical: 10.0,
+            vertical: 20.0,
           ),
           child: Builder(
             builder: (_) {
@@ -61,7 +61,7 @@ class AlarmDetailsRepeatPopup extends HookWidget {
                       (day) => _Component(
                         label: day.name.capitalize(),
                         value: state.value.contains(day),
-                        onChanged: (_) => _onDaysChanged([day], state),
+                        onChanged: (_) => _onDaysChanged({day}, state),
                       ),
                     )
                     .toList(),
@@ -81,7 +81,7 @@ class AlarmDetailsRepeatPopup extends HookWidget {
     );
   }
 
-  void _onDaysChanged(List<Weekday> days, ValueNotifier<Set<Weekday>> state) {
+  void _onDaysChanged(Set<Weekday> days, ValueNotifier<Set<Weekday>> state) {
     final isActive = state.value.containsAll(days);
     if (isActive) {
       state.value = Set.of(state.value)..removeAll(days);

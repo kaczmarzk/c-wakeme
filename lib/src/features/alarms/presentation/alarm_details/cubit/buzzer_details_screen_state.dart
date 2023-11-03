@@ -20,5 +20,6 @@ class AlarmDetailsScreenState with _$AlarmDetailsScreenState {
 enum AlarmDetailsScreenNavigationState {
   label,
   repeat,
+  sound,
   none,
 }

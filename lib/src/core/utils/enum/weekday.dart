@@ -18,7 +18,9 @@ enum Weekday {
     return values[nowIndex + 1];
   }
 
-  static List<Weekday> get weekdays => Weekday.values.sublist(0, Weekday.values.length - 2);
+  static Set<Weekday> get weekdays => {Weekday.monday, Weekday.tuesday, Weekday.wednesday, Weekday.thursday, Weekday.friday};
 
-  static List<Weekday> get weekends => [Weekday.saturday, Weekday.sunday];
+  static Set<Weekday> get weekends => {Weekday.saturday, Weekday.sunday};
+
+  static Set<Weekday> get every => values.toSet();
 }

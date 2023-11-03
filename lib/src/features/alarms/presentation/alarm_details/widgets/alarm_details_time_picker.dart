@@ -11,7 +11,7 @@ class AlarmDetailsTimePicker extends StatelessWidget {
   });
 
   final BuzzerDate initial;
-  final Function(BuzzerDate date) onDateChanged;
+  final Function(int hour, int minute) onDateChanged;
 
   static const height = 250.0;
   static const backgroundRadius = Radius.circular(50);

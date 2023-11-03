@@ -37,8 +37,7 @@ class _Body extends StatelessWidget {
 
   void _handleNavigationState(BuildContext context, DashboardScreenNavigationState state) => switch (state) {
         DashboardScreenNavigationState.details => context.router.push(const AlarmDetailsRoute()),
-        DashboardScreenNavigationState.quickAlarm => context.router.push(const QuickAlarmRoute()),
-        DashboardScreenNavigationState.settings => null,
+        DashboardScreenNavigationState.quickAlarm || DashboardScreenNavigationState.settings => null,
         DashboardScreenNavigationState.none => null,
       };
 

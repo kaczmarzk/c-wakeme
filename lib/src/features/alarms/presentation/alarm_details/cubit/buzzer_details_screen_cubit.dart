@@ -11,37 +11,42 @@ part 'buzzer_details_screen_state.dart';
 
 part 'buzzer_details_screen_cubit.freezed.dart';
 
+///TODO:
+/// - change repeat
+/// - cancel [dTime] if not needed (after repeat set)
+
 @injectable
 class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
   AlarmDetailsScreenCubit(this.debouncer, this.dTime) : super(AlarmDetailsScreenState.initial());
   final EasyDebouncer debouncer;
   final TimeListener dTime;
 
-  void handleDateChanged(BuzzerDate date) => debouncer.debounce(
-        execute: () {
-          final weekdays = _handleWeekdayChanged(entity: date);
-          emit(state.copyWith(date: date, weekdays: weekdays));
-        },
-      );
+  void onDateChanged(int hour, int minute) {
+    debouncer.debounce(
+      execute: () {
+        final date = state.date.copyWith(hour: hour, minute: minute);
+        final weekdays = _handleWeekdayChanged(entity: date);
+        emit(state.copyWith(date: date, weekdays: weekdays));
+      },
+    );
+  }
+
+  void onRepeatChanged(Set<Weekday>? value) {
+    if (value == null) return;
+    if (value.isEmpty && state.date.repeat.isNotEmpty) _handleTimeChanged();
+    if (value.isNotEmpty && state.date.repeat.isEmpty) dTime.cancel();
+
+    final date = state.date.copyWith(repeat: value);
+    emit(state.copyWith(date: date, weekdays: value));
+  }
+
+  void onLabelChanged(String? name) {
+    emit(state.copyWith(name: name));
+  }
 
   //TODO: to implement
   void handleSave() {
     loggy.debug('handle save');
-  }
-
-  //TODO: to implement
-  void handleRepeatChanged(Set<Weekday>? repeat) {}
-
-  void handleLabelChanged(String? name) {
-    emit(state.copyWith(name: name));
-  }
-
-  void onLabelPressed() {
-    cachedEmit(state.copyWith(navigation: AlarmDetailsScreenNavigationState.label));
-  }
-
-  void onRepeatPressed() {
-    cachedEmit(state.copyWith(navigation: AlarmDetailsScreenNavigationState.repeat));
   }
 
   @override
@@ -75,11 +80,20 @@ extension _WeekdayExt on AlarmDetailsScreenCubit {
   }
 
   void _handleTimeChanged() {
-    dTime.listen(
-      (dt) {
-        final weekdays = _handleWeekdayChanged(dt: dt);
-        emit(state.copyWith(weekdays: weekdays));
-      },
-    );
+    dTime.listen((dt) => emit(state.copyWith(weekdays: _handleWeekdayChanged(dt: dt))));
+  }
+}
+
+extension AlarmDetailsScreenCubitNavigationExt on AlarmDetailsScreenCubit {
+  void onLabelPressed() {
+    cachedEmit(state.copyWith(navigation: AlarmDetailsScreenNavigationState.label));
+  }
+
+  void onRepeatPressed() {
+    cachedEmit(state.copyWith(navigation: AlarmDetailsScreenNavigationState.repeat));
+  }
+
+  void onSoundPressed() {
+    cachedEmit(state.copyWith(navigation: AlarmDetailsScreenNavigationState.sound));
   }
 }

@@ -11,7 +11,7 @@ class CTimePicker extends StatelessWidget {
   });
 
   final BuzzerDate initial;
-  final Function(BuzzerDate date) onDateChanged;
+  final Function(int hour, int minute) onDateChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +27,11 @@ class CTimePicker extends StatelessWidget {
         ),
         child: CupertinoDatePicker(
           initialDateTime: DateTime.now(),
-          onDateTimeChanged: _onDateTimeChanged,
+          onDateTimeChanged: (dt) => onDateChanged(dt.hour, dt.minute),
           mode: CupertinoDatePickerMode.time,
           use24hFormat: true,
         ),
       ),
     );
-  }
-
-  void _onDateTimeChanged(DateTime time) {
-    final entity = initial.copyWith(hour: time.hour, minute: time.minute);
-    onDateChanged(entity);
   }
 }

@@ -1,7 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:time_listener/time_listener.dart';
+import 'package:wakeme/src/core/injection/injection.dart';
 import 'package:wakeme/src/core/service/debounce/easy_debouncer.dart';
+import 'package:wakeme/src/core/utils/c_time.dart';
 import 'package:wakeme/src/core/utils/enum/weekday.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer/buzzer.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date.dart';
@@ -13,9 +15,10 @@ part 'buzzer_details_screen_cubit.freezed.dart';
 
 @injectable
 class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
-  AlarmDetailsScreenCubit(this.debouncer, this.dTime) : super(AlarmDetailsScreenState.initial());
+  AlarmDetailsScreenCubit(this.debouncer, this.dTime, this.cTime) : super(AlarmDetailsScreenState.initial());
   final EasyDebouncer debouncer;
   final TimeListener dTime;
+  final CTime cTime;
 
   void onDateChanged(int hour, int minute) {
     debouncer.debounce(
@@ -74,8 +77,8 @@ extension _WeekdayExt on AlarmDetailsScreenCubit {
     /// if user set current hour and minute, set alarm to next day
     final isNow = date.hour == now.hour && date.minute == now.minute;
     final isBefore = date.isBefore(now);
-    if (isBefore || isNow) return {Weekday.next};
-    return {Weekday.now};
+    if (isBefore || isNow) return {cTime.currentWeekday};
+    return {cTime.nextWeekday};
   }
 }
 

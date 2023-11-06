@@ -12,6 +12,7 @@ import 'package:wakeme/src/core/presentation/widgets/button/c_square_button.dart
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_box.dart';
 import 'package:wakeme/src/core/routing/app_router.gr.dart';
 import 'package:wakeme/src/core/utils/enum/part_of_the_day.dart';
+import 'package:wakeme/src/core/utils/extension/build_context_ext.dart';
 import 'package:wakeme/src/features/dashboard/cubit/dashboard_screen_cubit.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_scaffold.dart';
 
@@ -65,7 +66,7 @@ class _Body extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      DateFormat.MMMMEEEEd().format(DateTime.now()),
+                      DateFormat.MMMMEEEEd().format(context.time.now()),
                       style: CThemeStyles.gilroyMedium_16.copyWith(
                         color: CThemeColors.softPeach,
                       ),

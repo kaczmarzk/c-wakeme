@@ -10,10 +10,10 @@ class AlarmDetailsScreenState with _$AlarmDetailsScreenState {
   }) = _AlarmDetailsScreenState;
 
   factory AlarmDetailsScreenState.initial([Buzzer? entity]) => AlarmDetailsScreenState(
-        date: entity?.date ?? BuzzerDate.now(),
-        weekdays: {Weekday.next},
+        weekdays: {inject<CTime>().nextWeekday},
         navigation: AlarmDetailsScreenNavigationState.none,
         name: null,
+        date: entity?.date ?? BuzzerDate.now(),
       );
 }
 

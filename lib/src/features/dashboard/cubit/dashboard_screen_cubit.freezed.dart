@@ -19,6 +19,7 @@ mixin _$DashboardScreenState {
   List<Buzzer> get buzzers => throw _privateConstructorUsedError;
   DashboardScreenNavigationState get navigation =>
       throw _privateConstructorUsedError;
+  Clock get clock => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DashboardScreenStateCopyWith<DashboardScreenState> get copyWith =>
@@ -31,7 +32,10 @@ abstract class $DashboardScreenStateCopyWith<$Res> {
           $Res Function(DashboardScreenState) then) =
       _$DashboardScreenStateCopyWithImpl<$Res, DashboardScreenState>;
   @useResult
-  $Res call({List<Buzzer> buzzers, DashboardScreenNavigationState navigation});
+  $Res call(
+      {List<Buzzer> buzzers,
+      DashboardScreenNavigationState navigation,
+      Clock clock});
 }
 
 /// @nodoc
@@ -50,6 +54,7 @@ class _$DashboardScreenStateCopyWithImpl<$Res,
   $Res call({
     Object? buzzers = null,
     Object? navigation = null,
+    Object? clock = null,
   }) {
     return _then(_value.copyWith(
       buzzers: null == buzzers
@@ -60,6 +65,10 @@ class _$DashboardScreenStateCopyWithImpl<$Res,
           ? _value.navigation
           : navigation // ignore: cast_nullable_to_non_nullable
               as DashboardScreenNavigationState,
+      clock: null == clock
+          ? _value.clock
+          : clock // ignore: cast_nullable_to_non_nullable
+              as Clock,
     ) as $Val);
   }
 }
@@ -72,7 +81,10 @@ abstract class _$$_DashboardScreenStateCopyWith<$Res>
       __$$_DashboardScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Buzzer> buzzers, DashboardScreenNavigationState navigation});
+  $Res call(
+      {List<Buzzer> buzzers,
+      DashboardScreenNavigationState navigation,
+      Clock clock});
 }
 
 /// @nodoc
@@ -88,6 +100,7 @@ class __$$_DashboardScreenStateCopyWithImpl<$Res>
   $Res call({
     Object? buzzers = null,
     Object? navigation = null,
+    Object? clock = null,
   }) {
     return _then(_$_DashboardScreenState(
       buzzers: null == buzzers
@@ -98,6 +111,10 @@ class __$$_DashboardScreenStateCopyWithImpl<$Res>
           ? _value.navigation
           : navigation // ignore: cast_nullable_to_non_nullable
               as DashboardScreenNavigationState,
+      clock: null == clock
+          ? _value.clock
+          : clock // ignore: cast_nullable_to_non_nullable
+              as Clock,
     ));
   }
 }
@@ -106,7 +123,9 @@ class __$$_DashboardScreenStateCopyWithImpl<$Res>
 
 class _$_DashboardScreenState implements _DashboardScreenState {
   const _$_DashboardScreenState(
-      {required final List<Buzzer> buzzers, required this.navigation})
+      {required final List<Buzzer> buzzers,
+      required this.navigation,
+      required this.clock})
       : _buzzers = buzzers;
 
   final List<Buzzer> _buzzers;
@@ -119,10 +138,12 @@ class _$_DashboardScreenState implements _DashboardScreenState {
 
   @override
   final DashboardScreenNavigationState navigation;
+  @override
+  final Clock clock;
 
   @override
   String toString() {
-    return 'DashboardScreenState(buzzers: $buzzers, navigation: $navigation)';
+    return 'DashboardScreenState(buzzers: $buzzers, navigation: $navigation, clock: $clock)';
   }
 
   @override
@@ -132,12 +153,13 @@ class _$_DashboardScreenState implements _DashboardScreenState {
             other is _$_DashboardScreenState &&
             const DeepCollectionEquality().equals(other._buzzers, _buzzers) &&
             (identical(other.navigation, navigation) ||
-                other.navigation == navigation));
+                other.navigation == navigation) &&
+            (identical(other.clock, clock) || other.clock == clock));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_buzzers), navigation);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_buzzers), navigation, clock);
 
   @JsonKey(ignore: true)
   @override
@@ -149,14 +171,16 @@ class _$_DashboardScreenState implements _DashboardScreenState {
 
 abstract class _DashboardScreenState implements DashboardScreenState {
   const factory _DashboardScreenState(
-          {required final List<Buzzer> buzzers,
-          required final DashboardScreenNavigationState navigation}) =
-      _$_DashboardScreenState;
+      {required final List<Buzzer> buzzers,
+      required final DashboardScreenNavigationState navigation,
+      required final Clock clock}) = _$_DashboardScreenState;
 
   @override
   List<Buzzer> get buzzers;
   @override
   DashboardScreenNavigationState get navigation;
+  @override
+  Clock get clock;
   @override
   @JsonKey(ignore: true)
   _$$_DashboardScreenStateCopyWith<_$_DashboardScreenState> get copyWith =>

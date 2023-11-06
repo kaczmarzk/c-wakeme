@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wakeme/src/core/injection/injection.dart';
+import 'package:wakeme/src/core/utils/c_time.dart';
 import 'package:wakeme/src/core/utils/enum/weekday.dart';
 import 'package:wakeme/src/features/alarms/data/dto/buzzer_date/buzzer_date_dto.dart';
 
@@ -21,8 +23,7 @@ class BuzzerDate with _$BuzzerDate {
       );
 
   factory BuzzerDate.now() {
-    final time = DateTime.now();
-
+    final time = inject<CTime>().now();
     return BuzzerDate(
       repeat: {},
       hour: time.hour,
@@ -32,6 +33,11 @@ class BuzzerDate with _$BuzzerDate {
 
   BuzzerDateDto toDto() => BuzzerDateDto(
         repeat: repeat,
+        hour: hour,
+        minute: minute,
+      );
+
+  DateTime toDt() => DateTime.now().copyWith(
         hour: hour,
         minute: minute,
       );

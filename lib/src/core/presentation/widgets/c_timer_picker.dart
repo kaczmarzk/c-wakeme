@@ -26,7 +26,7 @@ class CTimePicker extends StatelessWidget {
           ),
         ),
         child: CupertinoDatePicker(
-          initialDateTime: DateTime.now(),
+          initialDateTime: initial.toDt(),
           onDateTimeChanged: (dt) => onDateChanged(dt.hour, dt.minute),
           mode: CupertinoDatePickerMode.time,
           use24hFormat: true,

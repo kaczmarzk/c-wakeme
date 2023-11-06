@@ -7,7 +7,7 @@ import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/alarm_details_screen.dart';
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/cubit/buzzer_details_screen_cubit.dart';
 
-import '../../common/ct_golden_utils.dart';
+import '../../ct_presentation_utils/ct_golden_utils.dart';
 
 class MockAlarmDetailsScreenCubit extends MockCubit<AlarmDetailsScreenState> implements AlarmDetailsScreenCubit {}
 
@@ -16,8 +16,9 @@ class MockAlarmDetailsScreenState extends Fake implements AlarmDetailsScreenStat
 void main() {
   late AlarmDetailsScreenCubit cubit;
 
+
   setUpAll(() async {
-    await CTGoldenUtils.initializeFonts();
+    await CTGoldenUtils.initializeGolden();
     registerFallbackValue(MockAlarmDetailsScreenState());
     cubit = MockAlarmDetailsScreenCubit();
   });

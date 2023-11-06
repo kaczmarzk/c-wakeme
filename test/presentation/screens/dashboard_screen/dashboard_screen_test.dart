@@ -5,7 +5,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:wakeme/src/features/dashboard/cubit/dashboard_screen_cubit.dart';
 import 'package:wakeme/src/features/dashboard/dashboard_screen.dart';
 
-import '../../common/ct_golden_utils.dart';
+import '../../ct_presentation_utils/ct_golden_utils.dart';
 
 class MockDashboardScreenCubit extends MockCubit<DashboardScreenState> implements DashboardScreenCubit {}
 
@@ -15,7 +15,7 @@ void main() {
   late DashboardScreenCubit cubit;
 
   setUpAll(() async {
-    await CTGoldenUtils.initializeFonts();
+    await CTGoldenUtils.initializeGolden();
     registerFallbackValue(MockDashboardScreenState());
     cubit = MockDashboardScreenCubit();
   });

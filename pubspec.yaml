@@ -46,7 +46,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # tests
+  bloc_test: 9.1.5
+  mocktail: 1.0.1
   flutter_lints: 2.0.0
+  golden_toolkit: 0.15.0
 
   # build_runner generators
   build_runner: 2.3.3

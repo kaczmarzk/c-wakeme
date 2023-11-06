@@ -6,7 +6,6 @@ import 'package:slang/builder/utils/string_extensions.dart';
 import 'package:wakeme/i18n/translations.g.dart';
 import 'package:wakeme/src/core/injection/injection.dart';
 import 'package:wakeme/src/core/presentation/widgets/button/c_bottom_floating_button.dart';
-import 'package:wakeme/src/core/presentation/widgets/c_app_bar.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_dialog.dart';
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_box.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_timer_picker.dart';
@@ -22,6 +21,9 @@ import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/al
 @RoutePage()
 class AlarmDetailsScreen extends StatelessWidget {
   const AlarmDetailsScreen({super.key});
+
+  @visibleForTesting
+  static Widget get body => const _Body();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class _Body extends StatelessWidget {
         listener: (_, state) => _handleNavigationState(context, state),
         child: Column(
           children: [
-            const CAppBar(label: 'Edit Alarm'),
+            // const CAppBar(label: 'Edit Alarm'),
             const SizedBox(height: 10.0),
             CContentBox(
               height: 140.0,

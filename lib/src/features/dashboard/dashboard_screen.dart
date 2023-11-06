@@ -19,6 +19,9 @@ import 'package:wakeme/src/core/presentation/widgets/c_scaffold.dart';
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
+  @visibleForTesting
+  static Widget get body => const _Body();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

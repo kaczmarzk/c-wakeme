@@ -11,10 +11,6 @@ part 'buzzer_details_screen_state.dart';
 
 part 'buzzer_details_screen_cubit.freezed.dart';
 
-///TODO:
-/// - change repeat
-/// - cancel [dTime] if not needed (after repeat set)
-
 @injectable
 class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
   AlarmDetailsScreenCubit(this.debouncer, this.dTime) : super(AlarmDetailsScreenState.initial());
@@ -33,9 +29,6 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
 
   void onRepeatChanged(Set<Weekday>? value) {
     if (value == null) return;
-    if (value.isEmpty && state.date.repeat.isNotEmpty) _handleTimeChanged();
-    if (value.isNotEmpty && state.date.repeat.isEmpty) dTime.cancel();
-
     final date = state.date.copyWith(repeat: value);
     emit(state.copyWith(date: date, weekdays: value));
   }
@@ -51,7 +44,13 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
 
   @override
   void init() {
-    _handleTimeChanged();
+    dTime.listen(
+      (dt) {
+        if (state.date.repeat.isNotEmpty) return;
+        final weekdays = _handleWeekdayChanged(dt: dt);
+        emit(state.copyWith(weekdays: weekdays));
+      },
+    );
   }
 
   @override
@@ -77,10 +76,6 @@ extension _WeekdayExt on AlarmDetailsScreenCubit {
     final isBefore = date.isBefore(now);
     if (isBefore || isNow) return {Weekday.next};
     return {Weekday.now};
-  }
-
-  void _handleTimeChanged() {
-    dTime.listen((dt) => emit(state.copyWith(weekdays: _handleWeekdayChanged(dt: dt))));
   }
 }
 

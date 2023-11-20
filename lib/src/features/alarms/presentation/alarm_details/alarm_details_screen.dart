@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +5,7 @@ import 'package:slang/builder/utils/string_extensions.dart';
 import 'package:wakeme/i18n/translations.g.dart';
 import 'package:wakeme/src/core/injection/injection.dart';
 import 'package:wakeme/src/core/presentation/widgets/button/c_bottom_floating_button.dart';
+import 'package:wakeme/src/core/presentation/widgets/c_app_bar.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_dialog.dart';
 import 'package:wakeme/src/core/presentation/widgets/content/c_content_box.dart';
 import 'package:wakeme/src/core/presentation/widgets/c_timer_picker.dart';
@@ -50,7 +50,7 @@ class _Body extends StatelessWidget {
         listener: (_, state) => _handleNavigationState(context, state),
         child: Column(
           children: [
-            // const CAppBar(label: 'Edit Alarm'),
+            const CAppBar(label: 'Edit Alarm'),
             const SizedBox(height: 10.0),
             CContentBox(
               height: 140.0,
@@ -81,7 +81,7 @@ class _Body extends StatelessWidget {
               onPressed: context.read<AlarmDetailsScreenCubit>().handleSave,
               action: CBottomFloatingButtonAction(
                 icon: CupertinoIcons.clear,
-                onPressed: () {},
+                onPressed: context.router.pop,
               ),
             ),
             const SizedBox(height: 20.0),

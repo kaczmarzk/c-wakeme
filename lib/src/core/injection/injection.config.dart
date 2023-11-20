@@ -12,9 +12,9 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:time_listener/time_listener.dart' as _i7;
-import 'package:wakeme/src/core/injection/modules/c_time_module.dart' as _i15;
+import 'package:wakeme/src/core/injection/modules/c_time_module.dart' as _i14;
 import 'package:wakeme/src/core/injection/modules/debounce_module.dart' as _i12;
-import 'package:wakeme/src/core/injection/modules/router_module.dart' as _i14;
+import 'package:wakeme/src/core/injection/modules/router_module.dart' as _i15;
 import 'package:wakeme/src/core/injection/modules/time_listener_module.dart'
     as _i13;
 import 'package:wakeme/src/core/routing/app_router.dart' as _i3;
@@ -22,13 +22,13 @@ import 'package:wakeme/src/core/service/db/hive/hive_client.dart' as _i6;
 import 'package:wakeme/src/core/service/debounce/easy_debouncer.dart' as _i5;
 import 'package:wakeme/src/core/utils/c_time.dart' as _i4;
 import 'package:wakeme/src/features/alarms/data/source/local/buzzers_local_source.dart'
-    as _i9;
-import 'package:wakeme/src/features/alarms/domain/repository/buzzers_repository.dart'
-    as _i10;
-import 'package:wakeme/src/features/alarms/presentation/alarm_details/cubit/buzzer_details_screen_cubit.dart'
     as _i8;
-import 'package:wakeme/src/features/dashboard/cubit/dashboard_screen_cubit.dart'
+import 'package:wakeme/src/features/alarms/domain/repository/buzzers_repository.dart'
+    as _i9;
+import 'package:wakeme/src/features/alarms/presentation/alarm_details/cubit/buzzer_details_screen_cubit.dart'
     as _i11;
+import 'package:wakeme/src/features/dashboard/cubit/dashboard_screen_cubit.dart'
+    as _i10;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -50,17 +50,18 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i5.EasyDebouncer>(() => debounceModule.instance);
     gh.lazySingleton<_i6.HiveClient>(() => _i6.HiveClient());
     gh.factory<_i7.TimeListener>(() => timeListenerModule.instance);
-    gh.factory<_i8.AlarmDetailsScreenCubit>(() => _i8.AlarmDetailsScreenCubit(
+    gh.factory<_i8.BuzzersLocalSource>(
+        () => _i8.BuzzersLocalSource(gh<_i6.HiveClient>()));
+    gh.factory<_i9.BuzzersRepository>(
+        () => _i9.BuzzersRepository(gh<_i8.BuzzersLocalSource>()));
+    gh.factory<_i10.DashboardScreenCubit>(
+        () => _i10.DashboardScreenCubit(gh<_i9.BuzzersRepository>()));
+    gh.factory<_i11.AlarmDetailsScreenCubit>(() => _i11.AlarmDetailsScreenCubit(
           gh<_i5.EasyDebouncer>(),
           gh<_i7.TimeListener>(),
           gh<_i4.CTime>(),
+          gh<_i9.BuzzersRepository>(),
         ));
-    gh.factory<_i9.BuzzersLocalSource>(
-        () => _i9.BuzzersLocalSource(gh<_i6.HiveClient>()));
-    gh.factory<_i10.BuzzersRepository>(
-        () => _i10.BuzzersRepository(gh<_i9.BuzzersLocalSource>()));
-    gh.factory<_i11.DashboardScreenCubit>(
-        () => _i11.DashboardScreenCubit(gh<_i10.BuzzersRepository>()));
     return this;
   }
 }
@@ -69,6 +70,6 @@ class _$DebounceModule extends _i12.DebounceModule {}
 
 class _$TimeListenerModule extends _i13.TimeListenerModule {}
 
-class _$RouterModule extends _i14.RouterModule {}
+class _$CTimeModule extends _i14.CTimeModule {}
 
-class _$CTimeModule extends _i15.CTimeModule {}
+class _$RouterModule extends _i15.RouterModule {}

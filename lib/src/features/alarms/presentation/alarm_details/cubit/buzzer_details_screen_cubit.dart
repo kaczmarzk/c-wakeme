@@ -8,6 +8,7 @@ import 'package:wakeme/src/core/utils/enum/weekday.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer/buzzer.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date.dart';
 import 'package:wakeme/src/core/presentation/c_core/c_cubit.dart';
+import 'package:wakeme/src/features/alarms/domain/repository/buzzers_repository.dart';
 
 part 'buzzer_details_screen_state.dart';
 
@@ -15,10 +16,17 @@ part 'buzzer_details_screen_cubit.freezed.dart';
 
 @injectable
 class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
-  AlarmDetailsScreenCubit(this.debouncer, this.dTime, this.cTime) : super(AlarmDetailsScreenState.initial());
+  AlarmDetailsScreenCubit(
+    this.debouncer,
+    this.dTime,
+    this.cTime,
+    this.repository,
+  ) : super(AlarmDetailsScreenState.initial());
+
   final EasyDebouncer debouncer;
   final TimeListener dTime;
   final CTime cTime;
+  final BuzzersRepository repository;
 
   void onDateChanged(int hour, int minute) {
     debouncer.debounce(
@@ -40,9 +48,10 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
     emit(state.copyWith(name: name));
   }
 
-  //TODO: to implement
   void handleSave() {
-    loggy.debug('handle save');
+    if ((state.name ?? '').isEmpty) return;
+
+    repository.add(label: state.name!, date: state.date);
   }
 
   @override

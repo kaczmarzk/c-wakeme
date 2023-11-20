@@ -80,7 +80,7 @@ class CBottomFloatingButton extends CComponent {
                     color: cColors.background,
                   ),
                   child: CupertinoInkWell(
-                    onTap: onPressed,
+                    onTap: action?.onPressed,
                     pressColor: CThemeColors.cinder.withOpacity(0.33),
                     excludeFromSemantics: true,
                     child: Center(

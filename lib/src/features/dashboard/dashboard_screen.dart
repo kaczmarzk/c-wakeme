@@ -54,7 +54,7 @@ class _Body extends StatelessWidget {
             children: [
               Container(
                 height: 100.0,
-                padding: const EdgeInsets.symmetric(horizontal: CThemeDimens.paddingCScaffold),
+                padding: const EdgeInsets.symmetric(horizontal: CThemeDimens.paddingCScaffold * 2),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,

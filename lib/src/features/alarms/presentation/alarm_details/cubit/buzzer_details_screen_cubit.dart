@@ -8,7 +8,7 @@ import 'package:wakeme/src/core/utils/c_time.dart';
 import 'package:wakeme/src/core/utils/enum/weekday.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer/buzzer.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date.dart';
-import 'package:wakeme/src/features/alarms/domain/repository/buzzers_repository.dart';
+import 'package:wakeme/src/features/alarms/domain/repository/alarms_repository.dart';
 
 part 'buzzer_details_screen_cubit.freezed.dart';
 part 'buzzer_details_screen_state.dart';
@@ -25,7 +25,7 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
   final EasyDebouncer debouncer;
   final TimeListener dTime;
   final CTime cTime;
-  final BuzzersRepository repository;
+  final AlarmsRepository repository;
 
   void onDateChanged(int hour, int minute) {
     debouncer.debounce(

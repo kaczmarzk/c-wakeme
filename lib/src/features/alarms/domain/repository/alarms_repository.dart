@@ -1,12 +1,12 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:loggy/loggy.dart';
 import 'package:wakeme/src/core/utils/functional/failure/failure.dart';
-import 'package:wakeme/src/features/alarms/data/source/local/buzzers_local_source.dart';
+import 'package:wakeme/src/features/alarms/data/source/local/alarms_local_source.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer/buzzer.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date.dart';
-import 'package:fpdart/fpdart.dart';
 
-abstract interface class IBuzzersRepository {
+abstract interface class IAlarmsRepository {
   Either<Failure, Buzzer> add({required String label, required BuzzerDate date});
 
   Either<Failure, Buzzer> replace(Buzzer entity);
@@ -19,10 +19,10 @@ abstract interface class IBuzzersRepository {
 }
 
 @injectable
-class BuzzersRepository with UiLoggy implements IBuzzersRepository {
-  BuzzersRepository(this.source);
+class AlarmsRepository with UiLoggy implements IAlarmsRepository {
+  AlarmsRepository(this.source);
 
-  final BuzzersLocalSource source;
+  final AlarmsLocalSource source;
 
   @override
   Either<Failure, Buzzer> add({required String label, required BuzzerDate date}) {

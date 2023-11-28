@@ -8,7 +8,7 @@ import 'package:wakeme/src/core/utils/functional/failure/failure.dart';
 import 'package:wakeme/src/core/utils/functional/success/success.dart';
 import 'package:wakeme/src/features/alarms/data/dto/buzzer/buzzer_dto.dart';
 
-abstract interface class IBuzzersLocalSource {
+abstract interface class IAlarmsLocalSource {
   Either<Failure, Success> add(BuzzerDto dto);
 
   Either<Failure, Success> replace(BuzzerDto dto);
@@ -21,12 +21,12 @@ abstract interface class IBuzzersLocalSource {
 }
 
 @injectable
-class BuzzersLocalSource implements IBuzzersLocalSource {
-  BuzzersLocalSource(this.database);
+class AlarmsLocalSource implements IAlarmsLocalSource {
+  AlarmsLocalSource(this.database);
 
   final HiveClient database;
 
-  static const _box = HiveFactory.buzzersBox;
+  static const _box = HiveFactory.alarmsBox;
 
   @override
   Either<Failure, Success> add(BuzzerDto dto) {

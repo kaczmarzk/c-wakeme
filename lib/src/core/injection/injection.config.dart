@@ -21,9 +21,9 @@ import 'package:wakeme/src/core/routing/app_router.dart' as _i3;
 import 'package:wakeme/src/core/service/db/hive/hive_client.dart' as _i6;
 import 'package:wakeme/src/core/service/debounce/easy_debouncer.dart' as _i5;
 import 'package:wakeme/src/core/utils/c_time.dart' as _i4;
-import 'package:wakeme/src/features/alarms/data/source/local/buzzers_local_source.dart'
+import 'package:wakeme/src/features/alarms/data/source/local/alarms_local_source.dart'
     as _i8;
-import 'package:wakeme/src/features/alarms/domain/repository/buzzers_repository.dart'
+import 'package:wakeme/src/features/alarms/domain/repository/alarms_repository.dart'
     as _i9;
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/cubit/buzzer_details_screen_cubit.dart'
     as _i11;
@@ -50,17 +50,17 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i5.EasyDebouncer>(() => debounceModule.instance);
     gh.lazySingleton<_i6.HiveClient>(() => _i6.HiveClient());
     gh.factory<_i7.TimeListener>(() => timeListenerModule.instance);
-    gh.factory<_i8.BuzzersLocalSource>(
-        () => _i8.BuzzersLocalSource(gh<_i6.HiveClient>()));
-    gh.factory<_i9.BuzzersRepository>(
-        () => _i9.BuzzersRepository(gh<_i8.BuzzersLocalSource>()));
+    gh.factory<_i8.AlarmsLocalSource>(
+        () => _i8.AlarmsLocalSource(gh<_i6.HiveClient>()));
+    gh.factory<_i9.AlarmsRepository>(
+        () => _i9.AlarmsRepository(gh<_i8.AlarmsLocalSource>()));
     gh.factory<_i10.DashboardScreenCubit>(
-        () => _i10.DashboardScreenCubit(gh<_i9.BuzzersRepository>()));
+        () => _i10.DashboardScreenCubit(gh<_i9.AlarmsRepository>()));
     gh.factory<_i11.AlarmDetailsScreenCubit>(() => _i11.AlarmDetailsScreenCubit(
           gh<_i5.EasyDebouncer>(),
           gh<_i7.TimeListener>(),
           gh<_i4.CTime>(),
-          gh<_i9.BuzzersRepository>(),
+          gh<_i9.AlarmsRepository>(),
         ));
     return this;
   }

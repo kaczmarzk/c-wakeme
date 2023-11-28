@@ -8,14 +8,13 @@ abstract final class HiveFactory {
 
   static const settingsBox = '$_namePrefix.settings';
   static const baseBox = '$_namePrefix.base';
-  static const buzzersBox = '$_namePrefix.buzzers';
+  static const alarmsBox = '$_namePrefix.alarms';
 
   static Future<void> registerBoxes() => Future.wait<Box>([
         Hive.openBox(baseBox),
         Hive.openBox(settingsBox),
-        Hive.openBox(buzzersBox),
+        Hive.openBox(alarmsBox),
       ]).then((v) => instance = v);
 
   static List<Box> instance = [];
 }
-

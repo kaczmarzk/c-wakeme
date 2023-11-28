@@ -2,17 +2,16 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:time_listener/time_listener.dart';
 import 'package:wakeme/src/core/injection/injection.dart';
+import 'package:wakeme/src/core/presentation/c_core/c_cubit.dart';
 import 'package:wakeme/src/core/service/debounce/easy_debouncer.dart';
 import 'package:wakeme/src/core/utils/c_time.dart';
 import 'package:wakeme/src/core/utils/enum/weekday.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer/buzzer.dart';
 import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date.dart';
-import 'package:wakeme/src/core/presentation/c_core/c_cubit.dart';
 import 'package:wakeme/src/features/alarms/domain/repository/buzzers_repository.dart';
 
-part 'buzzer_details_screen_state.dart';
-
 part 'buzzer_details_screen_cubit.freezed.dart';
+part 'buzzer_details_screen_state.dart';
 
 @injectable
 class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
@@ -40,8 +39,11 @@ class AlarmDetailsScreenCubit extends CCubit<AlarmDetailsScreenState> {
 
   void onRepeatChanged(Set<Weekday>? value) {
     if (value == null) return;
-    final date = state.date.copyWith(repeat: value);
-    emit(state.copyWith(date: date, weekdays: value));
+
+    // to sort weekdays
+    final weekdays = Weekday.values.where((e) => value.contains(e)).toSet();
+    final date = state.date.copyWith(repeat: weekdays);
+    emit(state.copyWith(date: date, weekdays: weekdays));
   }
 
   void onLabelChanged(String? name) {

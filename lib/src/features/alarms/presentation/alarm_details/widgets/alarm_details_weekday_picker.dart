@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:wakeme/src/core/presentation/theme/c_theme_colors.dart';
-import 'package:wakeme/src/core/presentation/theme/c_theme_styles.dart';
-import 'package:wakeme/src/core/presentation/widgets/content/c_content_box.dart';
-import 'package:wakeme/src/core/utils/enum/weekday.dart';
+import 'package:wakeme/src/common/enums/weekday.dart';
+import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
+import 'package:wakeme/src/common/presentation/theme/c_theme_styles.dart';
+import 'package:wakeme/src/common/presentation/widgets/content/c_content_box.dart';
 
 class AlarmDetailsWeekdaysWidget extends StatelessWidget {
   const AlarmDetailsWeekdaysWidget({required this.values, super.key});

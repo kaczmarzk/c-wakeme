@@ -2,19 +2,18 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:wakeme/src/core/injection/injection.dart';
-import 'package:wakeme/src/core/presentation/c_core/c_component.dart';
-import 'package:wakeme/src/core/presentation/theme/c_theme_colors.dart';
-import 'package:wakeme/src/core/presentation/theme/c_theme_dimens.dart';
-import 'package:wakeme/src/core/presentation/theme/c_theme_styles.dart';
-import 'package:wakeme/src/core/presentation/widgets/button/c_rectangle_button.dart';
-import 'package:wakeme/src/core/presentation/widgets/button/c_square_button.dart';
-import 'package:wakeme/src/core/presentation/widgets/content/c_content_box.dart';
-import 'package:wakeme/src/core/routing/app_router.gr.dart';
-import 'package:wakeme/src/core/utils/enum/part_of_the_day.dart';
-import 'package:wakeme/src/core/utils/extension/build_context_ext.dart';
+import 'package:wakeme/core/injection/injection.dart';
+import 'package:wakeme/core/routing/app_router.gr.dart';
+import 'package:wakeme/src/common/enums/part_of_the_day.dart';
+import 'package:wakeme/src/common/presentation/c_core/c_component.dart';
+import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
+import 'package:wakeme/src/common/presentation/theme/c_theme_dimens.dart';
+import 'package:wakeme/src/common/presentation/theme/c_theme_styles.dart';
+import 'package:wakeme/src/common/presentation/widgets/button/c_rectangle_button.dart';
+import 'package:wakeme/src/common/presentation/widgets/button/c_square_button.dart';
+import 'package:wakeme/src/common/presentation/widgets/c_scaffold.dart';
+import 'package:wakeme/src/common/presentation/widgets/content/c_content_box.dart';
 import 'package:wakeme/src/features/dashboard/cubit/dashboard_screen_cubit.dart';
-import 'package:wakeme/src/core/presentation/widgets/c_scaffold.dart';
 
 @RoutePage()
 class DashboardScreen extends StatelessWidget {
@@ -26,7 +25,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => inject<DashboardScreenCubit>()..fetchBuzzers(),
+      create: (_) => inject<DashboardScreenCubit>(),
       child: const CScaffold(
         bottom: false,
         horizontal: false,
@@ -39,192 +38,151 @@ class DashboardScreen extends StatelessWidget {
 class _Body extends StatelessWidget {
   const _Body();
 
-  void _handleNavigationState(BuildContext context, DashboardScreenNavigationState state) => switch (state) {
-        DashboardScreenNavigationState.details => context.router.push(const AlarmDetailsRoute()),
-        DashboardScreenNavigationState.quickAlarm || DashboardScreenNavigationState.settings => null,
-        DashboardScreenNavigationState.none => null,
-      };
-
   @override
-  Widget build(BuildContext context) => BlocConsumer<DashboardScreenCubit, DashboardScreenState>(
-        listener: (_, state) => _handleNavigationState(context, state.navigation),
-        builder: (_, state) {
-          return ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              Container(
-                height: 100.0,
-                padding: const EdgeInsets.symmetric(horizontal: CThemeDimens.paddingCScaffold * 2),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Good ${PartOfTheDay.current.name}!',
-                      style: CThemeStyles.gilroyMedium_24.copyWith(
-                        color: CThemeColors.platinum,
-                      ),
-                    ),
-                    Text(
-                      DateFormat.MMMMEEEEd().format(context.time.now()),
-                      style: CThemeStyles.gilroyMedium_16.copyWith(
-                        color: CThemeColors.softPeach,
-                      ),
-                    ),
-                  ],
+  Widget build(BuildContext context) => ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [
+          Container(
+            height: 100.0,
+            padding: const EdgeInsets.symmetric(horizontal: CThemeDimens.paddingCScaffold * 2),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Good ${PartOfTheDay.afternoon}!',
+                  style: CThemeStyles.gilroyMedium_24.copyWith(
+                    color: CThemeColors.platinum,
+                  ),
                 ),
-              ),
-              Container(
-                height: 102.0,
-                padding: const EdgeInsets.symmetric(horizontal: CThemeDimens.paddingCScaffold),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: CContentBox(
-                        padding: const EdgeInsets.all(10.0).copyWith(
-                          left: 12.0,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Next alarm',
-                              style: CThemeStyles.gilroyMedium_20.copyWith(
-                                color: CThemeColors.platinum,
-                              ),
-                            ),
-                            const SizedBox(height: 2.0),
-                            Text(
-                              'No scheduled alarm',
-                              style: CThemeStyles.gilroyMedium_16.copyWith(
-                                color: CThemeColors.softPeach,
-                                fontSize: 15.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 14.0),
-                    Expanded(
-                      child: CContentBox(
-                        padding: const EdgeInsets.all(10.0).copyWith(
-                          left: 12.0,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Timer',
-                              style: CThemeStyles.gilroyMedium_20.copyWith(
-                                color: CThemeColors.platinum,
-                              ),
-                            ),
-                            const SizedBox(height: 2.0),
-                            Text(
-                              'No scheduled timer',
-                              style: CThemeStyles.gilroyMedium_16.copyWith(
-                                color: CThemeColors.softPeach,
-                                fontSize: 15.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                Text(
+                  DateFormat.MMMMEEEEd().format(DateTime.now()),
+                  style: CThemeStyles.gilroyMedium_16.copyWith(
+                    color: CThemeColors.softPeach,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: CThemeDimens.paddingCScaffold,
-                ),
-                child: Row(
-                  children: [
-                    CSquareButton(
-                      icon: CupertinoIcons.rocket,
-                      size: CThemeSize.small,
-                      onPressed: () {},
+              ],
+            ),
+          ),
+          Container(
+            height: 102.0,
+            padding: const EdgeInsets.symmetric(horizontal: CThemeDimens.paddingCScaffold),
+            child: Row(
+              children: [
+                Expanded(
+                  child: CContentBox(
+                    padding: const EdgeInsets.all(10.0).copyWith(
+                      left: 12.0,
                     ),
-                    const SizedBox(width: 20.0),
-                    CSquareButton(
-                      icon: CupertinoIcons.gear,
-                      size: CThemeSize.small,
-                      onPressed: () {},
-                    ),
-                    const SizedBox(width: 20.0),
-                    CSquareButton.invert(
-                      icon: CupertinoIcons.timer,
-                      size: CThemeSize.small,
-                      onPressed: () {},
-                    ),
-                    const SizedBox(width: 20.0),
-                    CSquareButton.invert(
-                      icon: CupertinoIcons.bolt,
-                      size: CThemeSize.small,
-                      onPressed: context.read<DashboardScreenCubit>().onQuickAlarmPressed,
-                    ),
-                    const SizedBox(width: 20.0),
-                    Expanded(
-                      child: CRectangleButton.invert(
-                        icon: CupertinoIcons.add,
-                        label: 'Add',
-                        size: CThemeSize.small,
-                        onPressed: context.read<DashboardScreenCubit>().onAddPressed,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 40.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: CThemeDimens.paddingCScaffold,
-                ),
-                child: BlocBuilder<DashboardScreenCubit, DashboardScreenState>(
-                  builder: (_, state) {
-                    if (state.buzzers.isEmpty) {
-                      return Text(
-                        'No alarms',
-                        style: CThemeStyles.gilroyMedium_20.copyWith(
-                          color: CThemeColors.platinum,
-                        ),
-                      );
-                    }
-
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Upcoming alarms',
+                          'Next alarm',
                           style: CThemeStyles.gilroyMedium_20.copyWith(
                             color: CThemeColors.platinum,
                           ),
                         ),
-                        const SizedBox(height: 20.0),
-                        ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: state.buzzers.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          separatorBuilder: (_, __) => const SizedBox(height: 10.0),
-                          itemBuilder: (_, index) => Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20.0),
-                            child: Text(state.buzzers[index].label),
+                        const SizedBox(height: 2.0),
+                        Text(
+                          'No scheduled alarm',
+                          style: CThemeStyles.gilroyMedium_16.copyWith(
+                            color: CThemeColors.softPeach,
+                            fontSize: 15.0,
                           ),
                         ),
                       ],
-                    );
-                  },
+                    ),
+                  ),
                 ),
+                const SizedBox(width: 14.0),
+                Expanded(
+                  child: CContentBox(
+                    padding: const EdgeInsets.all(10.0).copyWith(
+                      left: 12.0,
+                    ),
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Timer',
+                          style: CThemeStyles.gilroyMedium_20.copyWith(
+                            color: CThemeColors.platinum,
+                          ),
+                        ),
+                        const SizedBox(height: 2.0),
+                        Text(
+                          'No scheduled timer',
+                          style: CThemeStyles.gilroyMedium_16.copyWith(
+                            color: CThemeColors.softPeach,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: CThemeDimens.paddingCScaffold,
+            ),
+            child: Row(
+              children: [
+                CSquareButton(
+                  icon: CupertinoIcons.rocket,
+                  size: CThemeSize.small,
+                  onPressed: () {},
+                ),
+                const SizedBox(width: 20.0),
+                CSquareButton(
+                  icon: CupertinoIcons.gear,
+                  size: CThemeSize.small,
+                  onPressed: () {},
+                ),
+                const SizedBox(width: 20.0),
+                CSquareButton.invert(
+                  icon: CupertinoIcons.timer,
+                  size: CThemeSize.small,
+                  onPressed: () {},
+                ),
+                const SizedBox(width: 20.0),
+                CSquareButton.invert(
+                  icon: CupertinoIcons.bolt,
+                  size: CThemeSize.small,
+                  onPressed: () {},
+                ),
+                const SizedBox(width: 20.0),
+                Expanded(
+                  child: CRectangleButton.invert(
+                    icon: CupertinoIcons.add,
+                    label: 'Add',
+                    size: CThemeSize.small,
+                    onPressed: () => context.router.push(const AlarmDetailsRoute()),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 40.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: CThemeDimens.paddingCScaffold,
+            ),
+            child: Text(
+              'No alarms',
+              style: CThemeStyles.gilroyMedium_20.copyWith(
+                color: CThemeColors.platinum,
               ),
-            ],
-          );
-        },
+            ),
+          ),
+        ],
       );
 }

@@ -1,25 +1,24 @@
 part of 'buzzer_details_screen_cubit.dart';
 
-@freezed
-class AlarmDetailsScreenState with _$AlarmDetailsScreenState {
-  const factory AlarmDetailsScreenState({
-    required BuzzerDate date,
-    required Set<Weekday> weekdays,
-    required AlarmDetailsScreenNavigationState navigation,
-    required String? name,
-  }) = _AlarmDetailsScreenState;
+final class AlarmDetailsScreenState extends Equatable {
+  const AlarmDetailsScreenState._({
+    required this.time,
+    required this.repeat,
+    required this.name,
+  });
 
-  factory AlarmDetailsScreenState.initial([Buzzer? entity]) => AlarmDetailsScreenState(
-        weekdays: {inject<CTime>().nextWeekday},
-        navigation: AlarmDetailsScreenNavigationState.none,
-        name: null,
-        date: entity?.date ?? BuzzerDate.now(),
-      );
-}
+  factory AlarmDetailsScreenState.initial(CTime time) {
+    return AlarmDetailsScreenState._(
+      time: time,
+      repeat: const {},
+      name: '',
+    );
+  }
 
-enum AlarmDetailsScreenNavigationState {
-  label,
-  repeat,
-  sound,
-  none,
+  final CTime time;
+  final Set<Weekday> repeat;
+  final String name;
+
+  @override
+  List<Object> get props => [time, repeat, name];
 }

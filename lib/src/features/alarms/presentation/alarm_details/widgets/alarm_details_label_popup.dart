@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:wakeme/src/core/presentation/c_core/c_component.dart';
-import 'package:wakeme/src/core/presentation/widgets/button/c_bottom_floating_button.dart';
-import 'package:wakeme/src/core/presentation/widgets/text_field/c_text_field.dart';
-import 'package:wakeme/src/core/utils/validator/validators/label_validator.dart';
+import 'package:wakeme/src/common/presentation/c_core/c_component.dart';
+import 'package:wakeme/src/common/presentation/widgets/button/c_bottom_floating_button.dart';
+import 'package:wakeme/src/common/presentation/widgets/text_field/c_text_field.dart';
+import 'package:wakeme/src/common/validators/validators/label_validator.dart';
 
 class AlarmDetailsLabelPopup extends StatefulWidget {
   const AlarmDetailsLabelPopup({this.initialValue, super.key});

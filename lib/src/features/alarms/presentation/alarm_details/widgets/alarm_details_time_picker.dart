@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wakeme/src/core/utils/extension/build_context_ext.dart';
-import 'package:wakeme/src/features/alarms/domain/entity/buzzer_date/buzzer_date.dart';
-import 'package:wakeme/src/core/presentation/widgets/c_timer_picker.dart';
+import 'package:wakeme/src/common/extensions/build_context_ext.dart';
+import 'package:wakeme/src/common/models/c_time.dart';
+import 'package:wakeme/src/common/presentation/widgets/c_timer_picker.dart';
 
 class AlarmDetailsTimePicker extends StatelessWidget {
   const AlarmDetailsTimePicker({
@@ -10,7 +10,7 @@ class AlarmDetailsTimePicker extends StatelessWidget {
     super.key,
   });
 
-  final BuzzerDate initial;
+  final CTime initial;
   final Function(int hour, int minute) onDateChanged;
 
   static const height = 250.0;

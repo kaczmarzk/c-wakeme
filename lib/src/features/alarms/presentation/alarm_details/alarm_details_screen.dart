@@ -2,18 +2,17 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slang/builder/utils/string_extensions.dart';
-import 'package:wakeme/i18n/translations.g.dart';
-import 'package:wakeme/src/core/injection/injection.dart';
-import 'package:wakeme/src/core/presentation/widgets/button/c_bottom_floating_button.dart';
-import 'package:wakeme/src/core/presentation/widgets/c_app_bar.dart';
-import 'package:wakeme/src/core/presentation/widgets/c_dialog.dart';
-import 'package:wakeme/src/core/presentation/widgets/content/c_content_box.dart';
-import 'package:wakeme/src/core/presentation/widgets/c_timer_picker.dart';
-import 'package:wakeme/src/core/presentation/widgets/content/c_content_option_box.dart';
-import 'package:wakeme/src/core/utils/enum/weekday.dart';
-import 'package:wakeme/src/core/utils/extension/set_ext.dart';
+import 'package:wakeme/core/injection/injection.dart';
+import 'package:wakeme/src/common/enums/weekday.dart';
+import 'package:wakeme/src/common/extensions/set_ext.dart';
+import 'package:wakeme/src/common/presentation/widgets/button/c_bottom_floating_button.dart';
+import 'package:wakeme/src/common/presentation/widgets/c_app_bar.dart';
+import 'package:wakeme/src/common/presentation/widgets/c_dialog.dart';
+import 'package:wakeme/src/common/presentation/widgets/c_scaffold.dart';
+import 'package:wakeme/src/common/presentation/widgets/c_timer_picker.dart';
+import 'package:wakeme/src/common/presentation/widgets/content/c_content_box.dart';
+import 'package:wakeme/src/common/presentation/widgets/content/c_content_option_box.dart';
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/cubit/buzzer_details_screen_cubit.dart';
-import 'package:wakeme/src/core/presentation/widgets/c_scaffold.dart';
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/alarm_details_label_popup.dart';
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/alarm_details_repeat_popup.dart';
 import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/alarm_details_weekday_picker.dart';
@@ -28,7 +27,7 @@ class AlarmDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => inject<AlarmDetailsScreenCubit>()..init(),
+      create: (_) => inject<AlarmDetailsScreenCubit>(),
       child: const CScaffold(
         body: _Body(),
       ),
@@ -39,71 +38,46 @@ class AlarmDetailsScreen extends StatelessWidget {
 class _Body extends StatelessWidget {
   const _Body();
 
-  void _handleNavigationState(BuildContext context, AlarmDetailsScreenState state) => switch (state.navigation) {
-        AlarmDetailsScreenNavigationState.label => _showChangeLabelDialog(context, state),
-        AlarmDetailsScreenNavigationState.repeat => _showChangeRepeatDialog(context, state),
-        AlarmDetailsScreenNavigationState.sound || AlarmDetailsScreenNavigationState.none => null,
-      };
-
   @override
-  Widget build(BuildContext context) => BlocListener<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
-        listener: (_, state) => _handleNavigationState(context, state),
-        child: Column(
-          children: [
-            const CAppBar(label: 'Edit Alarm'),
-            const SizedBox(height: 10.0),
-            CContentBox(
-              height: 140.0,
-              child: CTimePicker(
-                initial: context.read<AlarmDetailsScreenCubit>().state.date,
-                onDateChanged: context.read<AlarmDetailsScreenCubit>().onDateChanged,
-              ),
+  Widget build(BuildContext context) => Column(
+        children: [
+          const CAppBar(label: 'Edit Alarm'),
+          const SizedBox(height: 10.0),
+          CContentBox(
+            height: 140.0,
+            child: CTimePicker(
+              initial: context.read<AlarmDetailsScreenCubit>().state.time,
+              onDateChanged: context.read<AlarmDetailsScreenCubit>().onDateChanged,
             ),
-            const SizedBox(height: 20.0),
-            BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
-              buildWhen: (prev, curr) => prev.weekdays != curr.weekdays,
-              builder: (_, state) => AlarmDetailsWeekdaysWidget(values: state.weekdays),
+          ),
+          const SizedBox(height: 20.0),
+          BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
+            buildWhen: (prev, curr) => prev.repeat != curr.repeat,
+            builder: (_, state) => AlarmDetailsWeekdaysWidget(values: state.repeat),
+          ),
+          const SizedBox(height: 20.0),
+          const CContentBox(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _LabelOptionBox(),
+                _RepeatOptionBox(),
+                _SoundOptionBox(),
+              ],
             ),
-            const SizedBox(height: 20.0),
-            const CContentBox(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _LabelOptionBox(),
-                  _RepeatOptionBox(),
-                  _SoundOptionBox(),
-                ],
-              ),
+          ),
+          const Spacer(),
+          CBottomFloatingButton.invert(
+            label: 'Save',
+            onPressed: context.read<AlarmDetailsScreenCubit>().handleSave,
+            action: CBottomFloatingButtonAction(
+              icon: CupertinoIcons.clear,
+              onPressed: context.router.pop,
             ),
-            const Spacer(),
-            CBottomFloatingButton.invert(
-              label: l18n.save,
-              onPressed: context.read<AlarmDetailsScreenCubit>().handleSave,
-              action: CBottomFloatingButtonAction(
-                icon: CupertinoIcons.clear,
-                onPressed: context.router.pop,
-              ),
-            ),
-            const SizedBox(height: 20.0),
-          ],
-        ),
+          ),
+          const SizedBox(height: 20.0),
+        ],
       );
-
-  Future<void> _showChangeLabelDialog(BuildContext context, AlarmDetailsScreenState state) {
-    return CDialog.show<String?>(
-      context,
-      label: 'Label',
-      child: AlarmDetailsLabelPopup(initialValue: state.name),
-    ).then(context.read<AlarmDetailsScreenCubit>().onLabelChanged);
-  }
-
-  Future<void> _showChangeRepeatDialog(BuildContext context, AlarmDetailsScreenState state) {
-    return CDialog.show<Set<Weekday>?>(
-      context,
-      label: 'Repeat',
-      child: AlarmDetailsRepeatPopup(initialValue: state.date.repeat),
-    ).then(context.read<AlarmDetailsScreenCubit>().onRepeatChanged);
-  }
 }
 
 class _LabelOptionBox extends StatelessWidget {
@@ -114,10 +88,16 @@ class _LabelOptionBox extends StatelessWidget {
         buildWhen: (prev, curr) => prev.name != curr.name,
         builder: (_, state) => CContentOptionBox(
           title: 'Label',
-          subtitle: (state.name ?? '').isEmpty ? 'No Label' : state.name,
-          onPressed: context.read<AlarmDetailsScreenCubit>().onLabelPressed,
+          subtitle: (state.name).isEmpty ? 'No Label' : state.name,
+          onPressed: () => _onChangeLabelPressed(context),
         ),
       );
+
+  void _onChangeLabelPressed(BuildContext context) => CDialog.show<String?>(
+        context,
+        label: 'Label',
+        child: const AlarmDetailsLabelPopup(initialValue: 'No label'),
+      ).then(context.read<AlarmDetailsScreenCubit>().onLabelChanged);
 }
 
 class _RepeatOptionBox extends StatelessWidget {
@@ -125,11 +105,15 @@ class _RepeatOptionBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
-        buildWhen: (prev, curr) => prev.date.repeat != curr.date.repeat,
+        buildWhen: (prev, curr) => !prev.repeat.equals(curr.repeat),
         builder: (_, state) => CContentOptionBox(
           title: 'Repeat',
-          subtitle: _handleSubtitle(state.date.repeat),
-          onPressed: context.read<AlarmDetailsScreenCubit>().onRepeatPressed,
+          subtitle: _handleSubtitle(state.repeat),
+          onPressed: () => CDialog.show<Set<Weekday>?>(
+            context,
+            label: 'Repeat',
+            child: const AlarmDetailsRepeatPopup(initialValue: {}),
+          ).then(context.read<AlarmDetailsScreenCubit>().onRepeatChanged),
         ),
       );
 
@@ -160,6 +144,6 @@ class _SoundOptionBox extends StatelessWidget {
   Widget build(BuildContext context) => CContentOptionBox(
         title: 'Sound',
         subtitle: 'Orkney',
-        onPressed: context.read<AlarmDetailsScreenCubit>().onSoundPressed,
+        onPressed: () {},
       );
 }

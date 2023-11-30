@@ -7,7 +7,6 @@ import 'package:wakeme/core/routing/app_router.gr.dart';
 import 'package:wakeme/src/common/enums/part_of_the_day.dart';
 import 'package:wakeme/src/common/presentation/c_core/c_component.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
-import 'package:wakeme/src/common/presentation/theme/c_theme_dimens.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_styles.dart';
 import 'package:wakeme/src/common/presentation/widgets/button/c_rectangle_button.dart';
 import 'package:wakeme/src/common/presentation/widgets/button/c_square_button.dart';
@@ -44,7 +43,7 @@ class _Body extends StatelessWidget {
         children: [
           Container(
             height: 100.0,
-            padding: const EdgeInsets.symmetric(horizontal: CThemeDimens.paddingCScaffold * 2),
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +65,7 @@ class _Body extends StatelessWidget {
           ),
           Container(
             height: 102.0,
-            padding: const EdgeInsets.symmetric(horizontal: CThemeDimens.paddingCScaffold),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
                 Expanded(
@@ -132,7 +131,7 @@ class _Body extends StatelessWidget {
           const SizedBox(height: 20.0),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: CThemeDimens.paddingCScaffold,
+              horizontal: 16.0,
             ),
             child: Row(
               children: [
@@ -174,7 +173,7 @@ class _Body extends StatelessWidget {
           const SizedBox(height: 40.0),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: CThemeDimens.paddingCScaffold,
+              horizontal: 16.0,
             ),
             child: Text(
               'No alarms',

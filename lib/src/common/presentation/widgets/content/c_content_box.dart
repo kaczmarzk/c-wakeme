@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wakeme/src/common/presentation/c_core/c_component.dart';
-import 'package:wakeme/src/common/presentation/theme/c_theme_dimens.dart';
 
 class CContentBox extends CComponent {
   const CContentBox({
@@ -19,7 +18,7 @@ class CContentBox extends CComponent {
   final EdgeInsets padding;
 
   @override
-  double get cRadius => CThemeDimens.radiusCContentBox;
+  double get cRadius => 10.0;
 
   @override
   Widget build(BuildContext context) {

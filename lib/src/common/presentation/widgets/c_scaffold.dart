@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
-import 'package:wakeme/src/common/presentation/theme/c_theme_dimens.dart';
 
 class CScaffold extends StatelessWidget {
   const CScaffold({
@@ -28,7 +27,7 @@ class CScaffold extends StatelessWidget {
           bottom: bottom,
           top: top,
           child: Padding(
-            padding: horizontal ? const EdgeInsets.symmetric(horizontal: CThemeDimens.paddingCScaffold) : EdgeInsets.zero,
+            padding: horizontal ? const EdgeInsets.symmetric(horizontal: 16.0) : EdgeInsets.zero,
             child: body,
           ),
         ),

@@ -10,10 +10,9 @@ part 'buzzer_details_screen_state.dart';
 @injectable
 class AlarmDetailsScreenCubit extends Cubit<AlarmDetailsScreenState> {
   AlarmDetailsScreenCubit(
+    @factoryParam CTime time,
     this.debouncer,
-  ) : super(
-          AlarmDetailsScreenState.initial(const CTime(hour: 12, minute: 12)),
-        );
+  ) : super(AlarmDetailsScreenState.initial(time));
 
   final EasyDebouncer debouncer;
 

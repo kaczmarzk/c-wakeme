@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wakeme/src/common/presentation/c_core/c_component.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
-import 'package:wakeme/src/common/presentation/theme/c_theme_dimens.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_styles.dart';
 import 'package:wakeme/src/common/presentation/widgets/button/c_icon_button.dart';
 
@@ -14,7 +13,7 @@ class CAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        height: CThemeDimens.sizeCAppBar,
+        height: 60.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,

@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wakeme/src/common/presentation/c_core/c_component.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
-import 'package:wakeme/src/common/presentation/theme/c_theme_dimens.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_styles.dart';
 import 'package:wakeme/src/common/presentation/widgets/button/c_icon_button.dart';
 
@@ -43,14 +42,14 @@ class CDialog<T> extends StatelessWidget {
           backgroundColor: CThemeColors.cinder,
           contentPadding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(CThemeDimens.radiusCContentBox),
+            borderRadius: BorderRadius.circular(10.0),
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: CThemeDimens.sizeCAppBar,
+                height: 60.0,
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

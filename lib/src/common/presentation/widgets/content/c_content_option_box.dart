@@ -1,7 +1,6 @@
 import 'package:enough_platform_widgets/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
-import 'package:wakeme/src/common/presentation/theme/c_theme_dimens.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_styles.dart';
 
 class CContentOptionBox extends StatelessWidget {
@@ -52,7 +51,7 @@ class CContentOptionBox extends StatelessWidget {
             ),
             const Icon(
               CupertinoIcons.chevron_right,
-              size: CThemeDimens.sizeSIcon,
+              size: 20.0,
               color: CThemeColors.platinum,
             ),
           ],

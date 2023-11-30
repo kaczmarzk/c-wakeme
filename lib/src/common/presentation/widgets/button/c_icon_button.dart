@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:wakeme/src/common/presentation/c_core/c_component.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
+import 'package:wakeme/src/common/presentation/widgets/c_component.dart';
 
 class CIconButton extends CComponent {
   const CIconButton({

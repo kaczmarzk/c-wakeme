@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 abstract final class CThemeStyles {
   static const _gilroy = 'Gilroy';
   static const _albert = 'AlbertSans';
-  static const _gilroyBold = TextStyle(fontFamily: _gilroy, fontWeight: FontWeight.w600);
   static const _gilroyMedium = TextStyle(fontFamily: _gilroy, fontWeight: FontWeight.w500);
   static const _albertRegular = TextStyle(fontFamily: _albert, fontWeight: FontWeight.w400);
 

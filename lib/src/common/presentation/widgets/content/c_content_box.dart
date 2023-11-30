@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wakeme/src/common/presentation/c_core/c_component.dart';
+import 'package:wakeme/src/common/presentation/widgets/c_component.dart';
 
 class CContentBox extends CComponent {
   const CContentBox({

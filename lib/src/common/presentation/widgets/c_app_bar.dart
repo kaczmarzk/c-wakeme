@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:wakeme/src/common/presentation/c_core/c_component.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_styles.dart';
 import 'package:wakeme/src/common/presentation/widgets/button/c_icon_button.dart';
+import 'package:wakeme/src/common/presentation/widgets/c_component.dart';
 
 class CAppBar extends StatelessWidget {
   const CAppBar({required this.label, this.leading, super.key});

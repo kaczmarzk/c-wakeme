@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slang/builder/utils/string_extensions.dart';
 import 'package:wakeme/core/injection/injection.dart';
 import 'package:wakeme/src/common/enums/weekday.dart';
+import 'package:wakeme/src/common/extensions/build_context_ext.dart';
 import 'package:wakeme/src/common/extensions/set_ext.dart';
+import 'package:wakeme/src/common/extensions/string_ext.dart';
 import 'package:wakeme/src/common/presentation/widgets/button/c_bottom_floating_button.dart';
 import 'package:wakeme/src/common/presentation/widgets/c_app_bar.dart';
 import 'package:wakeme/src/common/presentation/widgets/c_dialog.dart';
@@ -12,10 +13,10 @@ import 'package:wakeme/src/common/presentation/widgets/c_scaffold.dart';
 import 'package:wakeme/src/common/presentation/widgets/c_timer_picker.dart';
 import 'package:wakeme/src/common/presentation/widgets/content/c_content_box.dart';
 import 'package:wakeme/src/common/presentation/widgets/content/c_content_option_box.dart';
-import 'package:wakeme/src/features/alarms/presentation/alarm_details/cubit/buzzer_details_screen_cubit.dart';
-import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/alarm_details_label_popup.dart';
-import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/alarm_details_repeat_popup.dart';
-import 'package:wakeme/src/features/alarms/presentation/alarm_details/widgets/alarm_details_weekday_picker.dart';
+import 'package:wakeme/src/presentation/alarm_details/cubit/alarm_details_screen_cubit.dart';
+import 'package:wakeme/src/presentation/alarm_details/widgets/alarm_details_label_popup.dart';
+import 'package:wakeme/src/presentation/alarm_details/widgets/alarm_details_repeat_popup.dart';
+import 'package:wakeme/src/presentation/alarm_details/widgets/alarm_details_weekday_picker.dart';
 
 @RoutePage()
 class AlarmDetailsScreen extends StatelessWidget {
@@ -45,15 +46,23 @@ class _Body extends StatelessWidget {
           const SizedBox(height: 10.0),
           CContentBox(
             height: 140.0,
-            child: CTimePicker(
-              initial: context.read<AlarmDetailsScreenCubit>().state.time,
-              onDateChanged: context.read<AlarmDetailsScreenCubit>().onDateChanged,
+            child: Builder(
+              builder: (_) {
+                final alarmTime = context.read<AlarmDetailsScreenCubit>().state.alarm.time;
+                return CTimePicker(
+                  initial: context.clock.time.copyWith(hour: alarmTime.hour, minute: alarmTime.minute),
+                  onDateChanged: context.read<AlarmDetailsScreenCubit>().onDateChanged,
+                );
+              },
             ),
           ),
           const SizedBox(height: 20.0),
           BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
-            buildWhen: (prev, curr) => prev.repeat != curr.repeat,
-            builder: (_, state) => AlarmDetailsWeekdaysWidget(values: state.repeat),
+            buildWhen: (prev, curr) => prev.alarm != curr.alarm || !prev.weekdays.equals(curr.weekdays),
+            builder: (_, state) => AlarmDetailsWeekdaysWidget(
+              alarm: state.alarm,
+              weekdays: state.weekdays,
+            ),
           ),
           const SizedBox(height: 20.0),
           const CContentBox(
@@ -85,10 +94,10 @@ class _LabelOptionBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
-        buildWhen: (prev, curr) => prev.name != curr.name,
+        buildWhen: (prev, curr) => prev.alarm.name != curr.alarm.name,
         builder: (_, state) => CContentOptionBox(
           title: 'Label',
-          subtitle: (state.name).isEmpty ? 'No Label' : state.name,
+          subtitle: (state.alarm.name ?? '').isEmpty ? 'No Label' : state.alarm.name,
           onPressed: () => _onChangeLabelPressed(context),
         ),
       );
@@ -105,14 +114,14 @@ class _RepeatOptionBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
-        buildWhen: (prev, curr) => !prev.repeat.equals(curr.repeat),
+        buildWhen: (prev, curr) => !prev.alarm.repeated.equals(curr.alarm.repeated),
         builder: (_, state) => CContentOptionBox(
           title: 'Repeat',
-          subtitle: _handleSubtitle(state.repeat),
+          subtitle: _handleSubtitle(state.alarm.repeated),
           onPressed: () => CDialog.show<Set<Weekday>?>(
             context,
             label: 'Repeat',
-            child: const AlarmDetailsRepeatPopup(initialValue: {}),
+            child: AlarmDetailsRepeatPopup(initialValue: state.alarm.repeated),
           ).then(context.read<AlarmDetailsScreenCubit>().onRepeatChanged),
         ),
       );

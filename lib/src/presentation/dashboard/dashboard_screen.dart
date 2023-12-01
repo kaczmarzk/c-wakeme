@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wakeme/core/injection/injection.dart';
 import 'package:wakeme/core/routing/app_router.gr.dart';
-import 'package:wakeme/src/common/enums/part_of_the_day.dart';
+import 'package:wakeme/src/common/extensions/build_context_ext.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_styles.dart';
 import 'package:wakeme/src/common/presentation/widgets/button/c_rectangle_button.dart';
@@ -12,7 +12,7 @@ import 'package:wakeme/src/common/presentation/widgets/button/c_square_button.da
 import 'package:wakeme/src/common/presentation/widgets/c_component.dart';
 import 'package:wakeme/src/common/presentation/widgets/c_scaffold.dart';
 import 'package:wakeme/src/common/presentation/widgets/content/c_content_box.dart';
-import 'package:wakeme/src/features/dashboard/cubit/dashboard_screen_cubit.dart';
+import 'package:wakeme/src/presentation/dashboard/cubit/dashboard_screen_cubit.dart';
 
 @RoutePage()
 class DashboardScreen extends StatelessWidget {
@@ -49,13 +49,13 @@ class _Body extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Good ${PartOfTheDay.afternoon}!',
+                  'Good ${context.clock.partOfDay.name(context)}!',
                   style: CThemeStyles.gilroyMedium_24.copyWith(
                     color: CThemeColors.platinum,
                   ),
                 ),
                 Text(
-                  DateFormat.MMMMEEEEd().format(DateTime.now()),
+                  DateFormat.MMMMEEEEd().format(context.clock.now()),
                   style: CThemeStyles.gilroyMedium_16.copyWith(
                     color: CThemeColors.softPeach,
                   ),

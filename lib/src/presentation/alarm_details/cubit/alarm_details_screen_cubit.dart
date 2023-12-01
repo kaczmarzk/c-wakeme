@@ -1,27 +1,35 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:wakeme/core/service/debounce/easy_debouncer.dart';
+import 'package:wakeme/core/utils/c_clock.dart';
+import 'package:wakeme/core/utils/c_debounce.dart';
 import 'package:wakeme/src/common/enums/weekday.dart';
-import 'package:wakeme/src/common/models/c_time.dart';
+import 'package:wakeme/src/features/alarms/domain/entities/alarm/alarm_entity.dart';
+import 'package:wakeme/src/features/alarms/domain/entities/alarm_time/alarm_time_entity.dart';
 
-part 'buzzer_details_screen_state.dart';
+part 'alarm_details_screen_cubit.freezed.dart';
+part 'alarm_details_screen_state.dart';
 
 @injectable
 class AlarmDetailsScreenCubit extends Cubit<AlarmDetailsScreenState> {
   AlarmDetailsScreenCubit(
-    @factoryParam CTime time,
+    this.clock,
     this.debouncer,
-  ) : super(AlarmDetailsScreenState.initial(time));
+  ) : super(AlarmDetailsScreenState.initial(clock));
 
-  final EasyDebouncer debouncer;
+  final CClock clock;
+  final CDebounce debouncer;
+
+  void init([AlarmEntity? alarm]) {
+    if (alarm != null) emit(state.copyWith(alarm: alarm));
+  }
 
   void onDateChanged(int hour, int minute) {
     debouncer.debounce(
       execute: () {
-        // final date = state.date.copyWith(hour: hour, minute: minute);
-        // final weekdays = _handleWeekdayChanged(entity: date);
-        // emit(state.copyWith(date: date, weekdays: weekdays));
+        final time = state.alarm.time.copyWith(hour: hour, minute: minute);
+        final alarm = state.alarm.copyWith(time: time);
+        emit(state.copyWith(alarm: alarm));
       },
     );
   }
@@ -30,20 +38,18 @@ class AlarmDetailsScreenCubit extends Cubit<AlarmDetailsScreenState> {
     if (value == null) return;
 
     // to sort weekdays
-    // final weekdays = Weekday.values.where((e) => value.contains(e)).toSet();
-    // final date = state.date.copyWith(repeat: weekdays);
-    // emit(state.copyWith(date: date, weekdays: weekdays));
+    final repeated = Weekday.values.where((e) => value.contains(e)).toSet();
+    final alarm = state.alarm.copyWith(repeated: repeated);
+    emit(state.copyWith(alarm: alarm));
   }
 
   void onLabelChanged(String? name) {
-    // emit(state.copyWith(name: name));
+    if (name == null) return;
+    final alarm = state.alarm.copyWith(name: name);
+    emit(state.copyWith(alarm: alarm));
   }
 
-  void handleSave() {
-    if ((state.name).isEmpty) return;
-    _handleWeekdayChanged();
-    // repository.add(label: state.name!, date: state.date);
-  }
+  void handleSave() {}
 
   @override
   Future<void> close() {

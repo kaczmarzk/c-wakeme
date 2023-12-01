@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:wakeme/src/common/models/c_time.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_styles.dart';
 
@@ -10,7 +9,7 @@ class CTimePicker extends StatelessWidget {
     super.key,
   });
 
-  final CTime initial;
+  final DateTime initial;
   final Function(int hour, int minute) onDateChanged;
 
   @override
@@ -26,7 +25,7 @@ class CTimePicker extends StatelessWidget {
           ),
         ),
         child: CupertinoDatePicker(
-          initialDateTime: initial.dt,
+          initialDateTime: initial,
           onDateTimeChanged: (dt) => onDateChanged(dt.hour, dt.minute),
           mode: CupertinoDatePickerMode.time,
           use24hFormat: true,

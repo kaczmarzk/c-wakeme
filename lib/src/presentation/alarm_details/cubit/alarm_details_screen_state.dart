@@ -4,12 +4,10 @@ part of 'alarm_details_screen_cubit.dart';
 class AlarmDetailsScreenState with _$AlarmDetailsScreenState {
   const factory AlarmDetailsScreenState({
     required AlarmEntity alarm,
-    required Set<Weekday> weekdays,
     AlarmDetailsScreenSignal? signal,
   }) = _AlarmDetailsScreenState;
 
   factory AlarmDetailsScreenState.initial(CClock clock) => AlarmDetailsScreenState(
-        weekdays: {clock.weekday},
         alarm: AlarmEntity(
           uuid: const Uuid().v4(),
           time: AlarmTimeEntity.fromClock(clock),

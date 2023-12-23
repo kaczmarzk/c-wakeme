@@ -62,10 +62,9 @@ class _Body extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
             BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
-              buildWhen: (prev, curr) => prev.alarm != curr.alarm || !prev.weekdays.equals(curr.weekdays),
+              buildWhen: (prev, curr) => prev.alarm != curr.alarm,
               builder: (_, state) => AlarmDetailsWeekdaysWidget(
-                alarm: state.alarm,
-                weekdays: state.weekdays,
+                repeated: state.alarm.repeated,
               ),
             ),
             const SizedBox(height: 20.0),

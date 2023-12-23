@@ -92,7 +92,9 @@ class __$$_DashboardScreenStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DashboardScreenState implements _DashboardScreenState {
+class _$_DashboardScreenState
+    with DiagnosticableTreeMixin
+    implements _DashboardScreenState {
   const _$_DashboardScreenState({required final List<AlarmEntity> alarms})
       : _alarms = alarms;
 
@@ -105,8 +107,16 @@ class _$_DashboardScreenState implements _DashboardScreenState {
   }
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DashboardScreenState(alarms: $alarms)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DashboardScreenState'))
+      ..add(DiagnosticsProperty('alarms', alarms));
   }
 
   @override

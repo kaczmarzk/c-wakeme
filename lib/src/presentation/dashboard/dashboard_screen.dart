@@ -140,13 +140,13 @@ class _Body extends StatelessWidget {
                 CSquareButton(
                   icon: CupertinoIcons.rocket,
                   size: CThemeSize.small,
-                  onPressed: () {},
+                  onPressed: context.read<DashboardScreenCubit>().clearBoxes,
                 ),
                 const SizedBox(width: 20.0),
                 CSquareButton(
                   icon: CupertinoIcons.gear,
                   size: CThemeSize.small,
-                  onPressed: () {},
+                  onPressed: () => context.router.push(const SettingsRoute()),
                 ),
                 const SizedBox(width: 20.0),
                 CSquareButton.invert(

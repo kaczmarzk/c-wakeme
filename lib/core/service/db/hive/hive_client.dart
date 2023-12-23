@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
@@ -21,9 +20,6 @@ class HiveClient implements IHiveClient {
   static Future<void> init() async {
     await getApplicationDocumentsDirectory().then((dir) => Hive.init(dir.path));
     await HiveFactory.registerBoxes();
-
-    // TODO: for debug purposes
-    if (kDebugMode) Hive.box(HiveFactory.alarmsBox).clear();
   }
 
   @override

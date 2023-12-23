@@ -3,17 +3,11 @@ import 'package:wakeme/src/common/enums/weekday.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_colors.dart';
 import 'package:wakeme/src/common/presentation/theme/c_theme_styles.dart';
 import 'package:wakeme/src/common/presentation/widgets/content/c_content_box.dart';
-import 'package:wakeme/src/features/alarms/domain/entities/alarm_entity.dart';
 
 class AlarmDetailsWeekdaysWidget extends StatelessWidget {
-  const AlarmDetailsWeekdaysWidget({
-    required this.alarm,
-    required this.weekdays,
-    super.key,
-  });
+  const AlarmDetailsWeekdaysWidget({required this.repeated, super.key});
 
-  final AlarmEntity alarm;
-  final Set<Weekday> weekdays;
+  final Set<Weekday>? repeated;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +16,7 @@ class AlarmDetailsWeekdaysWidget extends StatelessWidget {
       child: LayoutBuilder(
         builder: (_, constraints) {
           /// out sunday as first
-          final values = (alarm.repeated ?? {}).isEmpty ? this.weekdays : alarm.repeated!;
+          final value = repeated ?? {};
           final weekdays = [Weekday.sunday, ...Weekday.weekdays, Weekday.saturday];
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -30,7 +24,7 @@ class AlarmDetailsWeekdaysWidget extends StatelessWidget {
                 .map(
                   (day) => _SingleDayWidget(
                     day: day,
-                    value: values.contains(day),
+                    value: value.contains(day),
                     dimension: constraints.maxWidth / 9,
                   ),
                 )

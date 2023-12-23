@@ -33,12 +33,7 @@ class DashboardAlarmWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16.0),
-            Text(
-              alarm.name ?? '',
-              style: CThemeStyles.gilroyMedium_20.copyWith(
-                color: CThemeColors.platinum,
-              ),
-            ),
+            Text(alarm.name ?? ''),
             const SizedBox(width: 16.0),
             Text(alarm.uuid.substring(0, 15)),
             const Spacer(),

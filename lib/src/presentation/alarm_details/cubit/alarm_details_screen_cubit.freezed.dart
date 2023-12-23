@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AlarmDetailsScreenState {
   AlarmEntity get alarm => throw _privateConstructorUsedError;
-  Set<Weekday> get weekdays => throw _privateConstructorUsedError;
   AlarmDetailsScreenSignal? get signal => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,10 +30,7 @@ abstract class $AlarmDetailsScreenStateCopyWith<$Res> {
           $Res Function(AlarmDetailsScreenState) then) =
       _$AlarmDetailsScreenStateCopyWithImpl<$Res, AlarmDetailsScreenState>;
   @useResult
-  $Res call(
-      {AlarmEntity alarm,
-      Set<Weekday> weekdays,
-      AlarmDetailsScreenSignal? signal});
+  $Res call({AlarmEntity alarm, AlarmDetailsScreenSignal? signal});
 
   $AlarmEntityCopyWith<$Res> get alarm;
   $AlarmDetailsScreenSignalCopyWith<$Res>? get signal;
@@ -55,7 +51,6 @@ class _$AlarmDetailsScreenStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? alarm = null,
-    Object? weekdays = null,
     Object? signal = freezed,
   }) {
     return _then(_value.copyWith(
@@ -63,10 +58,6 @@ class _$AlarmDetailsScreenStateCopyWithImpl<$Res,
           ? _value.alarm
           : alarm // ignore: cast_nullable_to_non_nullable
               as AlarmEntity,
-      weekdays: null == weekdays
-          ? _value.weekdays
-          : weekdays // ignore: cast_nullable_to_non_nullable
-              as Set<Weekday>,
       signal: freezed == signal
           ? _value.signal
           : signal // ignore: cast_nullable_to_non_nullable
@@ -103,10 +94,7 @@ abstract class _$$_AlarmDetailsScreenStateCopyWith<$Res>
       __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {AlarmEntity alarm,
-      Set<Weekday> weekdays,
-      AlarmDetailsScreenSignal? signal});
+  $Res call({AlarmEntity alarm, AlarmDetailsScreenSignal? signal});
 
   @override
   $AlarmEntityCopyWith<$Res> get alarm;
@@ -127,7 +115,6 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? alarm = null,
-    Object? weekdays = null,
     Object? signal = freezed,
   }) {
     return _then(_$_AlarmDetailsScreenState(
@@ -135,10 +122,6 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
           ? _value.alarm
           : alarm // ignore: cast_nullable_to_non_nullable
               as AlarmEntity,
-      weekdays: null == weekdays
-          ? _value._weekdays
-          : weekdays // ignore: cast_nullable_to_non_nullable
-              as Set<Weekday>,
       signal: freezed == signal
           ? _value.signal
           : signal // ignore: cast_nullable_to_non_nullable
@@ -150,26 +133,16 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
-  const _$_AlarmDetailsScreenState(
-      {required this.alarm, required final Set<Weekday> weekdays, this.signal})
-      : _weekdays = weekdays;
+  const _$_AlarmDetailsScreenState({required this.alarm, this.signal});
 
   @override
   final AlarmEntity alarm;
-  final Set<Weekday> _weekdays;
-  @override
-  Set<Weekday> get weekdays {
-    if (_weekdays is EqualUnmodifiableSetView) return _weekdays;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(_weekdays);
-  }
-
   @override
   final AlarmDetailsScreenSignal? signal;
 
   @override
   String toString() {
-    return 'AlarmDetailsScreenState(alarm: $alarm, weekdays: $weekdays, signal: $signal)';
+    return 'AlarmDetailsScreenState(alarm: $alarm, signal: $signal)';
   }
 
   @override
@@ -178,13 +151,11 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
         (other.runtimeType == runtimeType &&
             other is _$_AlarmDetailsScreenState &&
             (identical(other.alarm, alarm) || other.alarm == alarm) &&
-            const DeepCollectionEquality().equals(other._weekdays, _weekdays) &&
             (identical(other.signal, signal) || other.signal == signal));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, alarm,
-      const DeepCollectionEquality().hash(_weekdays), signal);
+  int get hashCode => Object.hash(runtimeType, alarm, signal);
 
   @JsonKey(ignore: true)
   @override
@@ -198,13 +169,10 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
 abstract class _AlarmDetailsScreenState implements AlarmDetailsScreenState {
   const factory _AlarmDetailsScreenState(
       {required final AlarmEntity alarm,
-      required final Set<Weekday> weekdays,
       final AlarmDetailsScreenSignal? signal}) = _$_AlarmDetailsScreenState;
 
   @override
   AlarmEntity get alarm;
-  @override
-  Set<Weekday> get weekdays;
   @override
   AlarmDetailsScreenSignal? get signal;
   @override

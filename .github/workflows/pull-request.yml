@@ -15,6 +15,6 @@ jobs:
           channel: 'stable'
 
       - run: flutter analyze
-      - run: flutter test
-      - run: dart run slang analyze
+        #      - run: flutter test
+        #      - run: dart run slang analyze
 

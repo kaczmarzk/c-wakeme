@@ -16,9 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AlarmEntity {
+  String get uuid => throw _privateConstructorUsedError;
   AlarmTimeEntity get time => throw _privateConstructorUsedError;
+  Set<Weekday>? get repeated => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  Set<Weekday> get repeated => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AlarmEntityCopyWith<AlarmEntity> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $AlarmEntityCopyWith<$Res> {
           AlarmEntity value, $Res Function(AlarmEntity) then) =
       _$AlarmEntityCopyWithImpl<$Res, AlarmEntity>;
   @useResult
-  $Res call({AlarmTimeEntity time, String? name, Set<Weekday> repeated});
+  $Res call(
+      {String uuid,
+      AlarmTimeEntity time,
+      Set<Weekday>? repeated,
+      String? name});
 
   $AlarmTimeEntityCopyWith<$Res> get time;
 }
@@ -49,23 +54,28 @@ class _$AlarmEntityCopyWithImpl<$Res, $Val extends AlarmEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? uuid = null,
     Object? time = null,
+    Object? repeated = freezed,
     Object? name = freezed,
-    Object? repeated = null,
   }) {
     return _then(_value.copyWith(
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as AlarmTimeEntity,
+      repeated: freezed == repeated
+          ? _value.repeated
+          : repeated // ignore: cast_nullable_to_non_nullable
+              as Set<Weekday>?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      repeated: null == repeated
-          ? _value.repeated
-          : repeated // ignore: cast_nullable_to_non_nullable
-              as Set<Weekday>,
     ) as $Val);
   }
 
@@ -86,7 +96,11 @@ abstract class _$$_AlarmEntityCopyWith<$Res>
       __$$_AlarmEntityCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AlarmTimeEntity time, String? name, Set<Weekday> repeated});
+  $Res call(
+      {String uuid,
+      AlarmTimeEntity time,
+      Set<Weekday>? repeated,
+      String? name});
 
   @override
   $AlarmTimeEntityCopyWith<$Res> get time;
@@ -103,51 +117,63 @@ class __$$_AlarmEntityCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? uuid = null,
     Object? time = null,
+    Object? repeated = freezed,
     Object? name = freezed,
-    Object? repeated = null,
   }) {
     return _then(_$_AlarmEntity(
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as AlarmTimeEntity,
+      repeated: freezed == repeated
+          ? _value._repeated
+          : repeated // ignore: cast_nullable_to_non_nullable
+              as Set<Weekday>?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      repeated: null == repeated
-          ? _value._repeated
-          : repeated // ignore: cast_nullable_to_non_nullable
-              as Set<Weekday>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_AlarmEntity implements _AlarmEntity {
+class _$_AlarmEntity extends _AlarmEntity {
   const _$_AlarmEntity(
-      {required this.time,
-      required this.name,
-      required final Set<Weekday> repeated})
-      : _repeated = repeated;
+      {required this.uuid,
+      required this.time,
+      final Set<Weekday>? repeated,
+      this.name})
+      : _repeated = repeated,
+        super._();
 
   @override
+  final String uuid;
+  @override
   final AlarmTimeEntity time;
+  final Set<Weekday>? _repeated;
   @override
-  final String? name;
-  final Set<Weekday> _repeated;
-  @override
-  Set<Weekday> get repeated {
+  Set<Weekday>? get repeated {
+    final value = _repeated;
+    if (value == null) return null;
     if (_repeated is EqualUnmodifiableSetView) return _repeated;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(_repeated);
+    return EqualUnmodifiableSetView(value);
   }
 
   @override
+  final String? name;
+
+  @override
   String toString() {
-    return 'AlarmEntity(time: $time, name: $name, repeated: $repeated)';
+    return 'AlarmEntity(uuid: $uuid, time: $time, repeated: $repeated, name: $name)';
   }
 
   @override
@@ -155,14 +181,15 @@ class _$_AlarmEntity implements _AlarmEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AlarmEntity &&
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.time, time) || other.time == time) &&
-            (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other._repeated, _repeated));
+            const DeepCollectionEquality().equals(other._repeated, _repeated) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, time, name, const DeepCollectionEquality().hash(_repeated));
+  int get hashCode => Object.hash(runtimeType, uuid, time,
+      const DeepCollectionEquality().hash(_repeated), name);
 
   @JsonKey(ignore: true)
   @override
@@ -171,18 +198,22 @@ class _$_AlarmEntity implements _AlarmEntity {
       __$$_AlarmEntityCopyWithImpl<_$_AlarmEntity>(this, _$identity);
 }
 
-abstract class _AlarmEntity implements AlarmEntity {
+abstract class _AlarmEntity extends AlarmEntity {
   const factory _AlarmEntity(
-      {required final AlarmTimeEntity time,
-      required final String? name,
-      required final Set<Weekday> repeated}) = _$_AlarmEntity;
+      {required final String uuid,
+      required final AlarmTimeEntity time,
+      final Set<Weekday>? repeated,
+      final String? name}) = _$_AlarmEntity;
+  const _AlarmEntity._() : super._();
 
+  @override
+  String get uuid;
   @override
   AlarmTimeEntity get time;
   @override
-  String? get name;
+  Set<Weekday>? get repeated;
   @override
-  Set<Weekday> get repeated;
+  String? get name;
   @override
   @JsonKey(ignore: true)
   _$$_AlarmEntityCopyWith<_$_AlarmEntity> get copyWith =>

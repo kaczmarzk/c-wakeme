@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AlarmDetailsScreenState {
   AlarmEntity get alarm => throw _privateConstructorUsedError;
   Set<Weekday> get weekdays => throw _privateConstructorUsedError;
+  AlarmDetailsScreenSignal? get signal => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AlarmDetailsScreenStateCopyWith<AlarmDetailsScreenState> get copyWith =>
@@ -30,9 +31,13 @@ abstract class $AlarmDetailsScreenStateCopyWith<$Res> {
           $Res Function(AlarmDetailsScreenState) then) =
       _$AlarmDetailsScreenStateCopyWithImpl<$Res, AlarmDetailsScreenState>;
   @useResult
-  $Res call({AlarmEntity alarm, Set<Weekday> weekdays});
+  $Res call(
+      {AlarmEntity alarm,
+      Set<Weekday> weekdays,
+      AlarmDetailsScreenSignal? signal});
 
   $AlarmEntityCopyWith<$Res> get alarm;
+  $AlarmDetailsScreenSignalCopyWith<$Res>? get signal;
 }
 
 /// @nodoc
@@ -51,6 +56,7 @@ class _$AlarmDetailsScreenStateCopyWithImpl<$Res,
   $Res call({
     Object? alarm = null,
     Object? weekdays = null,
+    Object? signal = freezed,
   }) {
     return _then(_value.copyWith(
       alarm: null == alarm
@@ -61,6 +67,10 @@ class _$AlarmDetailsScreenStateCopyWithImpl<$Res,
           ? _value.weekdays
           : weekdays // ignore: cast_nullable_to_non_nullable
               as Set<Weekday>,
+      signal: freezed == signal
+          ? _value.signal
+          : signal // ignore: cast_nullable_to_non_nullable
+              as AlarmDetailsScreenSignal?,
     ) as $Val);
   }
 
@@ -69,6 +79,18 @@ class _$AlarmDetailsScreenStateCopyWithImpl<$Res,
   $AlarmEntityCopyWith<$Res> get alarm {
     return $AlarmEntityCopyWith<$Res>(_value.alarm, (value) {
       return _then(_value.copyWith(alarm: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AlarmDetailsScreenSignalCopyWith<$Res>? get signal {
+    if (_value.signal == null) {
+      return null;
+    }
+
+    return $AlarmDetailsScreenSignalCopyWith<$Res>(_value.signal!, (value) {
+      return _then(_value.copyWith(signal: value) as $Val);
     });
   }
 }
@@ -81,10 +103,15 @@ abstract class _$$_AlarmDetailsScreenStateCopyWith<$Res>
       __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AlarmEntity alarm, Set<Weekday> weekdays});
+  $Res call(
+      {AlarmEntity alarm,
+      Set<Weekday> weekdays,
+      AlarmDetailsScreenSignal? signal});
 
   @override
   $AlarmEntityCopyWith<$Res> get alarm;
+  @override
+  $AlarmDetailsScreenSignalCopyWith<$Res>? get signal;
 }
 
 /// @nodoc
@@ -101,6 +128,7 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
   $Res call({
     Object? alarm = null,
     Object? weekdays = null,
+    Object? signal = freezed,
   }) {
     return _then(_$_AlarmDetailsScreenState(
       alarm: null == alarm
@@ -111,6 +139,10 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
           ? _value._weekdays
           : weekdays // ignore: cast_nullable_to_non_nullable
               as Set<Weekday>,
+      signal: freezed == signal
+          ? _value.signal
+          : signal // ignore: cast_nullable_to_non_nullable
+              as AlarmDetailsScreenSignal?,
     ));
   }
 }
@@ -119,7 +151,7 @@ class __$$_AlarmDetailsScreenStateCopyWithImpl<$Res>
 
 class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
   const _$_AlarmDetailsScreenState(
-      {required this.alarm, required final Set<Weekday> weekdays})
+      {required this.alarm, required final Set<Weekday> weekdays, this.signal})
       : _weekdays = weekdays;
 
   @override
@@ -133,8 +165,11 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
   }
 
   @override
+  final AlarmDetailsScreenSignal? signal;
+
+  @override
   String toString() {
-    return 'AlarmDetailsScreenState(alarm: $alarm, weekdays: $weekdays)';
+    return 'AlarmDetailsScreenState(alarm: $alarm, weekdays: $weekdays, signal: $signal)';
   }
 
   @override
@@ -143,12 +178,13 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
         (other.runtimeType == runtimeType &&
             other is _$_AlarmDetailsScreenState &&
             (identical(other.alarm, alarm) || other.alarm == alarm) &&
-            const DeepCollectionEquality().equals(other._weekdays, _weekdays));
+            const DeepCollectionEquality().equals(other._weekdays, _weekdays) &&
+            (identical(other.signal, signal) || other.signal == signal));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, alarm, const DeepCollectionEquality().hash(_weekdays));
+  int get hashCode => Object.hash(runtimeType, alarm,
+      const DeepCollectionEquality().hash(_weekdays), signal);
 
   @JsonKey(ignore: true)
   @override
@@ -162,14 +198,167 @@ class _$_AlarmDetailsScreenState implements _AlarmDetailsScreenState {
 abstract class _AlarmDetailsScreenState implements AlarmDetailsScreenState {
   const factory _AlarmDetailsScreenState(
       {required final AlarmEntity alarm,
-      required final Set<Weekday> weekdays}) = _$_AlarmDetailsScreenState;
+      required final Set<Weekday> weekdays,
+      final AlarmDetailsScreenSignal? signal}) = _$_AlarmDetailsScreenState;
 
   @override
   AlarmEntity get alarm;
   @override
   Set<Weekday> get weekdays;
   @override
+  AlarmDetailsScreenSignal? get signal;
+  @override
   @JsonKey(ignore: true)
   _$$_AlarmDetailsScreenStateCopyWith<_$_AlarmDetailsScreenState>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$AlarmDetailsScreenSignal {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() onSaved,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onSaved,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onSaved,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnSaved value) onSaved,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnSaved value)? onSaved,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnSaved value)? onSaved,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AlarmDetailsScreenSignalCopyWith<$Res> {
+  factory $AlarmDetailsScreenSignalCopyWith(AlarmDetailsScreenSignal value,
+          $Res Function(AlarmDetailsScreenSignal) then) =
+      _$AlarmDetailsScreenSignalCopyWithImpl<$Res, AlarmDetailsScreenSignal>;
+}
+
+/// @nodoc
+class _$AlarmDetailsScreenSignalCopyWithImpl<$Res,
+        $Val extends AlarmDetailsScreenSignal>
+    implements $AlarmDetailsScreenSignalCopyWith<$Res> {
+  _$AlarmDetailsScreenSignalCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$_OnSavedCopyWith<$Res> {
+  factory _$$_OnSavedCopyWith(
+          _$_OnSaved value, $Res Function(_$_OnSaved) then) =
+      __$$_OnSavedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_OnSavedCopyWithImpl<$Res>
+    extends _$AlarmDetailsScreenSignalCopyWithImpl<$Res, _$_OnSaved>
+    implements _$$_OnSavedCopyWith<$Res> {
+  __$$_OnSavedCopyWithImpl(_$_OnSaved _value, $Res Function(_$_OnSaved) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_OnSaved implements _OnSaved {
+  const _$_OnSaved();
+
+  @override
+  String toString() {
+    return 'AlarmDetailsScreenSignal.onSaved()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_OnSaved);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() onSaved,
+  }) {
+    return onSaved();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onSaved,
+  }) {
+    return onSaved?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onSaved,
+    required TResult orElse(),
+  }) {
+    if (onSaved != null) {
+      return onSaved();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnSaved value) onSaved,
+  }) {
+    return onSaved(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnSaved value)? onSaved,
+  }) {
+    return onSaved?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnSaved value)? onSaved,
+    required TResult orElse(),
+  }) {
+    if (onSaved != null) {
+      return onSaved(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnSaved implements AlarmDetailsScreenSignal {
+  const factory _OnSaved() = _$_OnSaved;
 }

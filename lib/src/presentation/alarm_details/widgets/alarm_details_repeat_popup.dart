@@ -13,11 +13,11 @@ import 'package:wakeme/src/common/presentation/widgets/c_component.dart';
 class AlarmDetailsRepeatPopup extends HookWidget {
   const AlarmDetailsRepeatPopup({required this.initialValue, super.key});
 
-  final Set<Weekday> initialValue;
+  final Set<Weekday>? initialValue;
 
   @override
   Widget build(BuildContext context) {
-    final state = useState<Set<Weekday>>(initialValue);
+    final state = useState<Set<Weekday>>(initialValue ?? {});
 
     return Column(
       mainAxisSize: MainAxisSize.min,

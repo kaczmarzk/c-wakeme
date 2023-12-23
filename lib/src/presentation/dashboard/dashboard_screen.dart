@@ -13,6 +13,7 @@ import 'package:wakeme/src/common/presentation/widgets/c_component.dart';
 import 'package:wakeme/src/common/presentation/widgets/c_scaffold.dart';
 import 'package:wakeme/src/common/presentation/widgets/content/c_content_box.dart';
 import 'package:wakeme/src/presentation/dashboard/cubit/dashboard_screen_cubit.dart';
+import 'package:wakeme/src/presentation/dashboard/widgets/dashboard_alarm_widget.dart';
 
 @RoutePage()
 class DashboardScreen extends StatelessWidget {
@@ -24,7 +25,8 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => inject<DashboardScreenCubit>(),
+      lazy: false,
+      create: (_) => inject<DashboardScreenCubit>()..load(),
       child: const CScaffold(
         bottom: false,
         horizontal: false,
@@ -164,7 +166,9 @@ class _Body extends StatelessWidget {
                     icon: CupertinoIcons.add,
                     label: 'Add',
                     size: CThemeSize.small,
-                    onPressed: () => context.router.push(const AlarmDetailsRoute()),
+                    onPressed: () => context.router.push(const AlarmDetailsRoute()).then(
+                          (_) => context.read<DashboardScreenCubit>().load(),
+                        ),
                   ),
                 ),
               ],
@@ -175,13 +179,36 @@ class _Body extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
               horizontal: 16.0,
             ),
-            child: Text(
-              'No alarms',
-              style: CThemeStyles.gilroyMedium_20.copyWith(
-                color: CThemeColors.platinum,
-              ),
+            child: BlocBuilder<DashboardScreenCubit, DashboardScreenState>(
+              builder: (_, state) {
+                if (state.alarms.isEmpty) {
+                  return Text(
+                    'No alarms',
+                    style: CThemeStyles.gilroyMedium_20.copyWith(
+                      color: CThemeColors.platinum,
+                    ),
+                  );
+                }
+
+                return ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: state.alarms.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 16.0),
+                  itemBuilder: (_, i) => DashboardAlarmWidget(
+                    alarm: state.alarms[i],
+                    onRemove: (uuid) => _onRemoveAlarm(context, uuid),
+                  ),
+                );
+              },
             ),
           ),
         ],
       );
+
+  void _onRemoveAlarm(BuildContext context, String uuid) {
+    final cubit = context.read<DashboardScreenCubit>();
+    cubit.removeAlarm(uuid);
+    cubit.load();
+  }
 }

@@ -40,52 +40,57 @@ class _Body extends StatelessWidget {
   const _Body();
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          const CAppBar(label: 'Edit Alarm'),
-          const SizedBox(height: 10.0),
-          CContentBox(
-            height: 140.0,
-            child: Builder(
-              builder: (_) {
-                final alarmTime = context.read<AlarmDetailsScreenCubit>().state.alarm.time;
-                return CTimePicker(
-                  initial: context.clock.time.copyWith(hour: alarmTime.hour, minute: alarmTime.minute),
-                  onDateChanged: context.read<AlarmDetailsScreenCubit>().onDateChanged,
-                );
-              },
+  Widget build(BuildContext context) => BlocListener<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
+        listener: (_, state) => state.signal?.whenOrNull(
+          onSaved: () => context.router.pop(),
+        ),
+        child: Column(
+          children: [
+            const CAppBar(label: 'Edit Alarm'),
+            const SizedBox(height: 10.0),
+            CContentBox(
+              height: 140.0,
+              child: Builder(
+                builder: (_) {
+                  final alarmTime = context.read<AlarmDetailsScreenCubit>().state.alarm.time;
+                  return CTimePicker(
+                    initial: context.clock.time.copyWith(hour: alarmTime.hour, minute: alarmTime.minute),
+                    onDateChanged: context.read<AlarmDetailsScreenCubit>().onDateChanged,
+                  );
+                },
+              ),
             ),
-          ),
-          const SizedBox(height: 20.0),
-          BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
-            buildWhen: (prev, curr) => prev.alarm != curr.alarm || !prev.weekdays.equals(curr.weekdays),
-            builder: (_, state) => AlarmDetailsWeekdaysWidget(
-              alarm: state.alarm,
-              weekdays: state.weekdays,
+            const SizedBox(height: 20.0),
+            BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
+              buildWhen: (prev, curr) => prev.alarm != curr.alarm || !prev.weekdays.equals(curr.weekdays),
+              builder: (_, state) => AlarmDetailsWeekdaysWidget(
+                alarm: state.alarm,
+                weekdays: state.weekdays,
+              ),
             ),
-          ),
-          const SizedBox(height: 20.0),
-          const CContentBox(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _LabelOptionBox(),
-                _RepeatOptionBox(),
-                _SoundOptionBox(),
-              ],
+            const SizedBox(height: 20.0),
+            const CContentBox(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _LabelOptionBox(),
+                  _RepeatOptionBox(),
+                  _SoundOptionBox(),
+                ],
+              ),
             ),
-          ),
-          const Spacer(),
-          CBottomFloatingButton.invert(
-            label: 'Save',
-            onPressed: context.read<AlarmDetailsScreenCubit>().handleSave,
-            action: CBottomFloatingButtonAction(
-              icon: CupertinoIcons.clear,
-              onPressed: context.router.pop,
+            const Spacer(),
+            CBottomFloatingButton.invert(
+              label: 'Save',
+              onPressed: context.read<AlarmDetailsScreenCubit>().handleSave,
+              action: CBottomFloatingButtonAction(
+                icon: CupertinoIcons.clear,
+                onPressed: context.router.pop,
+              ),
             ),
-          ),
-          const SizedBox(height: 20.0),
-        ],
+            const SizedBox(height: 20.0),
+          ],
+        ),
       );
 }
 
@@ -98,14 +103,14 @@ class _LabelOptionBox extends StatelessWidget {
         builder: (_, state) => CContentOptionBox(
           title: 'Label',
           subtitle: (state.alarm.name ?? '').isEmpty ? 'No Label' : state.alarm.name,
-          onPressed: () => _onChangeLabelPressed(context),
+          onPressed: () => _onChangeLabelPressed(context, state.alarm.name),
         ),
       );
 
-  void _onChangeLabelPressed(BuildContext context) => CDialog.show<String?>(
+  void _onChangeLabelPressed(BuildContext context, String? initialValue) => CDialog.show<String?>(
         context,
         label: 'Label',
-        child: const AlarmDetailsLabelPopup(initialValue: 'No label'),
+        child: AlarmDetailsLabelPopup(initialValue: initialValue),
       ).then(context.read<AlarmDetailsScreenCubit>().onLabelChanged);
 }
 
@@ -114,7 +119,6 @@ class _RepeatOptionBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<AlarmDetailsScreenCubit, AlarmDetailsScreenState>(
-        buildWhen: (prev, curr) => !prev.alarm.repeated.equals(curr.alarm.repeated),
         builder: (_, state) => CContentOptionBox(
           title: 'Repeat',
           subtitle: _handleSubtitle(state.alarm.repeated),
@@ -126,8 +130,8 @@ class _RepeatOptionBox extends StatelessWidget {
         ),
       );
 
-  String _handleSubtitle(Set<Weekday> repeat) {
-    if (repeat.isEmpty) return 'No repeat';
+  String _handleSubtitle(Set<Weekday>? repeat) {
+    if (repeat == null || repeat.isEmpty) return 'No repeat';
     if (repeat.equals(Weekday.every)) return 'Every day';
     if (repeat.equals(Weekday.weekdays)) return 'Weekdays';
     if (repeat.equals(Weekday.weekends)) return 'Weekends';

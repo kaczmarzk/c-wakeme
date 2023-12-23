@@ -1,13 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
 import 'package:wakeme/core/utils/c_clock.dart';
 import 'package:wakeme/core/utils/c_debounce.dart';
 import 'package:wakeme/src/common/enums/weekday.dart';
-import 'package:wakeme/src/features/alarms/domain/entities/alarm/alarm_entity.dart';
-import 'package:wakeme/src/features/alarms/domain/entities/alarm_time/alarm_time_entity.dart';
+import 'package:wakeme/src/features/alarms/domain/entities/alarm_entity.dart';
+import 'package:wakeme/src/features/alarms/domain/entities/alarm_time_entity.dart';
+import 'package:wakeme/src/features/alarms/domain/repositories/alarms_repository.dart';
 
 part 'alarm_details_screen_cubit.freezed.dart';
+
 part 'alarm_details_screen_state.dart';
 
 @injectable
@@ -15,10 +18,12 @@ class AlarmDetailsScreenCubit extends Cubit<AlarmDetailsScreenState> {
   AlarmDetailsScreenCubit(
     this.clock,
     this.debouncer,
+    this._repository,
   ) : super(AlarmDetailsScreenState.initial(clock));
 
   final CClock clock;
   final CDebounce debouncer;
+  final AlarmsRepository _repository;
 
   void init([AlarmEntity? alarm]) {
     if (alarm != null) emit(state.copyWith(alarm: alarm));
@@ -49,29 +54,14 @@ class AlarmDetailsScreenCubit extends Cubit<AlarmDetailsScreenState> {
     emit(state.copyWith(alarm: alarm));
   }
 
-  void handleSave() {}
+  void handleSave() {
+    _repository.add(state.alarm);
+    emit(state.copyWith(signal: const AlarmDetailsScreenSignal.onSaved()));
+  }
 
   @override
   Future<void> close() {
     debouncer.cancel();
     return super.close();
-  }
-}
-
-extension _WeekdayExt on AlarmDetailsScreenCubit {
-  /// change alarm weekday on time change by user or device
-  /// if not alarm repeat not set
-  Set<Weekday> _handleWeekdayChanged() {
-    // if (state.date.repeat.isNotEmpty) return state.date.repeat;
-    // if (dt == null && entity == null) return state.weekdays;
-    //
-    // final now = DateTime.now();
-    // final date = now.copyWith(hour: entity?.hour ?? dt!.hour, minute: entity?.minute ?? dt!.minute);
-    //
-    // /// if user set current hour and minute, set alarm to next day
-    // final isNow = date.hour == now.hour && date.minute == now.minute;
-    // final isBefore = date.isBefore(now);
-    // if (isBefore || isNow) return {cTime.currentWeekday};
-    return {Weekday.thursday};
   }
 }

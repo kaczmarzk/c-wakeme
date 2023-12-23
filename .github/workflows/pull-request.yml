@@ -1,0 +1,20 @@
+name: on commit
+
+on:
+  push:
+    branches: '**'
+
+jobs:
+  validate_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.13.3"
+          channel: 'stable'
+
+      - run: flutter analyze
+        #      - run: flutter test
+        #      - run: dart run slang analyze
+
